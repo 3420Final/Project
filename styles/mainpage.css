@@ -64,7 +64,7 @@ html body section#navbar div div form input:nth-child(3) {
 section#navbar i {
     color: var(--white);
 }
-section#navbar i[class='fas fa-quidditch'] {
+section#navbar i[class='fas fa-tree'] {
     font-size: 2em;
 }
 section#navbar i[class='fas fa-search'] {

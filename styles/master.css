@@ -1,0 +1,36 @@
+@import "reset.css";
+
+/********A set of general styles that should apply to the entire site*/
+h1{
+    font-size: 2em;
+    font-weight: 700;
+    padding: 0.5em;
+}
+h2{
+    font-size: 1.5em;
+    font-weight: 700;
+}
+em {
+    font-style: italic;
+}
+strong {
+    font-weight: 600;
+}
+abbr {
+    display: inline;
+}
+/*change visibility of accessibility text*/
+.sr-only {
+    visibility: hidden;
+}
+
+
+/*see google doc for picture of colours*/
+/*colour scheme variables*/
+:root {
+    --white: #DCE1DE;
+    --black: #1F2421;
+    --blue: #216869;
+    --green: #49A078;
+    --light-green: #9CC5A1;
+}

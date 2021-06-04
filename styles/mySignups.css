@@ -1,0 +1,94 @@
+@import url("reset.css"); /*import reset*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+:root {
+    /* the html element*/
+    
+  
+    /*set variables */
+    --dark: #dce1de;
+    --back: #216869;
+    --borders: black;
+    --other: #fff;
+  
+    /*fallback for browsers that don't suppor variables */
+    color: #216869;
+    background-color: #dce1de;
+    background-color: var(--dark);
+    color: var(--dark);
+    
+  }
+  
+
+body{
+    background: linear-gradient(var(--back), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:max-content;
+    padding: 1em;
+  }
+
+header h1 {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 4rem;
+  }
+  header{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    
+  }
+  main{
+      display:flex;
+      justify-content: space-evenly;
+  }
+  section {
+    display: flex;
+    border: 0.2em solid black;
+    margin: 0.5rem;
+    background-color: #dce1de;
+    color:black;
+    flex-direction: column;
+    justify-content: space-evenly;
+    justify-content: stretch;
+    flex: 2 1 auto;
+  }
+
+  h2{
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 1.5rem;
+  }
+  h3{
+      font-size: 1rem;
+  }
+  section > div {
+    display: flex;
+    border: 0.2em solid black;
+    margin: 0.5rem;
+    flex: 2 1 auto;
+    flex-direction: column;
+
+  }
+
+  section div > div{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border: none;
+  }
+  ul{
+    display: flex;
+    flex-direction: row;
+  }
+  li{
+      margin-right: 0.3rem;
+  }
+  a {
+      color: black;
+  }
+
+  #partA abbr:hover{
+    display: inline;
+}

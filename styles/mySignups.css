@@ -1,23 +1,24 @@
 @import url("reset.css"); /*import reset*/
 
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import "master.css";
+
 
 :root {
     /* the html element*/
     
   
     /*set variables */
-    --dark: #dce1de;
-    --back: #216869;
-    --borders: black;
-    --other: #fff;
+    --dark: var(--white);
+    --other: var(--white);
+    --back: var(--blue);
+    --borders: var(--black);
+    
   
     /*fallback for browsers that don't suppor variables */
     color: #216869;
     background-color: #dce1de;
     background-color: var(--dark);
     color: var(--dark);
-    
   }
   
 
@@ -32,7 +33,6 @@ body{
 
 header h1 {
     font-family: 'Fredericka the Great', cursive;
-    font-size: 4rem;
   }
   header{
     display: flex;
@@ -46,10 +46,10 @@ header h1 {
   }
   section {
     display: flex;
-    border: 0.2em solid black;
+    border: 0.2em solid var(--black);
     margin: 0.5rem;
-    background-color: #dce1de;
-    color:black;
+    background-color: var(--white);
+    color:var(--black);
     flex-direction: column;
     justify-content: space-evenly;
     justify-content: stretch;
@@ -58,18 +58,13 @@ header h1 {
 
   h2{
     font-family: 'Fredericka the Great', cursive;
-    font-size: 1.5rem;
-  }
-  h3{
-      font-size: 1rem;
   }
   section > div {
     display: flex;
-    border: 0.2em solid black;
+    border: 0.2em solid var(--black);
     margin: 0.5rem;
     flex: 2 1 auto;
     flex-direction: column;
-
   }
 
   section div > div{
@@ -86,7 +81,7 @@ header h1 {
       margin-right: 0.3rem;
   }
   a {
-      color: black;
+      color: var(--black);
   }
 
   #partA abbr:hover{

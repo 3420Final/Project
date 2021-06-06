@@ -15,8 +15,8 @@
     
   
     /*fallback for browsers that don't suppor variables */
-    color: #216869;
-    background-color: #dce1de;
+    color: (--blue);
+    background-color: (--white);
     background-color: var(--dark);
     color: var(--dark);
   }
@@ -33,6 +33,7 @@ body{
 
 header h1 {
     font-family: 'Fredericka the Great', cursive;
+    font-weight: normal;
   }
   header{
     display: flex;
@@ -59,6 +60,12 @@ header h1 {
   h2{
     font-family: 'Fredericka the Great', cursive;
   }
+
+  h3{
+    font-weight: bold;
+    font-size: 1.5 rem;
+  }
+  
   section > div {
     display: flex;
     border: 0.2em solid var(--black);

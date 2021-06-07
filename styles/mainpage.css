@@ -3,7 +3,7 @@
 
 /*********************navbar************************/
 section#navbar{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Fredericka the Great', cursive;
 }
 
 /*the whole bar*/
@@ -75,14 +75,14 @@ section#navbar i[class='fas fa-search'] {
 
 /*link colours*/
 section#navbar a {
-    color: var(--green);
+    color: var(--white);
     text-decoration: none;
 }
 section#navbar a:visited {
     color: var(--light-green);
 }
 section#navbar a:hover {
-    color: var(--white);
+    color: var(--green);
 }
 
 /*website title*/

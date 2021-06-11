@@ -36,8 +36,12 @@ header h1 {
     font-weight: normal;
   }
   header{
+    /*Citation for the image below: https://www.flexjobs.com/blog/post/essential-time-management-skills/*/
+    background-image: url('../images/MyStuffView.jpg');
+    height: 20em;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 1em;
     
   }
@@ -103,3 +107,38 @@ header h1 {
   #partA abbr:hover{
     display: inline;
 }
+
+nav a,
+nav a:visited,
+nav a:active,
+button {
+  border-radius: 0.5em; /*rounded corners*/
+  background-color: white;
+  border: 0.3em solid var(--borders);
+  color: var(--blue);
+  text-align: center;
+
+  text-decoration: none; /*remove underline*/
+}
+
+/*swap colours on hover*/
+nav a:hover,
+button:hover {
+  background-color: var(--green);
+  border: 0.3em solid var(--borders);
+  color: var(--white);
+  border-radius: 0.5em; /*rounded corners*/
+}
+
+button {
+  font-size: 1.2em;
+}
+  button, nav a{
+    display: flex;
+    padding: 1em;
+    margin-bottom: 1em;
+    align-items: flex-start;
+    text-align: center;
+    justify-content: space-around;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+  }

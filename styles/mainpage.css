@@ -64,7 +64,7 @@ html body section#navbar div div form input:nth-child(3) {
 section#navbar i {
     color: var(--white);
 }
-section#navbar i[class='fas fa-tree'] {
+section#navbar i[class='far fa-clock'] {
     font-size: 2em;
 }
 section#navbar i[class='fas fa-search'] {
@@ -91,3 +91,21 @@ section#navbar h2.title {
     color: var(--white);
 }
 /********************************/
+
+.container {
+    position: relative;
+    max-width: 100%; /* Maximum width */
+    margin: 0 auto; /* Center it */
+  }
+  
+  .container .content {
+    position: absolute;
+    bottom: 40%;
+    left: 25%;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 50%; /* Full width */
+    padding: 20px; /* Some padding */
+    text-align: center;
+  }

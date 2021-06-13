@@ -1,5 +1,3 @@
-@import url("reset.css"); /*import reset*/
-
 @import "master.css";
 
 
@@ -45,11 +43,7 @@ header h1 {
     margin-bottom: 1em;
     
   }
-  main{
-      display:flex;
-      justify-content: space-evenly;
-  }
-  section {
+  section, form {
     display: flex;
     border: 0.2em solid var(--black);
     margin: 0.5rem;
@@ -64,51 +58,53 @@ header h1 {
   h2{
     font-family: 'Fredericka the Great', cursive;
   }
-
-  section > section{
+  
+  main{
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
-    flex-direction: row;
-    margin: 0.5rem;
-    flex: 2 1 auto;
-    border: none;
-  }
-
-  h3{
-    font-weight: bold;
-    font-size: 1.5 rem;
+    margin: 0.1em;
+  
   }
   
-  section > div {
+  body{
     display: flex;
-    border: 0.2em solid var(--black);
-    margin: 0.5rem;
-    flex: 2 1 auto;
     flex-direction: column;
+    padding: 1em;
   }
-
-  section div > div{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      border: none;
+  
+  footer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15em;
+    align-items: center;
   }
-  ul{
+  
+  form > div{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+  }
+  
+  
+  input, select{
+    flex: 2 1 auto;
+    padding: 1em;
+    justify-content: space-evenly;
+    margin-top: 0.5em;
+  }
+  
+  fieldset{
+    
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    width: 30em;
+    padding: 1.5em;
+    margin: 0.5em;
   }
-  li{
-      margin-right: 0.3rem;
-  }
-  a {
-      color: var(--black);
-  }
-
-  #partA abbr:hover{
-    display: inline;
-}
-
-main nav a, main nav a:visited, main nav a:active, button {
+  
+  main nav a, main nav a:visited, main nav a:active, button {
   border-radius: 0.5em; /*rounded corners*/
   background-color: white;
   border: 0.3em solid var(--borders);
@@ -140,91 +136,87 @@ button {
   }
 
   
-  nav{
-    font-family: 'Fredericka the Great', cursive;
-}
-
 /*the whole bar*/
 nav > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: var(--blue);
-    flex-wrap: wrap;
-    padding:1em;
-    min-width: 35em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--blue);
+  flex-wrap: wrap;
+  padding:1em;
+  min-width: 35em;
 }
 /*flexbox containing the two sides of the bar*/
 nav div > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 1em 0 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 1em 0 1em;
 }
 
 /*list of links*/
 nav div > ul{
-    display: flex;
-    flex-direction: row;
-    padding: 0 1em 0 1em;
+  display: flex;
+  flex-direction: row;
+  padding: 0 1em 0 1em;
 }
 nav div > ul > li{
-    padding: 0.5em 1em 0 1em;
-    flex-shrink: 0;
+  padding: 0.5em 1em 0 1em;
+  flex-shrink: 0;
 }
 
 
 /****forms***/
 /*the search section*/
 nav form{
-    display: flex;
-    flex-direction: row;
-    padding: 0.3em 0 0 0;
+  display: flex;
+  flex-direction: row;
+  padding: 0.3em 0 0 0;
 }
 /*search bar*/
 html body nav div div form input:nth-child(2) {
-    background-color:var(--green);
-    border:none;
-    border-radius: 5px;
-    padding:0.5em 4em 0.5em 2.5em;
+  background-color:var(--green);
+  border:none;
+  border-radius: 5px;
+  padding:0.5em 4em 0.5em 2.5em;
 }
 /*button*/
 html body nav div div form input:nth-child(3) {
-    border:none;
-    border-radius: 1em;
-    padding: 0 1em 0 1em;
-    background-color: var(--white);
-    color: var(--black);
+  border:none;
+  border-radius: 1em;
+  padding: 0 1em 0 1em;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 
 /*icons*/
 nav i {
-    color: var(--white);
+  color: var(--white);
 }
 nav i[class='far fa-clock'] {
-    font-size: 2em;
+  font-size: 2em;
 }
 nav i[class='fas fa-search'] {
-    position: relative;
-    top:0.4em;
-    left: 1.8em;
+  position: relative;
+  top:0.4em;
+  left: 1.8em;
 }
 
 /*link colours*/
 nav a {
-    color: var(--white);
-    text-decoration: none;
+  color: var(--white);
+  text-decoration: none;
 }
 nav a:visited {
-    color: var(--light-green);
+  color: var(--light-green);
 }
 nav a:hover {
-    color: var(--green);
+  color: var(--green);
 }
 
 /*website title*/
 nav h2.title {
-    padding:0 1em 0 1em;
-    color: var(--white);
+  padding:0 1em 0 1em;
+  color: var(--white);
 }

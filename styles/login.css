@@ -1,0 +1,121 @@
+@import "master.css";
+
+
+:root {
+    /* the html element*/
+    
+  
+    /*set variables */
+    --dark: var(--white);
+    --other: var(--white);
+    --back: var(--blue);
+    --borders: var(--black);
+    
+  
+    /*fallback for browsers that don't suppor variables */
+    color: (--blue);
+    background-color: (--white);
+    background-color: var(--dark);
+    color: var(--dark);
+  }
+
+
+/*flexbox in here is for justifying the login logo*/
+body{
+    background: linear-gradient(var(--back), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:max-content;
+    padding: 1em;
+}
+header h1 {
+    font-family: 'Fredericka the Great', cursive;
+    color: black;
+}
+header{
+    /*Citation for the image below: https://www.flexjobs.com/blog/post/essential-time-management-skills/*/
+    background-image: url('../images/MyStuffView.jpg');
+    height: 20em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    
+}
+
+/*main inside of the body*/
+main{
+    color:var(--black);
+    margin-left: auto;
+    margin-right:auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*links*/
+a {
+    color: var(--black);
+}
+a:visited {
+    color: var(--light-green);
+}
+a:hover {
+    color: var(--green);
+}
+
+/*this is the box, border, shape*/
+section#loginbox > div{
+    border: solid black 2px;
+    border-radius: 10px;
+    background-color: var(--white);
+    padding: 2em 3em 2em 3em;
+}
+/*this is just for the form element, and the icon div*/
+section#loginbox > div > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*the icon for the person*/
+section#loginbox i {
+    font-size: 6em;
+    padding: 0.25em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 10em;
+}
+section#loginbox > div > div > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*put the labels ontop of the boxes*/
+section#loginbox > div > div > form label.emailpass {
+    display: block;
+}
+section#loginbox > div > div > form > div {
+    padding-top: 1em;
+}
+
+/*font and sizing for email password stuff*/
+section#loginbox > div > div > form div#emailandpassword > input{
+    font-size: 1em;
+    padding: 0.25em 1em 0.25em 1em;
+}
+section#loginbox > div > div > form div#emailandpassword > label{
+    padding: 0.25em 0 0.25em 0;
+    font-size: 1.75em;
+}
+
+section#loginbox > div > div > form div button{
+    font-size: 1.25em;
+    padding: 0.5em 1em 0.5em 1em;
+    border: transparent;
+    border-radius: 5em;
+    background-color: var(--light-green);
+}
+
+section#loginbox > div > div > form div button:hover{
+    background-color: #85b98a;
+}

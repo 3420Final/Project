@@ -31,14 +31,16 @@ body{
 
 header h1 {
     font-family: 'Fredericka the Great', cursive;
-    font-weight: normal;
+    color: black;
   }
   header{
+    /*Citation for the image below: https://www.pinterest.ca/pin/674203006692235309/*/
+    background-image: url('../images/SignUpSheet.jpg');
+    height: 20em;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 1em;
-    justify-content: space-between;
-    
   }
   section {
     display: flex;
@@ -101,10 +103,7 @@ header h1 {
     margin: 0.5em;
   }
   
-  nav a,
-nav a:visited,
-nav a:active,
-button {
+ main nav a, main nav a:visited, main nav a:active, button {
   border-radius: 0.5em; /*rounded corners*/
   background-color: white;
   border: 0.3em solid var(--borders);
@@ -115,8 +114,7 @@ button {
 }
 
 /*swap colours on hover*/
-nav a:hover,
-button:hover {
+main nav a:hover, button:hover {
   background-color: var(--green);
   border: 0.3em solid var(--borders);
   color: var(--white);
@@ -126,7 +124,7 @@ button:hover {
 button {
   font-size: 1.2em;
 }
-  button, nav a{
+  button, main nav a{
     display: flex;
     padding: 1em;
     margin-bottom: 1em;
@@ -164,4 +162,144 @@ section tr:nth-child(even){
 section table thead tr th{
     background-color: var(--green);
     color: white;
+}
+
+
+/*swap colours on hover*/
+button:hover {
+  background-color: var(--green);
+  border: 0.3em solid var(--borders);
+  color: var(--white);
+  border-radius: 0.5em; /*rounded corners*/
+}
+
+button{
+    font-size: 1.2em;
+    border-radius: 0.5em; /*rounded corners*/
+    background-color: white;
+    border: 0.3em solid var(--borders);
+    color: var(--blue);
+    text-align: center;
+    text-decoration: none; /*remove underline*/
+    display: flex;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    align-items: flex-start;
+    text-align: center;
+    justify-content: space-around;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+  }
+
+
+/*the whole bar*/
+nav > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--blue);
+    flex-wrap: wrap;
+    padding:1em;
+    min-width: 35em;
+}
+/*flexbox containing the two sides of the bar*/
+nav div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1em 0 1em;
+}
+
+/*list of links*/
+nav div > ul{
+    display: flex;
+    flex-direction: row;
+    padding: 0 1em 0 1em;
+}
+nav div > ul > li{
+    padding: 0.5em 1em 0 1em;
+    flex-shrink: 0;
+}
+
+
+/****forms***/
+/*the search section*/
+nav form{
+    display: flex;
+    flex-direction: row;
+    padding: 0.3em 0 0 0;
+}
+/*search bar*/
+html body nav div div form input:nth-child(2) {
+    background-color:var(--green);
+    border:none;
+    border-radius: 5px;
+    padding:0.5em 4em 0.5em 2.5em;
+}
+/*button*/
+html body nav div div form input:nth-child(3) {
+    border:none;
+    border-radius: 1em;
+    padding: 0 1em 0 1em;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+
+/*icons*/
+nav i {
+    color: var(--white);
+}
+nav i[class='far fa-clock'] {
+    font-size: 2em;
+}
+nav i[class='fas fa-search'] {
+    position: relative;
+    top:0.4em;
+    left: 1.8em;
+}
+
+/*link colours*/
+nav a {
+    color: var(--white);
+    text-decoration: none;
+}
+nav a:visited {
+    color: var(--light-green);
+}
+nav a:hover {
+    color: var(--green);
+}
+
+/*website title*/
+nav h2.title {
+    padding:0 1em 0 1em;
+    color: var(--white);
+}
+
+#FindSheet form{
+  display:flex;
+  flex: 2 1 auto;
+  padding: 1em;
+  margin: 1em;
+}
+
+#FindSheet form input{
+  height: 1.3em;
+  margin-right: 0.1em;
+}
+
+#FindSheet form i{
+  font-size: 2em;
+  margin-top: 0.5em;
+  margin-right: 0.3em;
+}
+
+#FindSheet form button{
+  padding: 0.5em;
+  border-radius: 1.5em;
+  width: 3em;
+}
+
+section .SlotSignUp{
+  margin: 1em;
 }

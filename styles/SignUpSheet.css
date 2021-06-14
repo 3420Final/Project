@@ -51,10 +51,6 @@ header h1 {
     justify-content: stretch;
     flex: 2 1 auto;
   }
-
-  h2{
-    font-family: 'Fredericka the Great', cursive;
-  }
   
   main{
     display: flex;

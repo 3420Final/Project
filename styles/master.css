@@ -55,7 +55,10 @@ body{
     padding: 1em;
   }
 /*navbar************************************************************************************************/
-  
+nav#navbar{
+    font-family: 'Fredericka the Great', cursive;
+}
+
   /*the whole bar*/
   nav#navbar > div {
       display: flex;

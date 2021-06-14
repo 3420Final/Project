@@ -19,20 +19,10 @@
     color: var(--dark);
   }
   
-
-body{
-    background: linear-gradient(var(--back), transparent);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height:max-content;
-    padding: 1em;
-  }
-
 header h1 {
-    font-family: 'Fredericka the Great', cursive;
     color: black;
   }
+
   header{
     /*Citation for the image below: https://www.flexjobs.com/blog/post/essential-time-management-skills/*/
     background-image: url('../images/MyStuffView.jpg');
@@ -53,10 +43,6 @@ header h1 {
     justify-content: space-evenly;
     justify-content: stretch;
     flex: 2 1 auto;
-  }
-
-  h2{
-    font-family: 'Fredericka the Great', cursive;
   }
   
   main{
@@ -134,89 +120,3 @@ button {
     justify-content: space-around;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
   }
-
-  
-/*the whole bar*/
-nav > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: var(--blue);
-  flex-wrap: wrap;
-  padding:1em;
-  min-width: 35em;
-}
-/*flexbox containing the two sides of the bar*/
-nav div > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 1em 0 1em;
-}
-
-/*list of links*/
-nav div > ul{
-  display: flex;
-  flex-direction: row;
-  padding: 0 1em 0 1em;
-}
-nav div > ul > li{
-  padding: 0.5em 1em 0 1em;
-  flex-shrink: 0;
-}
-
-
-/****forms***/
-/*the search section*/
-nav form{
-  display: flex;
-  flex-direction: row;
-  padding: 0.3em 0 0 0;
-}
-/*search bar*/
-html body nav div div form input:nth-child(2) {
-  background-color:var(--green);
-  border:none;
-  border-radius: 5px;
-  padding:0.5em 4em 0.5em 2.5em;
-}
-/*button*/
-html body nav div div form input:nth-child(3) {
-  border:none;
-  border-radius: 1em;
-  padding: 0 1em 0 1em;
-  background-color: var(--white);
-  color: var(--black);
-}
-
-
-/*icons*/
-nav i {
-  color: var(--white);
-}
-nav i[class='far fa-clock'] {
-  font-size: 2em;
-}
-nav i[class='fas fa-search'] {
-  position: relative;
-  top:0.4em;
-  left: 1.8em;
-}
-
-/*link colours*/
-nav a {
-  color: var(--white);
-  text-decoration: none;
-}
-nav a:visited {
-  color: var(--light-green);
-}
-nav a:hover {
-  color: var(--green);
-}
-
-/*website title*/
-nav h2.title {
-  padding:0 1em 0 1em;
-  color: var(--white);
-}

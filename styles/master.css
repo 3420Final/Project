@@ -29,6 +29,10 @@ strong {
 abbr {
     display: inline;
 }
+/*links in nav*/
+nav a {
+    font-family: 'Fredericka the Great', cursive;
+}
 /*change visibility of accessibility text*/
 .sr-only {
     visibility: hidden;

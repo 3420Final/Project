@@ -1,7 +1,6 @@
-@import "reset.css";
 @import "master.css";
 
-/*a quick bodge to remove the border padding from master.css*/
+/*a quick bodge to remove the border padding from master.css for the gradient not used here*/
 body {
     padding: 0;
 }

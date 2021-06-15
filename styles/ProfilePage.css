@@ -33,7 +33,7 @@ header h1 {
     margin-bottom: 1em;
     
   }
-  section, form {
+  section, form#newuser, form#uploadform {
     display: flex;
     border: 0.2em solid var(--black);
     margin: 0.5rem;
@@ -90,7 +90,7 @@ header h1 {
     margin: 0.5em;
   }
   
-  main nav a, main nav a:visited, main nav a:active, button {
+  main nav#sidebar a, main nav#sidebar a:visited, main nav#sidebar a:active, button {
   border-radius: 0.5em; /*rounded corners*/
   background-color: white;
   border: 0.3em solid var(--borders);
@@ -101,7 +101,7 @@ header h1 {
 }
 
 /*swap colours on hover*/
-main nav a:hover, button:hover {
+main nav#sidebar a:hover, button:hover {
   background-color: var(--green);
   border: 0.3em solid var(--borders);
   color: var(--white);
@@ -111,7 +111,7 @@ main nav a:hover, button:hover {
 button {
   font-size: 1.2em;
 }
-  button, main nav a{
+  button, main nav#sidebar a{
     display: flex;
     padding: 1em;
     margin-bottom: 1em;

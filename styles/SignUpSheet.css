@@ -51,10 +51,6 @@ header h1 {
     justify-content: stretch;
     flex: 2 1 auto;
   }
-
-  h2{
-    font-family: 'Fredericka the Great', cursive;
-  }
   
   main{
     display: flex;
@@ -101,9 +97,9 @@ header h1 {
     margin: 0.5em;
   }
   
-  nav a,
-nav a:visited,
-nav a:active,
+  nav#sidebar a,
+nav#sidebar a:visited,
+nav#sidebar a:active,
 button {
   border-radius: 0.5em; /*rounded corners*/
   background-color: var(--white);
@@ -115,7 +111,7 @@ button {
 }
 
 /*swap colours on hover*/
-nav a:hover,
+nav#sidebar a:hover,
 button:hover {
   background-color: var(--green);
   border: 0.3em solid var(--borders);
@@ -126,7 +122,7 @@ button:hover {
 button {
   font-size: 1.2em;
 }
-  button, nav a{
+  button, nav#sidebar a{
     display: flex;
     padding: 1em;
     margin-bottom: 1em;

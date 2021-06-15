@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav>
+    <nav id='navbar'>
         <div>
             <div>
               <i class="far fa-clock"></i>
@@ -32,17 +32,16 @@
     <h1><i class="fas fa-user"></i> My Profile</h1>
   </header>
   <main>
-    <nav>
+    <nav id='sidebar'>
       <ul>
         <li><a href="mySignups.html">Back</a></li>
         <li><a href="EditAccount.html">Edit Profile</a></li>
       </ul>
     </nav>
-        <div>
-            <img src="images/Profile.JPG" alt="Profile Image Icon" width="350" height="350" /> 
-        </div>
+      <div>
+        <img src="images/Profile.JPG" alt="Profile Image Icon" width="350" height="350" /> 
+      </div>
     <form id="newuser" name="newuser" action="results.php" method="post">
-      
         <div>
             <label for="name">Name </label>
             <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+"

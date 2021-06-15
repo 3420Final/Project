@@ -10,10 +10,12 @@ h1{
     font-size: 4em;
     font-weight: 700;
     padding: 0.5em;
+    font-family: 'Fredericka the Great', cursive;
 }
 h2{
     font-size: 1.5em;
     font-weight: 700;
+    font-family: 'Fredericka the Great', cursive;
 }
 h3{
     font-size: 1rem;
@@ -26,6 +28,10 @@ strong {
 }
 abbr {
     display: inline;
+}
+/*links in nav*/
+nav a {
+    font-family: 'Fredericka the Great', cursive;
 }
 /*change visibility of accessibility text*/
 .sr-only {
@@ -42,3 +48,103 @@ abbr {
     --green: #49A078;
     --light-green: #9CC5A1;
 }
+
+/*background gradient******************************************************************************/
+body{
+    background: linear-gradient(var(--back), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:max-content;
+    padding: 1em;
+  }
+/*navbar************************************************************************************************/
+nav#navbar{
+    font-family: 'Fredericka the Great', cursive;
+}
+
+  /*the whole bar*/
+  nav#navbar > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: var(--blue);
+      flex-wrap: wrap;
+      padding:1em;
+      min-width: 35em;
+  }
+  /*flexbox containing the two sides of the bar*/
+  nav#navbar div > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 1em 0 1em;
+  }
+  
+  /*list of links*/
+  nav#navbar div > ul{
+      display: flex;
+      flex-direction: row;
+      padding: 0 1em 0 1em;
+  }
+  nav#navbar div > ul > li{
+      padding: 0.5em 1em 0 1em;
+      flex-shrink: 0;
+  }
+  
+  
+  /****forms***/
+  /*the search section*/
+  nav#navbar form{
+      display: flex;
+      flex-direction: row;
+      padding: 0.3em 0 0 0;
+  }
+  /*search bar*/
+  nav#navbar div div form input:nth-child(2) {
+      background-color:var(--green);
+      border:none;
+      border-radius: 5px;
+      padding:0.5em 4em 0.5em 2.5em;
+  }
+  /*button*/
+  nav#navbar div div form input:nth-child(3) {
+      border:none;
+      border-radius: 1em;
+      padding: 0 1em 0 1em;
+      background-color: var(--white);
+      color: var(--black);
+  }
+  
+  
+  /*icons*/
+  nav#navbar i {
+      color: var(--white);
+  }
+  nav#navbar i[class='far fa-clock'] {
+      font-size: 2em;
+  }
+  nav#navbar i[class='fas fa-search'] {
+      position: relative;
+      top:0.4em;
+      left: 1.8em;
+  }
+  
+  /*link colours*/
+  nav#navbar a {
+      color: var(--white);
+      text-decoration: none;
+  }
+  nav#navbar a:visited {
+      color: var(--light-green);
+  }
+  nav#navbar a:hover {
+      color: var(--green);
+  }
+  
+  /*website title*/
+  nav#navbar h2.title {
+      padding:0 1em 0 1em;
+      color: var(--white);
+  }
+  /*navbar************************************************************************************************/

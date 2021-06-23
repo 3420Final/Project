@@ -1,19 +1,54 @@
 <?php
   $username = $_POST['username'] ?? "";
-  $password = $_POST['password'] ?? "";
+  $password1 = $_POST['password1'] ?? "";
+  $password2 = $_POST['password2'] ?? "";
   $gender = $_POST['gender'] ?? "";
   $email = $_POST['email'] ?? "";
   $name = $_POST['name'] ?? "";
-  
+
+  $errors = array();
+
 
   if (isset($_POST['submit'])) {
-
+    
     include 'includes/library.php';
     $pdo = connectDB();
 
-    $query = "INSERT INTO `timeslot_users` (username,password,gender,name,email) VALUES (?,?,?,?,?)"; //gender is an enum that goes from 1-4
+    //sanitize all the inputs
+    $username = filter_var($username, FILTER_SANITIZE_STRING);
+    $password1 = filter_var($password1, FILTER_SANITIZE_STRING);
+    $password2 = filter_var($password2, FILTER_SANITIZE_STRING);
+    $gender = filter_var($gender, FILTER_SANITIZE_STRING);
+    $email = filter_var($email, FILTER_SANITIZE_STRING);
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    
+    //check if the username given is already in the DB
+    $query = "SELECT username,email FROM timeslot_users WHERE username=?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$username,$password,$gender,$name,$email]);
+    $stmt->execute([$username]);
+    $results = $stmt->fetch();
+
+
+    if($username === $results['username']){ //make sure the username doesnt exists
+      $errors['usernameexists'] = true;
+    }
+    if ($password1 !== $password2){  //make sure that the both the password fields are the same
+      $errors['passwordsmatch'] = true;
+    }
+    if (count($errors) === 0){
+
+      //hash the password 
+      $hashpass = password_hash($password1, PASSWORD_DEFAULT);
+
+      //insert the new user into the DB
+      $query = "INSERT INTO `timeslot_users` (username,password,gender,name,email) VALUES (?,?,?,?,?)"; //gender is an enum that goes from 1-4
+      $stmt = $pdo->prepare($query);
+      $stmt->execute([$username,$hashpass,$gender,$name,$email]);
+
+      //todo list
+      //profile picture
+      //check emails maybe
+    }
   }
 ?>
 
@@ -46,45 +81,47 @@
     <form id="newuser" name="newuser"  method="post"><!--action="results.php" this was removed for testing by Bill-->
       <div>
         <label for="name">Name </label>
-        <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" required/>
+        <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>
       </div>
       <div>
         <label for="email">Email </label>
-        <input type="email" name="email" id="email" placeholder="test@test.com" required/>
+        <input type="email" name="email" id="email" placeholder="test@test.com" value="<?=$email?>" required/>
       </div>
       <fieldset>
         <legend>Gender</legend>
           <div>
-            <input type="radio" name="gender" id="male" value="1" />
+            <input type="radio" name="gender" id="male" value="1" <?=$gender == 1 ? 'checked' : ''?>/>
             <label for="male">Male</label>
           </div>
           <div>
-            <input type="radio" name="gender" id="female" value="2"/>
+            <input type="radio" name="gender" id="female" value="2" <?=$gender == 2 ? 'checked' : ''?>/>
             <label for="female">Female</label>
           </div>
           <div>
-            <input type="radio" name="gender" id="gnc" value="3"/>
+            <input type="radio" name="gender" id="gnc" value="3" <?=$gender == 3 ? 'checked' : ''?>/>
             <label for="gnc">Gender Queer/Non-Conforming</label>
           </div>
         <div>
-            <input type="radio" name="gender" id="notsay" value="4"/>
+            <input type="radio" name="gender" id="notsay" value="4" <?=$gender == 4 ? 'checked' : ''?>/>
             <label for="notsay">Prefer not to say</label>
          </div>
         </fieldset>
 
       <div>
         <label for="username">Username </label>
-        <input type="text" name="username" id="username" required/>
+        <input type="text" name="username" id="username" value="<?=$username?>"required/>
       </div>
 
       <div>
         <label for="passwd">Password </label>
-        <input type="password" name="password" id="passwd" required/>
+        <input type="password" name="password1" id="passwd" required/>
       </div>
       <div>
         <label for="passwd">Re-enter Password </label>
-        <input type="password" name="password" id="passwd" required/>
+        <input type="password" name="password2" id="passwd" required/>
       </div>
+      <span class="<?=!isset($errors['passwordsmatch']) ? 'hidden' : "error";?>">Password Fields Dont Match</span>
+      <span class="<?=!isset($errors['usernameexists']) ? 'hidden' : "error";?>">That Username is already taken</span>
       <div><button type="submit" name="submit">Submit</button></div>
     </form>
     </main>

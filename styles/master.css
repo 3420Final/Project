@@ -37,6 +37,17 @@ nav a {
 .sr-only {
     visibility: hidden;
 }
+/*hidden text*/
+.hidden {
+    display: none;
+}
+/*error messages*/
+.error {
+    color: red;
+    display: block;
+    margin: 0.5em;
+  }
+  
 
 
 /*see google doc for picture of colours*/

@@ -16,7 +16,7 @@
       <img src="images/MainpageImage.jpg" alt="computer with hour glass filled with blue sand" style = "width:100%" />
       <div class="content">
         <h1>Welcome!</h1>
-        <p>Creat and Manage Sign-Up Sheets and sign-up for time slots on other peoples sheets!</p>
+        <p>Create and Manage Sign-Up Sheets and sign-up for time slots on other peoples sheets!</p>
       </div>
     </div>
     </div>

@@ -7,7 +7,7 @@ $loginlink = 'login.php';
 if (isset($_SESSION['username']))
 {
     $login = 'Logout';
-    $loginlink = 'index.php';   //takes you to the homepage to get out
+    $loginlink = 'thanks.php';   //takes you to the thanks page
 }
 
 ?>
@@ -21,7 +21,7 @@ if (isset($_SESSION['username']))
             <ul>
                 <li><a href="mySignups.php">Home</a></li>
                 <li><a href="profile.php">View Profile</a></li>
-                <li><a href=<?php echo $loginlink ?>><?php echo $login ?></a></li>
+                <li><a href="<?php echo $loginlink ?>"><?php echo $login ?></a></li>
             </ul>
             <form id="searchbar" name="search">
                 <i aria-hidden="true" class="fas fa-search"></i>

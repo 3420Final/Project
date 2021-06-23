@@ -4,6 +4,9 @@
 
     if (isset($_POST['login'])) {
 
+        $username = filter_var($username, FILTER_SANITIZE_STRING);
+        $password = filter_var($password, FILTER_SANITIZE_STRING);
+
         include 'includes/library.php';
         $pdo = connectDB();
         
@@ -48,6 +51,7 @@
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <?php include 'includes/navbar.php';?>
     <header>
         <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
     </header>

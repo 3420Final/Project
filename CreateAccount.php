@@ -28,26 +28,27 @@
     $stmt->execute([$username]);
     $results = $stmt->fetch();
 
+    if($results == false){ //results should be empty(false) if the password doesnt exist
+      if ($password1 !== $password2){  //make sure that the both the password fields are the same
+        $errors['passwordsmatch'] = true;
+      }
+      if (count($errors) === 0){
 
-    if($username === $results['username']){ //make sure the username doesnt exists
+        //hash the password 
+        $hashpass = password_hash($password1, PASSWORD_DEFAULT);
+
+        //insert the new user into the DB
+        $query = "INSERT INTO `timeslot_users` (username,password,gender,name,email) VALUES (?,?,?,?,?)"; //gender is an enum that goes from 1-4
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$username,$hashpass,$gender,$name,$email]);
+
+        //todo list
+        //profile picture
+        //check emails maybe
+      }
+    }
+    else{
       $errors['usernameexists'] = true;
-    }
-    if ($password1 !== $password2){  //make sure that the both the password fields are the same
-      $errors['passwordsmatch'] = true;
-    }
-    if (count($errors) === 0){
-
-      //hash the password 
-      $hashpass = password_hash($password1, PASSWORD_DEFAULT);
-
-      //insert the new user into the DB
-      $query = "INSERT INTO `timeslot_users` (username,password,gender,name,email) VALUES (?,?,?,?,?)"; //gender is an enum that goes from 1-4
-      $stmt = $pdo->prepare($query);
-      $stmt->execute([$username,$hashpass,$gender,$name,$email]);
-
-      //todo list
-      //profile picture
-      //check emails maybe
     }
   }
 ?>
@@ -106,7 +107,6 @@
             <label for="notsay">Prefer not to say</label>
          </div>
         </fieldset>
-
       <div>
         <label for="username">Username </label>
         <input type="text" name="username" id="username" value="<?=$username?>"required/>

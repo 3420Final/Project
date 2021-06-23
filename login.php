@@ -1,3 +1,42 @@
+<?php
+    $username = $_POST['username'] ?? "";
+    $password = $_POST['password'] ?? "";
+
+    if (isset($_POST['login'])) {
+
+        include 'includes/library.php';
+        $pdo = connectDB();
+        
+        //prep and execute query to find username/password
+        $query = "SELECT * FROM `timeslot_users` WHERE username=?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$username]);
+        $results = $stmt->fetch();
+        var_dump($results);
+        if($results == false){  //does the user exist?
+            $errors['loginfail'] = true;
+            //var_dump($results);//problem is here
+        }
+        else{
+            if (password_verify($password, $results['password'])){  //if their password is valid
+
+                //put the user into the session
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['id'] = $id;
+    
+                header("Location:mySignups.php");
+                exit();
+            }
+    
+            else{
+                $errors['loginfail'] = true;
+            }
+        }
+        
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,23 +58,22 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div>
-                    <form>
-                        <div id='emailandpassword'>
-                            <label for="email" class='emailpass'>Email:</label>
-                            <input id="email" name="email" type="text" placeholder="" required/>
+                    <form id="login" name="login"  method="post">
+                        <div id='usernamepassword'>
+                            <label for="username" class='usernamepass'>Username:</label>
+                            <input id="username" name="username" type="text" placeholder="" required/>
                         </div>
-                        <div id='emailandpassword'>
-                            <label for="password" class='emailpass'>Password:</label>
+                        <div id='usernamepassword'>
+                            <label for="password" class='usernamepass'>Password:</label>
                             <input id="password" name="password" type="password" placeholder="" required/>
                         </div>
                         <div>
                             <a href="forgotpassword.php">Forgot Password?</a>
                         </div>
                         <div>
-                            <a href="mySignups.php">Login</a>
-                            <!--I made it a link for right now just to make the transition from pages easier
-                            <button id="login">Login</button>-->
+                            <button type="login" name="login">Login</button>
                         </div>
+                        <span class="<?=!isset($errors['loginfail']) ? 'hidden' : "error";?>">Username or password incorrect.</span>
                         <div>
                             <label for="remember">Remember Me:</label>
                             <input type="checkbox" id="remember" name="remember">

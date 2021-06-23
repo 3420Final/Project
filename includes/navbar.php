@@ -7,7 +7,7 @@ $loginlink = 'login.php';
 if (isset($_SESSION['username']))
 {
     $login = 'Logout';
-    $loginlink = 'index.php';
+    $loginlink = 'index.php';   //takes you to the homepage to get out
 }
 
 ?>

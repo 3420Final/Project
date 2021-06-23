@@ -90,7 +90,7 @@ section#loginbox > div > div > form {
     align-items: center;
 }
 /*put the labels ontop of the boxes*/
-section#loginbox > div > div > form label.emailpass {
+section#loginbox > div > div > form label.usernamepass {
     display: block;
 }
 section#loginbox > div > div > form > div {
@@ -98,11 +98,11 @@ section#loginbox > div > div > form > div {
 }
 
 /*font and sizing for email password stuff*/
-section#loginbox > div > div > form div#emailandpassword > input{
+section#loginbox > div > div > form div#usernamepassword > input{
     font-size: 1em;
     padding: 0.25em 1em 0.25em 1em;
 }
-section#loginbox > div > div > form div#emailandpassword > label{
+section#loginbox > div > div > form div#usernamepassword > label{
     padding: 0.25em 0 0.25em 0;
     font-size: 1.75em;
 }

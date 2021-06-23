@@ -16,7 +16,7 @@
       <main>
         <nav>
           <ul>
-            <li><a href="SignUpForSlot.html">Find a Sheet</a></li>
+            <li><a href="SignUpForSlot.php">Find a Sheet</a></li>
           </ul>
         </nav>
         <section class = "Sign-upSheets">

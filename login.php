@@ -29,10 +29,10 @@
                             <input id="password" name="password" type="password" placeholder="" required/>
                         </div>
                         <div>
-                            <a href="forgotpassword.html">Forgot Password?</a>
+                            <a href="forgotpassword.php">Forgot Password?</a>
                         </div>
                         <div>
-                            <a href="mySignups.html">Login</a>
+                            <a href="mySignups.php">Login</a>
                             <!--I made it a link for right now just to make the transition from pages easier
                             <button id="login">Login</button>-->
                         </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div>
                             <span>Dont have an account yet?</span>
-                            <a href="CreateAccount.html">Signup</a>
+                            <a href="CreateAccount.php">Signup</a>
                         </div>
                     </form>
                 </div>

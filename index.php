@@ -9,26 +9,7 @@
   <title>Main Page</title>
 </head>
 <body>
-  <nav id="navbar">
-    <div>
-        <div>
-          <i class="far fa-clock"></i>
-          <h2 class='title'>Bill and Jamie's Time Slot Manager</h2>
-        </div>
-        <div>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="CreateAccount.html">Sign Up</a></li>
-            <li><a href="login.html">Log In</a></li>
-          </ul>
-          <form id="searchbar" name="search">
-            <i aria-hidden="true" class="fas fa-search"></i>
-            <input type='text' name="search" id="search">
-            <input id="submit" type="submit" value="Go">
-          </form>
-        </div>
-    </div>
-  </nav>
+  <?php include 'includes/navbar.php';?>
   <section id="mainspace">
     <div class="container">
       <!--Citation for the image below: https://www.flexjobs.com/blog/post/essential-time-management-skills/-->

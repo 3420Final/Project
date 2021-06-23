@@ -3,53 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Profile</title>
+    <title>Create New User</title>
     <link rel ="stylesheet" href = "styles/ProfilePage.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav id='navbar'>
-        <div>
-            <div>
-              <i class="far fa-clock"></i>
-                <h2 class='title'>Bill and Jamie's Time Slot Manager</h2>
-            </div>
-            <div>
-              <ul>
-                <li><a href="mySignups.html">Home</a></li>
-                <li><a href="Profile.html">View Profile</a></li>
-                <li><a href="index.html">Logout</a></li>
-              </ul>
-              <form id="searchbar" name="search">
-                <i aria-hidden="true" class="fas fa-search"></i>
-                <input type='text' name="search" id="search">
-                <input id="submit" type="submit" value="Go">
-              </form>
-            </div>
-        </div>
-      </nav>
+    <?php include 'includes/navbar.php';?>
     <header>
-    <h1><i class="fas fa-user"></i> My Profile</h1>
+    <h1><i class="fas fa-user-plus"></i> Create Account</h1>
   </header>
   <main>
     <nav id='sidebar'>
       <ul>
-        <li><a href="mySignups.html">Back</a></li>
-        <li><a href="EditAccount.html">Edit Profile</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="login.php">Already Have an Account</a></li>
       </ul>
     </nav>
-      <div>
-        <img src="images/Profile.JPG" alt="Profile Image Icon" width="350" height="350" /> 
-      </div>
+    <form id="uploadform" action="fileupload.php" method="post" enctype="multipart/form-data">
+        <div>
+            <img src="images/profileImage.png" alt="Profile Image Icon" width="350" height="350" />
+          <!--this is require to restrict size of file upload in php-->
+          <input type="hidden" name="MAX_FILE_SIZE" value="12400" />
+          <label for="imgupload">Upload Profile Image:</label>
+          <input type="file" name="imgupload" id="imgupload" />
+        </div>
+        <input type="submit" name="submit" value="Finished" />
+      </form>
     <form id="newuser" name="newuser" action="results.php" method="post">
         <div>
             <label for="name">Name </label>
             <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+"
-              title="firstname lastname" autocorrect="off" value = "Jamie Le Neve" required/>
+              title="firstname lastname" autocorrect="off" required/>
           </div>
           <div>
             <label for="email">Email </label>
-            <input type="email" name="Email" id="email" value="jamieleneve@trentu.ca" />
+            <input type="email" name="Email" id="email" placeholder="test@test.com" required/>
           </div>
 
       <fieldset>
@@ -59,7 +47,7 @@
             <label for="male">Male</label>
           </div>
           <div>
-            <input type="radio" name="gender" id="female" value="f" checked/>
+            <input type="radio" name="gender" id="female" value="f"/>
             <label for="female">Female</label>
           </div>
           <div>
@@ -74,12 +62,16 @@
 
       <div>
         <label for="username">Username </label>
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" required/>
       </div>
 
       <div>
         <label for="passwd">Password </label>
-        <input type="password" name="password" id="passwd"/>
+        <input type="password" name="password" id="passwd" required/>
+      </div>
+      <div>
+        <label for="passwd">Password </label>
+        <input type="password" name="password" id="passwd" required/>
       </div>
 
       <div><button type="submit" name="submit">Submit</button></div>

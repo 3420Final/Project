@@ -3,39 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create New User</title>
+    <title>Edit Profile</title>
     <link rel ="stylesheet" href = "styles/ProfilePage.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav id='navbar'>
-      <div>
-          <div>
-            <i class="far fa-clock"></i>
-              <h2 class='title'>Bill and Jamie's Time Slot Manager</h2>
-          </div>
-          <div>
-            <ul>
-              <li><a href="mySignups.html">Home</a></li>
-              <li><a href="profile.html">View Profile</a></li>
-              <li><a href="index.html">Logout</a></li>
-            </ul>
-            <form id="searchbar" name="search">
-              <i aria-hidden="true" class="fas fa-search"></i>
-              <input type='text' name="search" id="search">
-              <input id="submit" type="submit" value="Go">
-            </form>
-          </div>
-      </div>
-    </nav>
+    <?php include 'includes/navbar.php';?>
     <header>
-    <h1><i class="fas fa-user-plus"></i> Create Account</h1>
+    <h1><i class="fas fa-user-edit"></i> Edit Profile</h1>
   </header>
   <main>
     <nav id='sidebar'>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="login.html">Already Have an Account</a></li>
+        <li><a href="mySignups.php">Back</a></li>
       </ul>
     </nav>
     <form id="uploadform" action="fileupload.php" method="post" enctype="multipart/form-data">
@@ -49,14 +29,15 @@
         <input type="submit" name="submit" value="Finished" />
       </form>
     <form id="newuser" name="newuser" action="results.php" method="post">
+      
         <div>
             <label for="name">Name </label>
             <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+"
-              title="firstname lastname" autocorrect="off" required/>
+              title="firstname lastname" autocorrect="off" placeholder = "Jamie Le Neve" required/>
           </div>
           <div>
             <label for="email">Email </label>
-            <input type="email" name="Email" id="email" placeholder="test@test.com" required/>
+            <input type="email" name="Email" id="email" placeholder="jamieleneve@trentu.ca" />
           </div>
 
       <fieldset>
@@ -66,7 +47,7 @@
             <label for="male">Male</label>
           </div>
           <div>
-            <input type="radio" name="gender" id="female" value="f"/>
+            <input type="radio" name="gender" id="female" value="f" checked/>
             <label for="female">Female</label>
           </div>
           <div>
@@ -81,16 +62,12 @@
 
       <div>
         <label for="username">Username </label>
-        <input type="text" name="username" id="username" required/>
+        <input type="text" name="username" id="username" />
       </div>
 
       <div>
         <label for="passwd">Password </label>
-        <input type="password" name="password" id="passwd" required/>
-      </div>
-      <div>
-        <label for="passwd">Password </label>
-        <input type="password" name="password" id="passwd" required/>
+        <input type="password" name="password" id="passwd" />
       </div>
 
       <div><button type="submit" name="submit">Submit</button></div>

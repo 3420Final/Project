@@ -8,33 +8,14 @@
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav id='navbar'>
-      <div>
-          <div>
-            <i class="far fa-clock"></i>
-              <h2 class='title'>Bill and Jamie's Time Slot Manager</h2>
-          </div>
-          <div>
-            <ul>
-              <li><a href="mySignups.html">Home</a></li>
-              <li><a href="profile.html">View Profile</a></li>
-              <li><a href="index.html">Log Out</a></li>
-            </ul>
-            <form id="searchbar" name="search">
-              <i aria-hidden="true" class="fas fa-search"></i>
-              <input type='text' name="search" id="search">
-              <input id="submit" type="submit" value="Go">
-            </form>
-          </div>
-      </div>
-    </nav>
+    <?php include 'includes/navbar.php';?>
     <header>
       <h1><i class="fab fa-readme"></i> View Sign-Up Sheet</h1>
     </header>
     <main>
       <nav>
         <ul>
-          <li><a href="mySignups.html">Back</a></li>
+          <li><a href="mySignups.php">Back</a></li>
         </ul>
       </nav>
       <section>

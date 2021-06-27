@@ -425,4 +425,17 @@ nav#navbar{
         
         }
 
-        
+        /*profile *************************************************************/
+      form#newuser, form#uploadform {
+        display: flex;
+        border: 0.2em solid var(--black);
+        margin: 0.5rem;
+        background-color: var(--white);
+        color:var(--black);
+        flex-direction: column;
+        justify-content: space-evenly;
+        justify-content: stretch;
+        flex: 2 1 auto;
+      }
+
+      

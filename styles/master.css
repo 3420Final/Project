@@ -281,7 +281,7 @@ nav#navbar{
       color: var(--white);
   }
   /*navbar************************************************************************************************/
-  
+
   /*home page for non-users*******************************************************************************/
 
   /*the picture inside*******************************/
@@ -301,4 +301,28 @@ nav#navbar{
     width: 50%; /* Full width */
     padding: 20px; /* Some padding */
     text-align: center;
+  }
+
+  /*mySignUps ***************************************************************/
+  
+
+  #mySignUps h3{
+    font-weight: bold;
+    font-size: 1.5 rem;
+  }
+  
+  #mySignUps section > div {
+    display: flex;
+    border: 0.2em solid var(--black);
+    margin: 0.5rem;
+    flex: 2 1 auto;
+    flex-direction: column;
+    padding: 0.5em;
+  }
+
+  #mySignUps section div > div{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border: none;
   }

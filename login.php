@@ -1,6 +1,7 @@
 <?php
     $username = $_POST['username'] ?? "";
     $password = $_POST['password'] ?? "";
+    $errors = array();
 
     if (isset($_POST['login'])) {
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Profile</title>
-    <link rel ="stylesheet" href = "styles/ProfilePage.css"/>
+    <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>

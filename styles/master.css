@@ -171,6 +171,16 @@ header h1 {
         background-color: var(--green);
         color: white;
     }
+    .error {
+        color: var(--borders);
+        display: block;
+        margin: 0.5em;
+      }
+      
+      .hidden {
+        display: none;
+      }
+    
 
 /*see google doc for picture of colours*/
 /*colour scheme variables*/

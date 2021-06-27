@@ -48,7 +48,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel ="stylesheet" href = "styles/login.css"/>
+    <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -85,7 +85,7 @@
                         </div>
                         <div>
                             <span>Dont have an account yet?</span>
-                            <a href="CreateAccount.php">Signup</a>
+                            <a href="createAccount.php">Signup</a>
                         </div>
                     </form>
                 </div>

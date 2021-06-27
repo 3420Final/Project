@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Done!</title>
-    <link rel="stylesheet" href="styles/mySignups.css" />
+    <link rel="stylesheet" href="styles/master.css" />
 </head>
 <body>
   <?php include 'includes/navbar.php';?>

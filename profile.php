@@ -16,7 +16,7 @@
     <nav id='sidebar'>
       <ul>
         <li><a href="mySignups.php">Back</a></li>
-        <li><a href="EditAccount.php">Edit Profile</a></li>
+        <li><a href="editAccount.php">Edit Profile</a></li>
       </ul>
     </nav>
       <div>

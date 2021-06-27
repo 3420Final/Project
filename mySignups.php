@@ -16,13 +16,13 @@
       <main>
         <nav>
           <ul>
-            <li><a href="SignUpForSlot.php">Find a Sheet</a></li>
+            <li><a href="signUpForSlot.php">Find a Sheet</a></li>
           </ul>
         </nav>
         <section class = "Sign-upSheets">
           <section class = "h2">
             <h2>My Sign-up Sheets </h2>
-            <a href="SignUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
+            <a href="signUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
           </section>
             <div>
                 <div>

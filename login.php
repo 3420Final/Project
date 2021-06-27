@@ -85,7 +85,7 @@
                         </div>
                         <div>
                             <span>Dont have an account yet?</span>
-                            <a href="CreateAccount.php">Signup</a>
+                            <a href="createAccount.php">Signup</a>
                         </div>
                     </form>
                 </div>

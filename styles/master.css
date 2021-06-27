@@ -495,3 +495,8 @@ section#loginbox > div > div > form div button{
 section#loginbox > div > div > form div button:hover{
     background-color: #85b98a;
 }
+
+/*time slots**********************************************/
+#timeSlot p, #timeSlot ul, #timeSlot li{
+    margin: .5em;
+}

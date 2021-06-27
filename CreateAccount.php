@@ -45,6 +45,8 @@
         //todo list
         //profile picture
         //check emails maybe
+        header("Location:mySignups.php");
+        exit();
       }
     }
     else{

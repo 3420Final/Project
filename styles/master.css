@@ -438,4 +438,60 @@ nav#navbar{
         flex: 2 1 auto;
       }
 
-      
+      /*login page*******************************************************/
+      /*this is the box, border, shape*/
+section#loginbox > div{
+    border: solid black 2px;
+    border-radius: 10px;
+    background-color: var(--white);
+    padding: 2em 3em 2em 3em;
+}
+/*this is just for the form element, and the icon div*/
+section#loginbox > div > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*the icon for the person*/
+section#loginbox i {
+    font-size: 6em;
+    padding: 0.25em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 10em;
+}
+section#loginbox > div > div > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*put the labels ontop of the boxes*/
+section#loginbox > div > div > form label.usernamepass {
+    display: block;
+}
+section#loginbox > div > div > form > div {
+    padding-top: 1em;
+}
+
+/*font and sizing for email password stuff*/
+section#loginbox > div > div > form div#usernamepassword > input{
+    font-size: 1em;
+    padding: 0.25em 1em 0.25em 1em;
+}
+section#loginbox > div > div > form div#usernamepassword > label{
+    padding: 0.25em 0 0.25em 0;
+    font-size: 1.75em;
+}
+
+section#loginbox > div > div > form div button{
+    font-size: 1.25em;
+    padding: 0.5em 1em 0.5em 1em;
+    border: transparent;
+    border-radius: 5em;
+    background-color: var(--light-green);
+}
+
+section#loginbox > div > div > form div button:hover{
+    background-color: #85b98a;
+}

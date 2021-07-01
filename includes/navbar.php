@@ -4,10 +4,15 @@
 session_start();
 $login = 'Login';
 $loginlink = 'login.php';
+$homelink = 'login.php';
+$profilelink = 'login.php';
+
 if (isset($_SESSION['username']))
 {
     $login = 'Logout';
     $loginlink = 'thanks.php';   //takes you to the thanks page
+    $homelink = 'mySignups.php';
+    $profilelink = 'profile.php';
 }
 
 ?>
@@ -19,8 +24,8 @@ if (isset($_SESSION['username']))
         </div>
         <div>
             <ul>
-                <li><a href="mySignups.php">Home</a></li>
-                <li><a href="profile.php">View Profile</a></li>
+                <li><a href="<?php echo $homelink ?>">Home</a></li>
+                <li><a href="<?php echo $profilelink ?>">View Profile</a></li>
                 <li><a href="<?php echo $loginlink ?>"><?php echo $login ?></a></li>
             </ul>
             <form id="searchbar" name="search">

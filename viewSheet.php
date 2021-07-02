@@ -1,3 +1,18 @@
+<?php
+$creator = $_SESSION['username'];
+include 'includes/library.php';
+$pdo = connectDB();
+$query = "select * from timeslot_users WHERE username = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$creator]);
+$host = $stmt->fetch();
+
+$query = "select * from timeslot_slots WHERE userID = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$host["ID"]]);
+$slots = $stmt->fetchAll();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,64 +35,46 @@
           </ul>
         </nav>
         <section>
-          <h2>Front-End Design (Check-In One)</h2>
-            <p><i class="fas fa-info-circle"></i><strong> About:</strong> Your overall site design, HTML forms and corresponding CSS styling on all pages</p>
-            <div>
-              <label for="slots">Number of slots</label>
-              <select name="primary" id="primary">
-                <option value="">Choose One</option>
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="o">Other</option>
-              </select>
-            </div>
-            <div class = "table"> 
-              <table>
-                <thead>
+        <h2><?=$title?></h2>
+          <p><i class="fas fa-user"></i><strong>Creator: </strong><?=$creator?></p>
+          <p><i class="fas fa-info-circle"></i><strong>Description: </strong><?=$description?></p>
+          <p><i class="fas fa-map-marker-alt"></i><strong>Location: </strong><?=$location?></p>
+          <p><i class="fas fa-unlock-alt"></i><strong>Privacy: </strong><?=$privacy?></p>
+          <p><i class="fas fa-sticky-note"></i><strong>Notes: </strong><?=$notes?></p>
+          <div class = "table"> 
+          <div class = "table"> 
+            <table>
+              <thead>
+                <tr>
+                  <th>What</th>
+                  <th>When</th>
+                  <th>Who</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($slots as $slot): ?>
                   <tr>
-                    <th>What</th>
-                    <th>When</th>
-                    <th>Who</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Project Check-In #1</td>
-                    <td>Tue, Jun 15 @ 3:20 PM</td>
-                    <td>Jamie Le Neve</td>
-                  </tr>
-                  <tr>
-                    <td>Project Check-In #1</td>
-                    <td>Tue, Jun 15 @ 3:30 PM</td>
-                    <td>Bill Van Leeuwan</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <fieldset>
-              <legend>Privacy</legend>
-              <div>
-                <input id="public" name="status" type="radio" value="O" />
-                <label for="public">Public</label>
-              </div>
+                    <td><?=$title?></td>
+                    <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
+                    <?php if ($slot["userID"] == null): ?>
+                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                    <?php else: ?>
+                      <td>
+                        <?php
+                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $stmt = $pdo->prepare($query);
+                          $stmt->execute([$slot["userID"]]);
+                          $slotParticipant = $stmt->fetch();
 
-              <div>
-                <input id="private" name="status" type="radio" value="C" checked/>
-                <label for="private">Private</label>
-              </div>
-            </fieldset>
-            <div>
-              <button id="submit">Done</button>
-            </div>
-          </form>
+                          echo "$slotParticipant[username]";
+                        ?>
+                      </td>
+                    <?php endif ?>
+                  </tr>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
         </section>
       </main>
     </section>

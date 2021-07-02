@@ -16,7 +16,7 @@
         $stmt = $pdo->prepare($query);
         $stmt->execute([$username]);
         $results = $stmt->fetch();
-        var_dump($results);
+
         if($results == false){  //does the user exist?
             $errors['loginfail'] = true;
             //var_dump($results);//problem is here

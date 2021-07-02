@@ -95,30 +95,6 @@
                   <p><strong>Location: </strong><?=$slot["location"]?></p>
               </div>
             <?php endforeach ?>
-              <div>
-                  <div>
-                      <h3>Time Slot 2</h3>
-                      <ul>
-                          <li><a href="viewTimeSlot.php"><abbr title = "View Time Slot"><i class="fab fa-readme"></i></abbr></a></li>
-                          <li><a href="deleteTimeSlot.php"><abbr title = "Delete Time Slot"><i class="fas fa-trash-alt"></i></abbr></a></li>
-                      </ul>
-                  </div>
-                <p><strong>Date: </strong>June 15, 2021</p>
-                <p><strong>Time: </strong>3:30 PM</p>
-                <p><strong>Location: </strong>Remote via Zoom</p>
-            </div>
-            <div>
-              <div>
-                  <h3>Time Slot 3</h3>
-                  <ul>
-                      <li><a href="viewTimeSlot.php"><abbr title = "View Time Slot"><i class="fab fa-readme"></i></abbr></a></li>
-                      <li><a href="deleteTimeSlot.php"><abbr title = "Delete Time Slot"><i class="fas fa-trash-alt"></i></abbr></a></li>
-                  </ul>
-              </div>
-                <p><strong>Date: </strong>June 15, 2021</p>
-                <p><strong>Time: </strong>3:40 PM</p>
-                <p><strong>Location: </strong>Remote via Zoom</p>
-            </div>
           </section>
       </main>
     </section>

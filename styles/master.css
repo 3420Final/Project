@@ -199,7 +199,6 @@ body{
     flex-direction: column;
     justify-content: space-between;
     height:max-content;
-    padding: 1em;
   }
 /*navbar************************************************************************************************/
 nav#navbar{

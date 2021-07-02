@@ -76,7 +76,7 @@
                             <a href="forgotpassword.php">Forgot Password?</a>
                         </div>
                         <div>
-                            <button type="login" name="login">Login</button>
+                            <button type="submit" name="login">Login</button>
                         </div>
                         <span class="<?=!isset($errors['loginfail']) ? 'hidden' : "error";?>">Username or password incorrect.</span>
                         <div>

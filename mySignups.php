@@ -90,10 +90,11 @@
                         <li><a href="deleteTimeSlot.php"><abbr title = "Delete Time Slot"><i class="fas fa-trash-alt"></i></abbr></a></li>
                     </ul>
                   </div>
-                  <p><strong>Date: </strong>June 15, 2021</p>
-                  <p><strong>Time: </strong>3:20 PM</p>
-                  <p><strong>Location: </strong>Remote via Zoom</p>
+                  <p><strong>Date: </strong><?=$slot["date"]?></p>
+                  <p><strong>Time: </strong><?=$slot["time"]?></p>
+                  <p><strong>Location: </strong><?=$slot["location"]?></p>
               </div>
+            <?php endforeach ?>
               <div>
                   <div>
                       <h3>Time Slot 2</h3>

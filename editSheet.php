@@ -1,3 +1,97 @@
+<?php 
+  session_start();
+  include 'includes/library.php';
+  $pdo = connectDB();
+  
+  $query = "select * from timeslot_sheets WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $sheet = $stmt->fetch();
+
+  $query = "select * from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slots = $stmt->fetchAll();
+
+  $query = "select location, notes from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slotInfo = $stmt->fetch();
+
+  $creator = $_SESSION['username'];
+  $title = $_POST['title'] ?? $sheet["name"];
+  $description = $_POST['description'] ?? $sheet["description"];
+  $location = $_POST['location'] ?? $slotInfo["location"];
+  $privacy = $_POST['status'] ?? $sheet["privacy"];
+  $numSlots = $_POST['numSlots'] ?? $sheet["numslots"];
+  $notes = $_POST['notes'] ?? $slotInfo["notes"];
+
+  if (isset($_POST['submit'])){
+
+    //sanitize all the textbox inputs
+    $description = filter_var($description, FILTER_SANITIZE_STRING);
+    $notes = filter_var($notes, FILTER_SANITIZE_STRING);
+    //validate user has entered a title
+    if (!isset($title) || strlen($title) === 0) {
+      $errors['title'] = true;
+    }
+
+    //validate user has entered a title
+    if (!isset($creator) || strlen($creator) === 0) {
+      $errors['creator'] = true;
+    }
+
+    //validate user has entered a title
+    if (!isset($description)) {
+      $errors['description'] = true;
+    }
+
+    //validate user has entered a title
+    if (!isset($location) || strlen($location) === 0) {
+      $errors['location'] = true;
+    }
+
+    //make sure the chose a character
+    if (empty($privacy)) {
+      $errors['privacy'] = true;
+    }
+
+    //make sure they agreed to the terms
+    if ($numSlots == "") {
+      $errors['numSlots'] = true;
+    }
+      //validate user has entered a title
+      if (!isset($date)) {
+        $errors['date'] = true;
+      }
+
+      //validate user has entered a title
+      if (!isset($time)) {
+        $errors['time'] = true;
+      }
+
+      //only do this if there weren't any errors
+      if (count($errors) === 0) {
+        $query = "UPDATE timeslot_sheets SET numslots = ?, name = ?, description = ?, privacy = ?, host = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$numSlots, $title, $description, $privacy, $host["ID"]]);
+
+        $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$numSlots, $title, $description, $privacy]);
+        $sheetID = $stmt->fetch();
+        for ($i = 0; $i < $numSlots; $i ++){
+          $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =?";
+          $stmt = $pdo->prepare($query);
+          $stmt->execute([$date, $time, $location, $notes]);
+        }
+        //send the user to the thankyou page.
+        header("Location:sheetThanks.php");
+        exit();
+      }
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

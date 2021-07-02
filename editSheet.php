@@ -115,32 +115,48 @@
         </nav>
         <section>
           <h2>Sign-Up Sheet Details</h2>
-          <form id="requestform" action="EditSheet.php" method="post">
+          <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
-              <label for="title">Sign-Up Sheet Title</label>
-              <input id="title" name="title" type="text" placeholder="Project Check-In #1" />
+              <label for="title">Title</label>
+              <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
+              <span class="error <?=!isset($errors['title']) ? 'hidden' : "";?>">Please enter a title</span>
             </div>
             <div>
-              <label for="description">Sign-Up Sheet Description</label>
-              <textarea name="description" id="description" cols="30" rows="10" placeholder="Your overall site design, HTML forms and corresponding CSS styling on all pages"></textarea>
+              <label for="creator">Creator</label>
+              <input id="creator" name="creator" type="text" value="<?=$creator?>"/>
+              <span class="error <?=!isset($errors['creator']) ? 'hidden' : "";?>">Please enter your username</span>
             </div>
             <div>
-              <label for="slots">Number of slots</label>
-              <select name="primary" id="primary">
-                <option value="">Choose One</option>
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="o">Other</option>
-              </select>
+              <label for="description">Description</label>
+              <textarea name="description" id="description" cols="30" rows="10"><?=$description?></textarea>
+              <span class="error <?=!isset($errors['description']) ? 'hidden' : "";?>">Please enter a description</span>
             </div>
+            <div>
+              <label for="location">Loaction</label>
+              <input id="location" name="location" type="text" placeholder="Remote via Zoom" value="<?=$location?>"/>
+              <span class="error <?=!isset($errors['location']) ? 'hidden' : "";?>">Please enter a location</span>
+            </div>
+            <fieldset>
+              <legend>Privacy</legend>
+              <div>
+                <input id="public" name="status" type="radio" value="public" <?=$privacy == "public" ? 'checked' : ''?>/>
+                <label for="public">Public</label>
+              </div>
+              <div>
+                <input id="private" name="status" type="radio" value="private" <?=$privacy == "private" ? 'checked' : ''?>/>
+                <label for="private">Private</label>
+              </div>
+              <span class="error <?=!isset($errors['privacy']) ? 'hidden' : "";?>">Please select a privacy setting</span>
+            </fieldset>
+            <div>
+              <label for="notes">Notes</label>
+              <textarea name="notes" id="notes" cols="30" rows="10"><?=$notes?></textarea>
+            </div>
+              <div>
+                <label for="numSlots">Number of Time Slots</label>
+                <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>"/>
+                <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
+              </div>
             <div class = "table"> 
               <table>
                 <thead>
@@ -151,33 +167,42 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Project Check-In #1</td>
-                    <td>Tue, Jun 15 @ 3:20 PM</td>
-                    <td>Jamie Le Neve</td>
-                  </tr>
-                  <tr>
-                    <td>Project Check-In #1</td>
-                    <td>Tue, Jun 15 @ 3:30 PM</td>
-                    <td>Bill Van Leeuwan</td>
-                  </tr>
+                  <?php foreach ($slots as $slot): ?>
+                    <tr>
+                      <td><?=$title?></td>
+                      <td>
+                        <div>
+                          <label for="date">Date: </label>
+                          <input id="date" name="date" type="date" value="<?=$slot["date"]?>"/>
+                          <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
+                        </div>
+                        <div>
+                          <label for="time">Time</label>
+                          <input id="time" name="time" type="time" value="<?=$slot["time"]?>"/>
+                          <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
+                        </div>
+                      </td>
+                      <?php if ($slot["userID"] == null): ?>
+                        <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                      <?php else: ?>
+                        <td>
+                          <?php
+                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $stmt = $pdo->prepare($query);
+                          $stmt->execute([$slot["userID"]]);
+                          $slotParticipant = $stmt->fetch();
+
+                          echo "$slotParticipant[username]";
+                          ?>
+                        </td>
+                      <?php endif ?>
+                    </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>
-            <fieldset>
-              <legend>Privacy</legend>
-              <div>
-                <input id="public" name="status" type="radio" value="O" />
-                <label for="public">Public</label>
-              </div>
-
-              <div>
-                <input id="private" name="status" type="radio" value="C" checked/>
-                <label for="private">Private</label>
-              </div>
-            </fieldset>
             <div>
-              <button id="submit">Update Sheet</button>
+              <button type="submit" name="submit">Change Sheet</button>
             </div>
           </form>
         </section>

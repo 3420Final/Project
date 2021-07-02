@@ -1,3 +1,28 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['username'])){
+    header("Location:login.php");
+    exit();
+  }
+  $creator = $_SESSION['username'];
+  include 'includes/library.php';
+  $pdo = connectDB();
+  $query = "select * from timeslot_users WHERE username = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$creator]);
+  $host = $stmt->fetch();
+
+  $query = "select * from timeslot_sheets WHERE host = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$host["ID"]]);
+  $sheets = $stmt->fetchAll();
+
+  $query = "select * from timeslot_slots WHERE userID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$host["ID"]]);
+  $slots = $stmt->fetchAll();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

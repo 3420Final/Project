@@ -55,10 +55,10 @@
                   <div>
                       <h3><?=$sheet["name"]?></h3>
                       <ul>
-                        <li><a href="viewSheet.php"><abbr title = "View Sign-up Sheet"><i class="fab fa-readme"></i></abbr></a></li>
-                        <li><a href="editSheet.php"><abbr title = "Edit Sign-up Sheet"><i class="far fa-edit"></i></abbr></a></li>
-                        <li><a href="copySheet.php"><abbr title = "Copy Sign-up Sheet"><i class="far fa-copy"></i></abbr></a></li>
-                        <li><a href="deleteSheet.php"><abbr title = "Delete Sign-up Sheet"><i class="fas fa-trash-alt"></i></abbr></a></li>
+                        <li><?="<a href='viewSheet.php?id=".$sheet["ID"]."'><abbr title = 'View Sign-up Sheet'><i class='fab fa-readme'></i></abbr></a>"?></li>
+                        <li><?="<a href='editSheet.php?id=".$sheet["ID"]."'><abbr title = 'Edit Sign-up Sheet'><i class='far fa-edit'></i></abbr></a>"?></li>
+                        <li><?="<a href='copySheet.php?id=".$sheet["ID"]."'><abbr title = 'Copy Sign-up Sheet'><i class='far fa-copy'></i></abbr></a>"?></li>
+                        <li><?="<a href='deleteSheet.php?id=".$sheet["ID"]."'><abbr title = 'Delete Sign-up Sheet'><i class='fas fa-trash-alt'></i></abbr></a>"?></li>
                       </ul>
                   </div>
                   <p><strong>Description: </strong><?=$sheet["description"]?></p>
@@ -86,8 +86,8 @@
                       ?>
                     </h3>
                     <ul>
-                        <li><a href="viewTimeSlot.php"><abbr title = "View Time Slot"><i class="fab fa-readme"></i></abbr></a></li>
-                        <li><a href="deleteTimeSlot.php"><abbr title = "Delete Time Slot"><i class="fas fa-trash-alt"></i></abbr></a></li>
+                      <li><?="<a href='viewTimeSlot.php?id=".$slot["ID"]."'><abbr title = 'View Time Slot'><i class='fab fa-readme'></i></abbr></a>"?></li>
+                      <li><?="<a href='deleteTimeSlot.php?id=".$slot["ID"]."'><abbr title = 'Delete Time Slot'><i class='fas fa-trash-alt'></i></abbr></a>"?></li>
                     </ul>
                   </div>
                   <p><strong>Date: </strong><?=$slot["date"]?></p>

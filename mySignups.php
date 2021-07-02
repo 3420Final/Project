@@ -50,9 +50,10 @@
               <h2>My Sign-up Sheets </h2>
               <a href="signUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
             </section>
+            <?php foreach ($sheets as $sheet): ?>
               <div>
                   <div>
-                      <h3>Sign-up Sheet 1</h3>
+                      <h3><?=$sheet["name"]?></h3>
                       <ul>
                         <li><a href="viewSheet.php"><abbr title = "View Sign-up Sheet"><i class="fab fa-readme"></i></abbr></a></li>
                         <li><a href="editSheet.php"><abbr title = "Edit Sign-up Sheet"><i class="far fa-edit"></i></abbr></a></li>
@@ -60,9 +61,11 @@
                         <li><a href="deleteSheet.php"><abbr title = "Delete Sign-up Sheet"><i class="fas fa-trash-alt"></i></abbr></a></li>
                       </ul>
                   </div>
-                  <p><strong>Number of Slots: </strong>5</p>
-                  <p><strong>Number of People Signed-Up</strong> 3</p>
+                  <p><strong>Description: </strong><?=$sheet["description"]?></p>
+                  <p><strong>Number of Slots: </strong><?=$sheet["numslots"]?></p>
+                  <p><strong>Number of People Signed-Up: </strong><?=$sheet["numslotsfilled"]?></p>
               </div>
+              <?php endforeach ?> 
               <div>
                   <div>
                       <h3>Sign-up Sheet 2</h3>

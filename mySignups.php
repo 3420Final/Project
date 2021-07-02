@@ -65,33 +65,7 @@
                   <p><strong>Number of Slots: </strong><?=$sheet["numslots"]?></p>
                   <p><strong>Number of People Signed-Up: </strong><?=$sheet["numslotsfilled"]?></p>
               </div>
-              <?php endforeach ?> 
-              <div>
-                  <div>
-                      <h3>Sign-up Sheet 2</h3>
-                      <ul>
-                        <li><a href="viewSheet.php"><abbr title = "View Sign-up Sheet"><i class="fab fa-readme"></i></abbr></a></li>
-                        <li><a href="editSheet.php"><abbr title = "Edit Sign-up Sheet"><i class="far fa-edit"></i></abbr></a></li>
-                        <li><a href="copySheet.php"><abbr title = "Copy Sign-up Sheet"><i class="far fa-copy"></i></abbr></a></li>
-                        <li><a href="deleteSheet.php"><abbr title = "Delete Sign-up Sheet"><i class="fas fa-trash-alt"></i></abbr></a></li>
-                      </ul>
-                  </div>
-                <p><strong>Number of Slots: </strong>25</p>
-                <p><strong>Number of People Signed-Up</strong> 20</p>
-            </div>
-              <div>
-                  <div>
-                      <h3>Sign-up Sheet 3</h3>
-                      <ul>
-                        <li><a href="viewSheet.php"><abbr title = "View Sign-up Sheet"><i class="fab fa-readme"></i></abbr></a></li>
-                        <li><a href="editSheet.php"><abbr title = "Edit Sign-up Sheet"><i class="far fa-edit"></i></abbr></a></li>
-                        <li><a href="copySheet.php"><abbr title = "Copy Sign-up Sheet"><i class="far fa-copy"></i></abbr></a></li>
-                        <li><a href="deleteSheet.php"><abbr title = "Delete Sign-up Sheet"><i class="fas fa-trash-alt"></i></abbr></a></li>
-                      </ul>
-                  </div>
-                  <p><strong>Number of Slots: </strong>10</p>
-                  <p><strong>Number of People Signed-Up</strong> 7</p>
-              </div>   
+            <?php endforeach ?> 
           </section>
           <section class = "Slots">
             <section>

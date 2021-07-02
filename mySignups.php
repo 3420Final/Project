@@ -72,13 +72,23 @@
               <h2>My Time Slots</h2>
               <a href="SignUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
             </section>
+            <?php foreach ($slots as $slot): ?>
               <div>
                   <div>
-                      <h3>Time Slot 1</h3>
-                      <ul>
-                          <li><a href="viewTimeSlot.php"><abbr title = "View Time Slot"><i class="fab fa-readme"></i></abbr></a></li>
-                          <li><a href="deleteTimeSlot.php"><abbr title = "Delete Time Slot"><i class="fas fa-trash-alt"></i></abbr></a></li>
-                      </ul>
+                    <h3>
+                      <?php 
+                        $query = "select * from 'timeslot_sheets' WHERE ID = ?";
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$slot["sheetID"]]);
+                        $slotName = $stmt->fetchAll();
+
+                        echo "$slotName[name]";
+                      ?>
+                    </h3>
+                    <ul>
+                        <li><a href="viewTimeSlot.php"><abbr title = "View Time Slot"><i class="fab fa-readme"></i></abbr></a></li>
+                        <li><a href="deleteTimeSlot.php"><abbr title = "Delete Time Slot"><i class="fas fa-trash-alt"></i></abbr></a></li>
+                    </ul>
                   </div>
                   <p><strong>Date: </strong>June 15, 2021</p>
                   <p><strong>Time: </strong>3:20 PM</p>

@@ -1,3 +1,28 @@
+<?php
+  include 'includes/library.php';
+  $pdo = connectDB();
+
+  $query = "select * from timeslot_slots WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slot = $stmt->fetch();
+
+  $query = "select * from timeslot_sheets WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$slot["sheetID"]]);
+  $sheet = $stmt->fetch();
+
+  $query = "SELECT * FROM `timeslot_users` WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$sheet["host"]]);
+  $host = $stmt->fetch();
+
+  $query = "SELECT * FROM `timeslot_users` WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$slot["userID"]]);
+  $user = $stmt->fetch();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,17 +46,13 @@
           </ul>
         </nav>
         <section>
-          <h2>Front-End Design (Check-In One)</h2>
-            <p><i class="fas fa-info-circle"></i><strong> About:</strong> Your overall site design, HTML forms and corresponding CSS styling on all pages</p>
-            <p><i class="fas fa-user-circle"></i><strong> Host:</strong> Jamie Mitchell</p>
-            <p><i class="fas fa-user-circle"></i><strong>Participants: </strong></p>
-            <ul>
-              <li>Bill Van Leeuwan</li>
-              <li>Jamie Le Neve</li>
-            </ul>
-            <p><i class="fas fa-clock"></i><strong> When: </strong>Tue, Jun 15 @ 3:20pm</p>
-            <p><i class="fas fa-map-marked-alt"></i><strong> Where: </strong>Remote via Zoom</p>
-            <p><i class="fas fa-sticky-note"></i><strong> Notes: </strong>Access meeting through Jamie's Office Hours</p>
+          <h2><?=$sheet["name"]?></h2>
+          <p><i class="fas fa-info-circle"></i><strong>Description: </strong><?=$sheet["description"]?></p>
+          <p><i class="fas fa-user-circle"></i><strong>Host: </strong><?=$host["username"]?></p>
+          <p><i class="fas fa-user-circle"></i><strong>Participants: </strong><?=$user["name"]?></p>
+          <p><i class="fas fa-clock"></i><strong>When: </strong><?=$slot["date"]?> @ <?=$slot["time"]?></p>
+          <p><i class="fas fa-map-marked-alt"></i><strong>Where: </strong><?=$slot["location"]?></p>
+          <p><i class="fas fa-sticky-note"></i><strong>Notes: </strong><?=$slot["notes"]?></p>
         </section>
       </main>
     </section>

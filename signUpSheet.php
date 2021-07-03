@@ -6,7 +6,9 @@
   $numSlots = $_POST['numSlots'] ?? null;
   $notes = $_POST['notes'] ?? null;
   $errors = array();
+
   session_start();
+  
   if(!isset($_SESSION['username'])){
     header("Location:login.php");
     exit();

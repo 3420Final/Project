@@ -1,11 +1,20 @@
 <?php
 
 //check if user is logged in, present with proper text
-session_start();
 $login = 'Login';
 $loginlink = 'login.php';
 $homelink = 'login.php';
 $profilelink = 'login.php';
+
+//check if session started, stolen from https://stackoverflow.com/a/18542272
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+//if the user had remember me on, store their username in the session
+if(isset($_COOKIE['logincookie'])){
+    $_SESSION['username']=$_COOKIE['logincookie'];
+}
 
 if (isset($_SESSION['username']))
 {

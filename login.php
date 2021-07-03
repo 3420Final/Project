@@ -19,7 +19,6 @@
 
         if($results == false){  //does the user exist?
             $errors['loginfail'] = true;
-            //var_dump($results);//problem is here
         }
         else{
             if (password_verify($password, $results['password'])){  //if their password is valid

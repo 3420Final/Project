@@ -23,14 +23,18 @@
     $name = filter_var($name, FILTER_SANITIZE_STRING);
     
     //check if the username given is already in the DB
-    $query = "SELECT username,email FROM timeslot_users WHERE username=?";
+    $query = "SELECT username,email FROM timeslot_users WHERE username=? OR email=?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$username]);
+    $stmt->execute([$username,$email]);
     $results = $stmt->fetch();
 
-    if($results == false){ //results should be empty(false) if the password doesnt exist
+
+    if($results == false){ //results should be empty(false) if the user doesnt exist
       if ($password1 !== $password2){  //make sure that the both the password fields are the same
         $errors['passwordsmatch'] = true;
+      }
+      if(strlen($username) > 20 ){
+        $errors['usernametoolong'] = true;
       }
       if (count($errors) === 0){
 
@@ -44,7 +48,6 @@
 
         //todo list
         //profile picture
-        //check emails maybe
         header("Location:login.php");
         exit();
       }
@@ -81,7 +84,7 @@
       </div>
       <input type="submit" name="submit" value="Finished" />
     </form>
-    <form id="newuser" name="newuser"  method="post"><!--action="results.php" this was removed for testing by Bill-->
+    <form id="newuser" name="newuser"  method="post">
       <div>
         <label for="name">Name </label>
         <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>
@@ -123,7 +126,8 @@
         <input type="password" name="password2" id="passwd" required/>
       </div>
       <span class="<?=!isset($errors['passwordsmatch']) ? 'hidden' : "error";?>">Password Fields Dont Match</span>
-      <span class="<?=!isset($errors['usernameexists']) ? 'hidden' : "error";?>">That Username is already taken</span>
+      <span class="<?=!isset($errors['usernameexists']) ? 'hidden' : "error";?>">That Username is already taken, or the email is already in use</span>
+      <span class="<?=!isset($errors['usernametoolong']) ? 'hidden' : "error";?>">That Username is too long. Less than 20 charachters please.</span>
       <div><button type="submit" name="submit">Submit</button></div>
     </form>
     </main>

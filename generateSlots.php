@@ -64,6 +64,9 @@
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
+
+        $numSlots = intval($numSlots);  //bill july 4th
+
         $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$numSlots, $title, '0', $description, $privacy, $host["ID"]]);
@@ -173,7 +176,6 @@
                           <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
                         </div>
                       </td>
-                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
                     </tr>
                   <?php endfor ?>
                 </tbody>

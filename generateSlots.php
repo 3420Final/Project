@@ -7,9 +7,11 @@
   $privacy = $_POST['status'] ?? $privacy = $_SESSION['privacy'] ?? null;
   $numSlots = $_POST['numSlots'] ?? $numSlots = $_SESSION['numSlots'] ?? null;
   $notes = $_POST['notes'] ?? $notes = $_SESSION['notes'] ?? null;
-  $date = $_POST['date'] ?? null;
-  $time = $_POST['time'] ?? null;
-  
+  $date = null; //bill july 4th
+  $time = null; //bill july 4th
+
+  $numSlots = intval($numSlots);  //bill july 4th
+
   $errors = array();
   
   include 'includes/library.php';
@@ -19,6 +21,12 @@
   $stmt->execute([$creator]);
   $host = $stmt->fetch();
   if (isset($_POST['submit'])){
+
+    //bill july 4th
+    for($i = 0; $i<$numSlots;$i++){
+      $date[$i] = $_POST["date" .  $i ];
+      $time[$i] = $_POST["time" .  $i ];
+    }
 
     //sanitize all the textbox inputs
     $description = filter_var($description, FILTER_SANITIZE_STRING);
@@ -48,16 +56,16 @@
       $errors['privacy'] = true;
     }
 
-    //make sure they agreed to the terms
+    //validate user has entered a number of slots
     if ($numSlots == "") {
       $errors['numSlots'] = true;
     }
-      //validate user has entered a title
+      //validate user has entered a date
       if (!isset($date)) {
         $errors['date'] = true;
       }
 
-      //validate user has entered a title
+      //validate user has entered a time
       if (!isset($time)) {
         $errors['time'] = true;
       }
@@ -65,7 +73,7 @@
       //only do this if there weren't any errors
       if (count($errors) === 0) {
 
-        $numSlots = intval($numSlots);  //bill july 4th
+        
 
         $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);
@@ -78,7 +86,7 @@
         for ($i = 0; $i < $numSlots; $i ++){
           $query = "insert into timeslot_slots values (NULL,?,?,?,?,?,NULL)";
           $stmt = $pdo->prepare($query);
-          $stmt->execute([$sheetID["ID"], $date, $time, $location, $notes]);
+          $stmt->execute([$sheetID["ID"], $date[$i], $time[$i], $location, $notes]);
         }
         //send the user to the thankyou page.
         header("Location:sheetThanks.php");
@@ -157,7 +165,6 @@
                   <tr>
                     <th>What</th>
                     <th>When</th>
-                    <th>Who</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -167,12 +174,12 @@
                       <td>
                         <div>
                           <label for="date">Date: </label>
-                          <input id="date" name="date" type="date" value="<?=$date?>"/>
+                          <input id="date" name="date<?=$i-1?>" type="date" value="<?= ($date == null) ? null : $date[$i-1] //bill july 4th ?>"/>
                           <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                         <div>
                           <label for="time">Time</label>
-                          <input id="time" name="time" type="time" value="<?=$time?>"/>
+                          <input id="time" name="time<?=$i-1?>" type="time" value="<?= ($time == null) ? null : $time[$i-1] //bill july 4th ?>"/>
                           <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
                         </div>
                       </td>

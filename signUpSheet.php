@@ -46,7 +46,7 @@
     }
 
     //make sure they agreed to the terms
-    if ($numSlots == "") {
+    if ($numSlots == "" || $numSlots == "0") {
       $errors['numSlots'] = true;
     }
 

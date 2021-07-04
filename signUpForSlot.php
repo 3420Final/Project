@@ -1,17 +1,80 @@
+<?php 
+  session_start();
+  $user = $_SESSION['username'];
+  $book = "book";
+  
+  include 'includes/library.php';
+  $pdo = connectDB();
+
+  $query = "select * from timeslot_users WHERE username = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$user]);
+  $userDetails = $stmt->fetch();
+  
+  $query = "select * from timeslot_sheets WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $sheet = $stmt->fetch();
+
+  $query = "select * from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slots = $stmt->fetchAll();
+
+  $query = "select location, notes from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slotInfo = $stmt->fetch();
+
+  $creatorID = $sheet["host"];
+  $query = "select * from timeslot_users WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$creatorID]);
+  $creatorDetails = $stmt->fetch();
+
+  $creator = $creatorDetails["username"];
+  $title = $sheet["name"];
+  $description = $sheet["description"];
+  $location = $slotInfo["location"];
+  $privacy = $sheet["privacy"];
+  $numSlots = $sheet["numslots"];
+  $numSlotsFilled = $sheet["numslotsfilled"];
+  $notes = $slotInfo["notes"];
+  if ((isset($_GET["slotID"])) || (isset($_GET["action"]))){
+    echo "slotID: ". $_GET["slotID"]. "";
+    $query = "select * from timeslot_slots WHERE ID = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([(int)$_GET["slotID"]]);
+    $slotDetails = $stmt->fetch();
+    $action = $_GET["action"];
+    if ($action == "book"){
+        $query = "UPDATE timeslot_sheets SET numslotsfilled = numslotsfilled + 1 WHERE ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$sheet["ID"]]);
+
+        $query = "UPDATE timeslot_slots SET userID = ? WHERE ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$userDetails["ID"], $slotDetails["ID"]]);
+        header("Location:slotThanks.php");
+        exit();
+    }
+  }
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>View Sign-Up Sheet</title>
+    <title>Book a Time Slot</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <section id = "signUpForSlot">
+    <section id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
-        <h1><i class="fas fa-search"></i> Find Sign-Up Sheet</h1>
+        <h1><i class="fab fa-readme"></i> Book a Time Slot</h1>
       </header>
       <main>
         <nav>
@@ -19,60 +82,55 @@
             <li><a href="mySignups.php">Back</a></li>
           </ul>
         </nav>
-        
-        <section id = "FindSheet">
-          <form id="searchbar" name="search">
-                  <i aria-hidden="true" class="fas fa-search"></i>
-                  <input type='text' name="search" id="search" placeholder="Search for the Public Sign-Up Sheets Host or Title">
-                  <button id="submit" type="submit">Go</button>
-            </form>
-            <div class = "SlotSignUp">
-              <h2>Front-End Design (Check-In One)</h2>
-              <p><i class="fas fa-info-circle"></i><strong> About:</strong> Your overall site design, HTML forms and corresponding CSS styling on all pages</p>
-              <div>
-                <label for="slots">Number of slots</label>
-                <select name="primary" id="primary">
-                  <option value="">Choose One</option>
-                  <option value="1">1</option>
-                  <option value="2" selected>2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="o">Other</option>
-                </select>
-              </div>
-              <div class = "table"> 
-                <table>
-                  <thead>
-                    <tr>
-                      <th>What</th>
-                      <th>When</th>
-                      <th>Who</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Project Check-In #1</td>
-                      <td>Tue, Jun 15 @ 3:20 PM</td>
-                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
-                    </tr>
-                    <tr>
-                      <td>Project Check-In #1</td>
-                      <td>Tue, Jun 15 @ 3:30 PM</td>
-                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+        <section>
+          <h2><?=$title?></h2>
+          <p><i class="fas fa-user"></i><strong>Creator: </strong><?=$creator?></p>
+          <p><i class="fas fa-info-circle"></i><strong>Description: </strong><?=$description?></p>
+          <p><i class="fas fa-map-marker-alt"></i><strong>Location: </strong><?=$location?></p>
+          <p><i class="fas fa-unlock-alt"></i><strong>Privacy: </strong><?=$privacy?></p>
+          <p><i class="fas fa-sticky-note"></i><strong>Notes: </strong><?=$notes?></p>
+          <div class = "table"> 
+          <div class = "table"> 
+            <table>
+              <thead>
+                <tr>
+                  <th>What</th>
+                  <th>When</th>
+                  <th>Who</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($slots as $slot): ?>
+                  <tr>
+                    <td><?=$title?></td>
+                    <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
+                    <?php if ($slot["userID"] == null): ?>
+                      <?php if (isset($_SESSION['username'])): ?>
+                        <td>
+                          <button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button>
+                        </td>
+                      <?php else: ?>
+                        <td><input type="button" name="submit"><?="<a href='bookSlotNonUsers.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></td>
+                      <?php endif ?>
+                    <?php else: ?>
+                      <td>
+                        <?php
+                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $stmt = $pdo->prepare($query);
+                          $stmt->execute([$slot["userID"]]);
+                          $slotParticipant = $stmt->fetch();
+
+                          echo "$slotParticipant[username]";
+                        ?>
+                      </td>
+                    <?php endif ?>
+                  </tr>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
         </section>
       </main>
     </section>
   </body>
 </html>
-

@@ -1,6 +1,7 @@
 <?php
     session_start();
-    session_destroy();
+    session_destroy();  //destroy session
+    setcookie("logincookie","",1);  //remove username from cookie and expire the cookie in 1 second
     header('Location:index.php');
     exit();
 

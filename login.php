@@ -19,7 +19,6 @@
 
         if($results == false){  //does the user exist?
             $errors['loginfail'] = true;
-            //var_dump($results);//problem is here
         }
         else{
             if (password_verify($password, $results['password'])){  //if their password is valid
@@ -27,8 +26,13 @@
                 //put the user into the session
                 session_start();
                 $_SESSION['username'] = $username;
-                $_SESSION['id'] = $id;
-    
+                //removed the storing of ID here for simplicity. Bill (July 3rd 2021).
+                
+                if($_POST['remember']){
+                    setcookie("logincookie",$username,time()+60*60*24); //expires after one day
+                }
+
+
                 header("Location:mySignups.php");
                 exit();
             }
@@ -73,7 +77,7 @@
                             <input id="password" name="password" type="password" placeholder="" required/>
                         </div>
                         <div>
-                            <a href="forgotpassword.php">Forgot Password?</a>
+                            <a href="forgotPassword.php">Forgot Password?</a>
                         </div>
                         <div>
                             <button type="submit" name="login">Login</button>

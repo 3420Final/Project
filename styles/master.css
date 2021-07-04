@@ -19,6 +19,7 @@ h2{
 }
 h3{
     font-size: 1rem;
+    padding: 0.5em;
 }
 em {
     font-style: italic;
@@ -505,6 +506,68 @@ section#loginbox > div > div > form div button:hover{
     background-color: #85b98a;
 }
 
+
+/*reset password page*******************************************************/
+section#emailbox > div{
+  border: solid black 2px;
+  border-radius: 10px;
+  background-color: var(--white);
+  padding: 2em 3em 2em 3em;
+}
+/*this is just for the form element, and the icon div*/
+section#emailbox > div > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*the icon for the person*/
+section#emailbox i {
+  font-size: 6em;
+  padding: 0.25em;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border-radius: 10em;
+}
+section#emailbox > div > div > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*put the labels ontop of the boxes*/
+section#emailbox > div > div > form label.emailaddress {
+  display: block;
+}
+section#emailbox > div > div > form > div {
+  padding-top: 1em;
+}
+
+/*font and sizing for email password stuff*/
+section#emailbox > div > div > form div#emailspot > input{
+  font-size: 1em;
+  padding: 0.25em 1em 0.25em 1em;
+}
+section#emailbox > div > div > form div#emailspot > label{
+  padding: 0.25em 0 0.25em 0;
+  font-size: 1.75em;
+}
+
+section#emailbox > div > div > form div button{
+  font-size: 1.25em;
+  padding: 0.5em 1em 0.5em 1em;
+  border: transparent;
+  border-radius: 5em;
+  background-color: var(--light-green);
+}
+
+section#emailbox > div > div > form div button:hover{
+  background-color: #85b98a;
+}
+
+section#emailbox h3{
+  font-size: 1.5em;
+  padding: 1em;
+}
 /*time slots**********************************************/
 #timeSlot p, #timeSlot ul, #timeSlot li{
     margin: .5em;

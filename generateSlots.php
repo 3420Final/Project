@@ -60,13 +60,13 @@
     if ($numSlots == "") {
       $errors['numSlots'] = true;
     }
-      //validate user has entered a date
-      if (!isset($date)) {
+      //validate user has entered a date, by checking date[0]
+      if ($date[0] == "") {
         $errors['date'] = true;
       }
 
-      //validate user has entered a time
-      if (!isset($time)) {
+      //validate user has entered a time,by checking time[0]
+      if ($time[0] == "") {
         $errors['time'] = true;
       }
 

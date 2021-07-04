@@ -6,7 +6,7 @@
     $query = "SELECT * FROM `timeslot_users` WHERE username like ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$search]);
-    $hostUsername = $stmt->fetch();
+    $host = $stmt->fetch();
     $query = "select * from `timeslot_sheets` WHERE name like ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$search]);
@@ -15,11 +15,14 @@
     $stmt = $pdo->prepare($query);
     $stmt->execute([$search]);
     $descriptionResults = $stmt->fetchAll();
-    if ($hostUsername != false){
+    if ($host != false){
       $query = "select * from `timeslot_sheets` WHERE host = ?";
       $stmt = $pdo->prepare($query);
       $stmt->execute([$host["ID"]]);
-      $hostUsernameResults = $stmt->fetchAll();
+      $hostResults = $stmt->fetchAll();
+    }
+    else{
+      $hostResults = false;
     }
   }
   
@@ -50,7 +53,7 @@
         <form id="searchbar" name="search"  action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="GET">
             <i aria-hidden="true" class="fas fa-search"></i>
             <input type='text' name="search" id="search" placeholder="Search for the Public Sign-Up Sheets By Creator username, Title, Description">
-            <input id="submit" type="submit" value="Search"/>
+            <button id="submit" type="submit">Search</button>
           </form>
           <?php if(isset($_GET['search'])): ?>
             <?php if ($hostResults != false): ?>
@@ -110,4 +113,3 @@
     </section>
   </body>
 </html>
-

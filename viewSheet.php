@@ -1,17 +1,32 @@
-<?php
-$creator = $_SESSION['username'];
-include 'includes/library.php';
-$pdo = connectDB();
-$query = "select * from timeslot_users WHERE username = ?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$creator]);
-$host = $stmt->fetch();
+<?php 
+  session_start();
+  include 'includes/library.php';
+  $pdo = connectDB();
+  
+  $query = "select * from timeslot_sheets WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $sheet = $stmt->fetch();
 
-$query = "select * from timeslot_slots WHERE userID = ?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$host["ID"]]);
-$slots = $stmt->fetchAll();
+  $query = "select * from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slots = $stmt->fetchAll();
 
+  $query = "select location, notes from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slotInfo = $stmt->fetch();
+
+  $creator = $_SESSION['username'];
+  $title = $sheet["name"];
+  $description = $sheet["description"];
+  $location = $slotInfo["location"];
+  $privacy = $sheet["privacy"];
+  $numSlots = $sheet["numslots"];
+  $numSlotsFilled = $sheet["numslotsfilled"];
+  $notes = $slotInfo["notes"];
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">

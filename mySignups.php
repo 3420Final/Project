@@ -42,7 +42,7 @@
         <main>
           <nav>
             <ul>
-              <li><a href="signUpForSlot.php">Find a Sheet</a></li>
+              <li><a href="searchForSheet.php">Find a Sheet</a></li>
             </ul>
           </nav>
           <section class = "Sign-upSheets">

@@ -1,17 +1,35 @@
-<?php
-$creator = $_SESSION['username'];
-include 'includes/library.php';
-$pdo = connectDB();
-$query = "select * from timeslot_users WHERE username = ?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$creator]);
-$host = $stmt->fetch();
+<?php 
+  session_start();
+  include 'includes/library.php';
+  $pdo = connectDB();
+  
+  $query = "select * from timeslot_sheets WHERE ID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $sheet = $stmt->fetch();
 
-$query = "select * from timeslot_slots WHERE userID = ?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$host["ID"]]);
-$slots = $stmt->fetchAll();
+  $query = "select * from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slots = $stmt->fetchAll();
 
+  $query = "select location, notes from timeslot_slots WHERE sheetID = ?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$_GET["id"]]);
+  $slotInfo = $stmt->fetch();
+
+  $creator = $_SESSION['username'];
+  $title = $sheet["name"];
+  $description = $sheet["description"];
+  $location = $slotInfo["location"];
+  $privacy = $sheet["privacy"];
+  $numSlots = $sheet["numslots"];
+  $numSlotsFilled = $sheet["numslotsfilled"];
+  $notes = $slotInfo["notes"];
+
+  if (isset($_POST['bookslot'])) {
+    
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,11 +75,13 @@ $slots = $stmt->fetchAll();
                     <td><?=$title?></td>
                     <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
                     <?php if ($slot["userID"] == null): ?>
-                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                      <form id="book" name="book"  method="post">
+                        <td><button type='submit' name='bookslot'>Book Time Slot</button></td>
+                      </form>
                     <?php else: ?>
                       <td>
                         <?php
-                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $query = "select * from `timeslot_users` WHERE ID= ?";
                           $stmt = $pdo->prepare($query);
                           $stmt->execute([$slot["userID"]]);
                           $slotParticipant = $stmt->fetch();

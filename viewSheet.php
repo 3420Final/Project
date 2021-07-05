@@ -27,7 +27,6 @@
   $numSlotsFilled = $sheet["numslotsfilled"];
   $notes = $slotInfo["notes"];
 ?>
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -72,11 +71,13 @@
                     <td><?=$title?></td>
                     <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
                     <?php if ($slot["userID"] == null): ?>
-                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                      <form id="book" name="book"  method="post">
+                        <td><button type='submit' name='bookslot'>Book Time Slot</button></td>
+                      </form>
                     <?php else: ?>
                       <td>
                         <?php
-                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $query = "select * from `timeslot_users` WHERE ID= ?";
                           $stmt = $pdo->prepare($query);
                           $stmt->execute([$slot["userID"]]);
                           $slotParticipant = $stmt->fetch();

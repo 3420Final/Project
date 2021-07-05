@@ -77,12 +77,12 @@
                   <div>
                     <h3>
                       <?php 
-                        $query = "select * from 'timeslot_sheets' WHERE ID = ?";
+                        $query = "select * from `timeslot_sheets` WHERE ID = ?";
                         $stmt = $pdo->prepare($query);
                         $stmt->execute([$slot["sheetID"]]);
                         $slotName = $stmt->fetchAll();
 
-                        echo "$slotName[name]";
+                        echo $slotName[0]['name'];
                       ?>
                     </h3>
                     <ul>

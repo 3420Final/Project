@@ -26,10 +26,6 @@
   $numSlots = $sheet["numslots"];
   $numSlotsFilled = $sheet["numslotsfilled"];
   $notes = $slotInfo["notes"];
-
-  if (isset($_POST['bookslot'])) {
-    
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

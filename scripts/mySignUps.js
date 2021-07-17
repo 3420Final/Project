@@ -2,14 +2,14 @@
 //confirmation dialog on delete
 const sheetListItems = document.querySelectorAll(".Sign-upSheets div ul li");
 sheetListItems[3].addEventListener("click", (ev) =>{
-    let confirmDelete = confirm ("There is not enough of that toy available. Would you like more to be made?");
+    let confirmDelete = confirm ("Are you sure you want to delete this sheet?");
     if (confirmDelete == false){
         ev.preventDefault();
     }
 });
 const slotListItems = document.querySelectorAll(".Slots div ul li");
 sheetListItems[1].addEventListener("click", (ev) =>{
-    let confirmDelete = confirm ("Are you sure you want to delete this?");
+    let confirmDelete = confirm ("Are you sure you want to delete this time slot?");
     if (confirmDelete == false){
         ev.preventDefault();
     }

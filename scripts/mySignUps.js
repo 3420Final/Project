@@ -9,7 +9,7 @@ sheetListItems[3].addEventListener("click", (ev) =>{
 });
 const slotListItems = document.querySelectorAll(".Slots div ul li");
 sheetListItems[1].addEventListener("click", (ev) =>{
-    let confirmDelete = confirm ("There is not enough of that toy available. Would you like more to be made?");
+    let confirmDelete = confirm ("Are you sure you want to delete this?");
     if (confirmDelete == false){
         ev.preventDefault();
     }

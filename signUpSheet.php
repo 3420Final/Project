@@ -5,6 +5,8 @@
   $privacy = $_POST['status'] ?? null;
   $numSlots = $_POST['numSlots'] ?? null;
   $notes = $_POST['notes'] ?? null;
+  $date = $_POST['date'] ?? null;
+  $time = $_POST['time'] ?? null;
   $errors = array();
 
   session_start();
@@ -49,16 +51,32 @@
     if ($numSlots == "" || $numSlots == "0") {
       $errors['numSlots'] = true;
     }
+    if (!isset($date)) {
+      $errors['date'] = true;
+    }
+
+    //validate user has entered a title
+    if (!isset($time)) {
+      $errors['time'] = true;
+    }
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
-        $_SESSION['title'] = $title;
-        $_SESSION['description'] = $description;
-        $_SESSION['location'] = $location;
-        $_SESSION['privacy'] = $privacy;
-        $_SESSION['notes'] = $notes;
-        $_SESSION['numSlots'] = $numSlots;
-        header("Location:generateSlots.php");
+        $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$numSlots, $title, '0', $description, $privacy, $host["ID"]]);
+
+        $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$numSlots, $title, $description, $privacy]);
+        $sheetID = $stmt->fetch();
+        for ($i = 0; $i < $numSlots; $i ++){
+          $query = "insert into timeslot_slots values (NULL,?,?,?,?,?,NULL)";
+          $stmt = $pdo->prepare($query);
+          $stmt->execute([$sheetID["ID"], $date, $time, $location, $notes]);
+        }
+        //send the user to the thankyou page.
+        header("Location:sheetThanks.php");
         exit();
       }
   }
@@ -70,6 +88,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Sign-Up Sheet</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <script defer src="scripts/scripts.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -127,6 +146,36 @@
                 <label for="numSlots">Number of Time Slots</label>
                 <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>"/>
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>What</th>
+                    <th>When</th>
+                    <th>Who</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td><?=$title?></td>
+                      <td>
+                        <div>
+                          <label for="date">Date: </label>
+                          <input id="date" name="date" type="date" value="<?=$date?>"/>
+                          <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
+                        </div>
+                        <div>
+                          <label for="time">Time</label>
+                          <input id="time" name="time" type="time" value="<?=$time?>"/>
+                          <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
+                        </div>
+                      </td>
+                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                    </tr>
+                </tbody>
+              </table>
+              <div>
+                <button type="button" name="addSlot" id="addSlot">Add Another Time Slot</button>
               </div>
             <div>
               <button type="submit" name="submit">Generate Slots</button>

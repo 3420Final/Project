@@ -65,7 +65,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create New User</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
-    <script defer src="scripts/scripts.js"></script>
+    <script defer src="scripts/createAccount.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>

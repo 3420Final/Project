@@ -88,7 +88,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Sign-Up Sheet</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
-    <script defer src="scripts/scripts.js"></script>
+    <script defer src="scripts/createSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -147,7 +147,7 @@
                 <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>"/>
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
-              <table>
+              <table id="generateSlots">
                 <thead>
                   <tr>
                     <th>What</th>
@@ -156,7 +156,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr id="original">
                       <td><?=$title?></td>
                       <td>
                         <div>

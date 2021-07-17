@@ -8,7 +8,7 @@ sheetListItems[3].addEventListener("click", (ev) =>{
     }
 });
 const slotListItems = document.querySelectorAll(".Slots div ul li");
-sheetListItems[1].addEventListener("click", (ev) =>{
+slotListItems[1].addEventListener("click", (ev) =>{
     let confirmDelete = confirm ("Are you sure you want to delete this time slot?");
     if (confirmDelete == false){
         ev.preventDefault();

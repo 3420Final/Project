@@ -65,6 +65,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create New User</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <script defer src="scripts/scripts.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -82,7 +83,7 @@
         <label for="imgupload">Upload Profile Image:</label>
         <input type="file" name="imgupload" id="imgupload" />
       </div>
-      <input type="submit" name="submit" value="Finished" />
+      <button type="button" name="finished" id="finished">Finished</button>
     </form>
     <form id="newuser" name="newuser"  method="post">
       <div>

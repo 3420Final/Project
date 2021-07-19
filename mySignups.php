@@ -30,6 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Home</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <script defer src="scripts/mySignUps.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>

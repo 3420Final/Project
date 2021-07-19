@@ -36,12 +36,8 @@ if (isset($_SESSION['username']))
                 <li><a href="<?php echo $homelink ?>">Home</a></li>
                 <li><a href="<?php echo $profilelink ?>">View Profile</a></li>
                 <li><a href="<?php echo $loginlink ?>"><?php echo $login ?></a></li>
+                <li><a href="searchForSheet.php">Find Sign-up Sheet</a></li>
             </ul>
-            <form id="searchbar" name="search">
-                <i aria-hidden="true" class="fas fa-search"></i>
-                <input type='text' name="search" id="search">
-                <input id="submit" type="submit" value="Go">
-            </form>
         </div>
     </div>
 </nav>

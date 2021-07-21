@@ -99,6 +99,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Sign-Up Sheet</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <script defer src="scripts/createSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -115,7 +116,7 @@
         </nav>
         <section>
           <h2>Sign-Up Sheet Details</h2>
-          <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+          <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
               <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
@@ -158,7 +159,7 @@
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
             <div class = "table"> 
-              <table>
+              <table id="generateSlots">
                 <thead>
                   <tr>
                     <th>What</th>
@@ -200,6 +201,9 @@
                   <?php endforeach ?>
                 </tbody>
               </table>
+            </div>
+            <div>
+              <button type="button" name="addSlot" id="addSlot">Add Another Time Slot</button>
             </div>
             <div>
               <button type="submit" name="submit">Change Sheet</button>

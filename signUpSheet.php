@@ -105,7 +105,7 @@
         </nav>
         <section>
           <h2>Sign-Up Sheet Details</h2>
-          <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+          <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
               <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>

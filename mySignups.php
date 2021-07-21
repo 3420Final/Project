@@ -43,7 +43,7 @@
         <main>
           <nav>
             <ul>
-              <li><a href="searchForSheet.php">Find a Sheet</a></li>
+              <li><a href="calender.php">View Calender</a></li>
             </ul>
           </nav>
           <section class = "Sign-upSheets">

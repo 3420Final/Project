@@ -21,7 +21,7 @@ function addRow(id){
 } 
 
 //Form validation
-const requestForm = document.querySelector("#createSheet");
+const requestForm = document.querySelector("#sheet");
 
 //replace 'event name here' with the correct event
 requestForm.addEventListener("submit", (ev) => {

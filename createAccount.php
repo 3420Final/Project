@@ -8,9 +8,10 @@
 
   $errors = array();
 
-
+  
+  
   if (isset($_POST['submit'])) {
-    
+
     include 'includes/library.php';
     $pdo = connectDB();
 
@@ -48,8 +49,9 @@
 
         //todo list
         //profile picture
-        header("Location:login.php");
-        exit();
+        //TESTING FILE UPLOAD
+        //header("Location:login.php");
+        //exit();
       }
     }
     else{
@@ -75,15 +77,15 @@
   </header>
   <main>
   <?php include 'includes/sidebar.php';?>
-    <form id="uploadform" action="fileupload.php" method="post" enctype="multipart/form-data">
+    <form id="uploadform" action="includes/fileupload.php" method="post" enctype="multipart/form-data">
       <div>
         <img src="images/profileImage.png" alt="Profile Image Icon" width="350" height="350" />
-        <!--this is required to restrict size of file upload in php-->
-        <input type="hidden" name="MAX_FILE_SIZE" value="12400" />
+        <!--2MB restriction-->
+        <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
         <label for="imgupload">Upload Profile Image:</label>
         <input type="file" name="imgupload" id="imgupload" />
       </div>
-      <button type="button" name="finished" id="finished">Finished</button>
+      <button type="submit" name="finished" id="finished">Finished</button>
     </form>
     <form id="newuser" name="newuser"  method="post">
       <div>

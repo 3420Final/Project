@@ -12,6 +12,7 @@ function resetPassword($email)
 
     // Load configuration as an array. FROM LIBRARY.PHP
     $config = parse_ini_file(DOCROOT . "pwd/config.ini");
+    
 
     //create key
     //generates a 30 length cryptographically secure string of random bytes, and then converts to hexidecimal

@@ -18,6 +18,7 @@ if (isset($_POST['resetpassword'])) {
         resetPassword($email);
     }
 
+    
     header("Location:index.php");
     exit();
 }

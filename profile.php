@@ -1,3 +1,41 @@
+<?php
+session_start();
+//if user not logged in, send them to login
+if (!isset($_SESSION['username'])){
+  header("Location:login.php");
+}
+//get username
+$username = $_SESSION['username'];
+
+include 'includes/library.php';
+$pdo = connectDB();
+
+//get the user Info
+$query = "select * from timeslot_users WHERE username = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$username]);
+$userInfo = $stmt->fetch();
+$userID = $userInfo['ID'];
+$gender = $userInfo['gender'];
+$name = $userInfo['name'];
+$email = $userInfo['email'];
+
+
+//get their profile picture 
+$query = "select filepath from timeslot_images WHERE userID = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$userID]);
+$path = $stmt->fetch();
+
+//if profile picture doesnt exist, use blank
+if(!$path){
+  $path = "images/profileImage.png";
+}
+else{
+  $path = $path['filepath'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,50 +58,45 @@
       </ul>
     </nav>
       <div>
-        <img src="images/Profile.JPG" alt="Profile Image Icon" width="350" height="350" /> 
+        <img src=<?=$path?> alt="Profile Image Icon" width="350" height="350" /> 
       </div>
     <form id="newuser" name="newuser" action="results.php" method="post">
         <div>
             <label for="name">Name </label>
-            <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+"
-              title="firstname lastname" autocorrect="off" value = "Jamie Le Neve" required/>
+            <input type="text" id="name" name="name" 
+              title="firstname lastname"  value = <?=$name?> readonly required/>
           </div>
           <div>
             <label for="email">Email </label>
-            <input type="email" name="Email" id="email" value="jamieleneve@trentu.ca" />
+            <input type="email" name="Email" id="email" value=<?=$email?> readonly />
           </div>
 
-      <fieldset>
+      <fieldset disabled>
         <legend>Gender</legend>
           <div>
-            <input type="radio" name="gender" id="male" value="m" />
+            <input type="radio" name="gender" id="male" value="m" <?=($gender == 'male') ? 'checked' : '' ?>/>
             <label for="male">Male</label>
           </div>
           <div>
-            <input type="radio" name="gender" id="female" value="f" checked/>
+            <input type="radio" name="gender" id="female" value="f" <?=($gender == 'female') ? 'checked' : ''?>/>
             <label for="female">Female</label>
           </div>
           <div>
-            <input type="radio" name="gender" id="gnc" value="gnc"/>
+            <input type="radio" name="gender" id="gnc" value="gnc" <?=($gender == 'gqnc') ? 'checked' : ''?>/>
             <label for="gnc">Gender Queer/Non-Conforming</label>
           </div>
         <div>
-            <input type="radio" name="gender" id="notsay" value="notsay"/>
+            <input type="radio" name="gender" id="notsay" value="notsay" <?=($gender == 'notsay') ? 'checked' : ''?>/>
             <label for="notsay">Prefer not to say</label>
          </div>
         </fieldset>
 
       <div>
         <label for="username">Username </label>
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" value=<?=$username?> readonly/>
       </div>
 
-      <div>
-        <label for="passwd">Password </label>
-        <input type="password" name="password" id="passwd"/>
-      </div>
-
-      <div><button type="submit" name="submit">Submit</button></div>
+      <div></div>
     </form>
     </main>
   </body>

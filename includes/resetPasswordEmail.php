@@ -31,12 +31,20 @@ function resetPassword($email)
     $stmt = $pdo->prepare($query);
     $stmt->execute([$email,$expiry,$key]);
 
+    $query = "select username from timeslot_users WHERE email = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$email]);
+    $username = $stmt->fetch();
+    $username = $username['username'];
+
     //send the email containing the link
     require_once "Mail.php";  //this includes the pear SMTP mail library
     $from = "Password System Reset <noreply@loki.trentu.ca>";
     $to = "BillAndJamiesTimeSheetsUser <" . $email . ">";  //put user's email here
-    $subject = "This is the subject";
-    $body = "https://loki.trentu.ca/~". $config['username'] ."/Project/resetPassword.php?key=$key&email=$email&action=reset";   //uses the config file from the server to get the correct user, jamie or william
+    $subject = "Password Reset";
+    $body = "Hello, " . $username . ". follow this link to reset your password. https://loki.trentu.ca/~". 
+    $config['username'] ."/Project/resetPassword.php?key=$key&email=$email&action=reset
+    \nIf you recieved this message by mistake, you can safely ignore this email.";   //uses the config file from the server to get the correct user, jamie or william
     $host = "smtp.trentu.ca";
     $headers = array ('From' => $from,
       'To' => $to,

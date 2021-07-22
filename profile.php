@@ -1,3 +1,23 @@
+<?php
+session_start();
+//if user not logged in, send them to login
+if (!isset($_SESSION['username'])){
+  header("Location:login.php");
+}
+
+$user = $_SESSION['username'];
+
+include 'includes/library.php';
+$pdo = connectDB();
+$query = "select ID from timeslot_users WHERE username = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$user]);
+$userID = $stmt->fetch();
+
+$userID = $userID['ID'];
+
+var_dump($userID);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

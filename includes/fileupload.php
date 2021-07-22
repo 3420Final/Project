@@ -17,8 +17,9 @@ function fileUpload(int $userID){
     
     
             //path to the images folder
-            $path = WEBROOT . "/www_data/";
-    
+            //$path = WEBROOT . "/www_data/";
+            $path = "../www_data/";
+
             //split string on period
             $extension = explode('.', $_FILES['imgupload']['name']);
             //just take the extension

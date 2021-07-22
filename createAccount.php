@@ -47,11 +47,26 @@
         $stmt = $pdo->prepare($query);
         $stmt->execute([$username,$hashpass,$gender,$name,$email]);
 
-        //todo list
-        //profile picture
-        //TESTING FILE UPLOAD
-        //header("Location:login.php");
-        //exit();
+        //a function that uploads the photo, if the user uploaded one
+        if(isset($_FILES)){
+          //get the user ID
+          $query = "SELECT `ID` FROM `timeslot_users` WHERE username=?";
+          $stmt = $pdo->prepare($query);
+          $stmt->execute([$username]);
+          $userID = $stmt->fetch();
+          
+          try{
+            $userID = $userID['ID'];
+            include 'includes/fileupload.php';
+            fileUpload($userID);
+          }
+          catch (exceptions $e){
+            echo 'Something went horribly wrong with the image upload';
+          }
+        }
+
+        header("Location:login.php");
+        exit();
       }
     }
     else{
@@ -77,7 +92,7 @@
   </header>
   <main>
   <?php include 'includes/sidebar.php';?>
-    <form id="uploadform" action="includes/fileupload.php" method="post" enctype="multipart/form-data">
+    <form id="uploadform"  method="post" enctype="multipart/form-data">
       <div>
         <img src="images/profileImage.png" alt="Profile Image Icon" width="350" height="350" />
         <!--2MB restriction-->
@@ -85,9 +100,9 @@
         <label for="imgupload">Upload Profile Image:</label>
         <input type="file" name="imgupload" id="imgupload" />
       </div>
-      <button type="submit" name="finished" id="finished">Finished</button>
-    </form>
-    <form id="newuser" name="newuser"  method="post">
+      <!--<button type="submit" name="finished" id="finished">Finished</button>
+    </form>action="includes/fileupload.php"
+    <form id="newuser" name="newuser"  method="post">-->
       <div>
         <label for="name">Name </label>
         <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>

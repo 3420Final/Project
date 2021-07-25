@@ -29,13 +29,13 @@ if (isset($_POST['resetpassword'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+    <title>Change Password</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <h1><i class="fas fa-sign-in-alt"></i> Forgot Password</h1>
+        <h1><i class="fas fa-sign-in-alt"></i> Change Password</h1>
     </header>
     <main>
         <section id='emailbox'>

@@ -100,9 +100,6 @@
         <label for="imgupload">Upload Profile Image:</label>
         <input type="file" name="imgupload" id="imgupload" />
       </div>
-      <!--<button type="submit" name="finished" id="finished">Finished</button>
-    </form>action="includes/fileupload.php"
-    <form id="newuser" name="newuser"  method="post">-->
       <div>
         <label for="name">Name </label>
         <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>

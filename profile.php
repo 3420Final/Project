@@ -27,6 +27,7 @@ $stmt = $pdo->prepare($query);
 $stmt->execute([$userID]);
 $path = $stmt->fetch();
 
+
 //if profile picture doesnt exist, use blank
 if(!$path){
   $path = "images/profileImage.png";

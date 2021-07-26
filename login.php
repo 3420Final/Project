@@ -83,7 +83,7 @@
                             <input id="password" name="password" type="password" placeholder="" required/>
                         </div>
                         <div>
-                            <a href="forgotPassword.php">Forgot Password?</a>
+                            <a href="changePassword.php">Forgot Password?</a>
                         </div>
                         <div>
                             <button type="submit" name="login">Login</button>

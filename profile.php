@@ -27,6 +27,7 @@ $stmt = $pdo->prepare($query);
 $stmt->execute([$userID]);
 $path = $stmt->fetch();
 
+
 //if profile picture doesnt exist, use blank
 if(!$path){
   $path = "images/profileImage.png";
@@ -41,7 +42,7 @@ else{
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Profile</title>
+    <title>Profile</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
@@ -95,8 +96,6 @@ else{
         <label for="username">Username </label>
         <input type="text" name="username" id="username" value=<?=$username?> readonly/>
       </div>
-
-      <div></div>
     </form>
     </main>
   </body>

@@ -62,9 +62,22 @@
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
+
+        include 'includes/library.php';
+        $pdo = connectDB();
+
+        //get the user ID
+        $query = "select * from `timeslot_users` WHERE username = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$creator]);
+        $host = $stmt->fetch();
+
+        //insert the sheet
         $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$numSlots, $title, '0', $description, $privacy, $host["ID"]]);
+
+
 
         $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
         $stmt = $pdo->prepare($query);
@@ -113,7 +126,7 @@
             </div>
             <div>
               <label for="creator">Creator</label>
-              <input id="creator" name="creator" type="text" value="<?=$creator?>"/>
+              <input id="creator" name="creator" type="text" value="<?=$creator?>" disabled/>
               <span class="error <?=!isset($errors['creator']) ? 'hidden' : "";?>">Please enter your username</span>
             </div>
             <div>
@@ -144,7 +157,7 @@
             </div>
               <div>
                 <label for="numSlots">Number of Time Slots</label>
-                <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>"/>
+                <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>" disabled/>
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
               <table id="generateSlots">
@@ -170,7 +183,7 @@
                           <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
                         </div>
                       </td>
-                      <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                      <td><button id="submit" disabled>Book Time Slot</button></td>
                     </tr>
                 </tbody>
               </table>

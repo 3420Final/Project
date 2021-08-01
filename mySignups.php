@@ -20,7 +20,7 @@
   $query = "select * from timeslot_slots WHERE userID = ?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$host["ID"]]);
-  $slots = $stmt->fetchAll();
+  $mySlots = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -41,17 +41,19 @@
           <h1>My Sign Ups</h1>
         </header>
         <main>
-          <nav>
-            <ul>
-              <li><a href="calender.php">View Calender</a></li>
-            </ul>
-          </nav>
           <section class = "Sign-upSheets">
             <section class = "h2">
               <h2>My Sign-up Sheets </h2>
               <a href="signUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
             </section>
             <?php foreach ($sheets as $sheet): ?>
+              <?php 
+              $query = "select * from timeslot_slots WHERE sheetID = ? AND DATE(date) >= CURDATE()";
+              $stmt = $pdo->prepare($query);
+              $stmt->execute([$sheet["ID"]]);
+              $slots = $stmt->fetchAll();
+              if ($slots):
+              ?>
               <div>
                   <div>
                       <h3><?=$sheet["name"]?></h3>
@@ -66,6 +68,7 @@
                   <p><strong>Number of Slots: </strong><?=$sheet["numslots"]?></p>
                   <p><strong>Number of People Signed-Up: </strong><?=$sheet["numslotsfilled"]?></p>
               </div>
+              <?php endif ?>
             <?php endforeach ?> 
           </section>
           <section class = "Slots">
@@ -73,7 +76,7 @@
               <h2>My Time Slots</h2>
               <a href="SignUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
             </section>
-            <?php foreach ($slots as $slot): ?>
+            <?php foreach ($mySlots as $slot): ?>
               <div>
                   <div>
                     <h3>

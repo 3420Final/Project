@@ -38,6 +38,16 @@ nav a {
 .sr-only {
     visibility: hidden;
 }
+
+/*colour scheme variables*/
+:root {
+  --white: #DCE1DE;
+  --black: #1F2421;
+  --blue: #216869;
+  --green: #49A078;
+  --light-green: #9CC5A1;
+}
+
 header h1 {
     color: black;
   }
@@ -173,7 +183,7 @@ header h1 {
         color: white;
     }
     .error {
-        color: var(--borders);
+        color: red;
         display: block;
         margin: 0.5em;
       }
@@ -181,17 +191,7 @@ header h1 {
       .hidden {
         display: none;
       }
-    
-
-/*see google doc for picture of colours*/
-/*colour scheme variables*/
-:root {
-    --white: #DCE1DE;
-    --black: #1F2421;
-    --blue: #216869;
-    --green: #49A078;
-    --light-green: #9CC5A1;
-}
+  
 
 /*background gradient******************************************************************************/
 body{

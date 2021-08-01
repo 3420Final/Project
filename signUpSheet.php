@@ -3,10 +3,9 @@
   $description = $_POST['description'] ?? null;
   $location = $_POST['location'] ?? null;
   $privacy = $_POST['status'] ?? null;
-  $numSlots = $_POST['numSlots'] ?? null;
+  $numSlots = $_REQUEST['numSlots'] ?? null;
   $notes = $_POST['notes'] ?? null;
-  $date = $_POST['date'] ?? null;
-  $time = $_POST['time'] ?? null;
+  $dateTime = $_POST['dateTime'] ?? null;
   $errors = array();
 
   session_start();
@@ -51,45 +50,18 @@
     if ($numSlots == "" || $numSlots == "0") {
       $errors['numSlots'] = true;
     }
-    if (!isset($date)) {
-      $errors['date'] = true;
-    }
-
-    //validate user has entered a title
-    if (!isset($time)) {
-      $errors['time'] = true;
-    }
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
 
-        include 'includes/library.php';
-        $pdo = connectDB();
-
-        //get the user ID
-        $query = "select * from `timeslot_users` WHERE username = ?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$creator]);
-        $host = $stmt->fetch();
-
-        //insert the sheet
-        $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$numSlots, $title, '0', $description, $privacy, $host["ID"]]);
-
-
-
-        $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$numSlots, $title, $description, $privacy]);
-        $sheetID = $stmt->fetch();
-        for ($i = 0; $i < $numSlots; $i ++){
-          $query = "insert into timeslot_slots values (NULL,?,?,?,?,?,NULL)";
-          $stmt = $pdo->prepare($query);
-          $stmt->execute([$sheetID["ID"], $date, $time, $location, $notes]);
-        }
+        $_SESSION['title'] = $title;
+        $_SESSION['description'] = $description;
+        $_SESSION['location'] = $location;
+        $_SESSION['privacy'] = $privacy;
+        $_SESSION['numSlots'] = $numSlots;
+        $_SESSION['notes'] = $notes;
         //send the user to the thankyou page.
-        header("Location:sheetThanks.php");
+        header("Location:generateSlots.php");
         exit();
       }
   }
@@ -99,8 +71,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Sign-Up Sheet</title>
+    <title>Create Sign-Up Sheet: Part 1</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
     <script defer src="scripts/createSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
@@ -108,7 +84,7 @@
     <section id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
-        <h1>New Sign-Up Sheet</h1>
+        <h1>Part 1: Sign-up Sheet Outline</h1>
       </header>
       <main>
         <nav id='sidebar'>
@@ -157,7 +133,7 @@
             </div>
               <div>
                 <label for="numSlots">Number of Time Slots</label>
-                <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>" disabled/>
+                <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>" readonly/>
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
               <table id="generateSlots">
@@ -173,14 +149,9 @@
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date: </label>
-                          <input id="date" name="date" type="date" value="<?=$date?>"/>
-                          <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
-                        </div>
-                        <div>
-                          <label for="time">Time</label>
-                          <input id="time" name="time" type="time" value="<?=$time?>"/>
-                          <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
+                          <label for="date">Date and Time: </label>
+                          <input type="text" name="dateTime" id="basicDate" placeholder="Please select Date Time" data-input value="<?=$dateTime?>" disabled>
+                          <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
                       <td><button id="submit" disabled>Book Time Slot</button></td>
@@ -191,7 +162,7 @@
                 <button type="button" name="addSlot" id="addSlot">Add Another Time Slot</button>
               </div>
             <div>
-              <button type="submit" name="submit">Generate Slots</button>
+              <button type="submit" name="submit">Proceed to Part 2: Time Slot Details</button>
             </div>
           </form>
         </section>

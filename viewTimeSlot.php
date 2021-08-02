@@ -30,6 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>View Time Slot</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <script defer src="scripts/deleteSlot.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -46,7 +47,12 @@
           </ul>
         </nav>
         <section>
-          <h2><?=$sheet["name"]?></h2>
+        <div>
+            <h2><?=$sheet["name"]?></h2>
+            <ul>
+              <li><?="<a href='deleteTimeSlot.php?id=".$slot["ID"]."'><abbr title = 'Delete Time Slot'><i class='fas fa-trash-alt'></i></abbr></a>"?></li>
+            </ul>
+          </div>
           <p><i class="fas fa-info-circle"></i><strong>Description: </strong><?=$sheet["description"]?></p>
           <p><i class="fas fa-user-circle"></i><strong>Host: </strong><?=$host["username"]?></p>
           <p><i class="fas fa-user-circle"></i><strong>Participants: </strong><?=$user["name"]?></p>

@@ -13,7 +13,7 @@
   <section id="mainspace">
     <div class="container">
       <!--Citation for the image below: https://www.flexjobs.com/blog/post/essential-time-management-skills/-->
-      <img src="images/MainpageImage.jpg" alt="computer with hour glass filled with blue sand" style = "width:100%" />
+      <img src="images/MainpageImage.jpg" alt="computer with hour glass filled with blue sand" width=100% height=700/>
       <div class="content">
         <h1>Welcome!</h1>
         <p>Create and Manage Sign-Up Sheets and sign-up for time slots on other peoples sheets!</p>

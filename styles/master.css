@@ -449,6 +449,12 @@ section .SlotSignUp{
 #signUpSheet button:disabled:hover{
   color: var(--back);
 }
+
+#signUpSheet header h1{
+  background: rgb(255, 255, 255); /* Fallback color */
+  background: rgba(255, 255, 255, 0.3); /* Black background with 0.5 opacity */
+}
+
   /*profile *************************************************************/
 form#newuser, form#uploadform {
   display: flex;

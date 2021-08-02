@@ -74,7 +74,7 @@
     }
   }
 ?>
-
+<!--There is an error coming up in the console relating to the plugin and the plugin dosen't appear to be working on my end-->
 <!DOCTYPE html>
 <html lang="en">
   <head>

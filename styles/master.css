@@ -158,10 +158,15 @@ header h1 {
     color: var(--white);
     border-radius: 0.5em; /*rounded corners*/
   }
+
+  main nav ul{
+    flex-direction: column;
+  }
   
  button {
     font-size: 1.2em;
   }
+
  button, main nav a{
       display: flex;
       padding: 1em;

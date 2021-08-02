@@ -168,6 +168,7 @@
                   <tr>
                     <th>What</th>
                     <th>When</th>
+                    <th>Book</th>
                   </tr>
                 </thead>
                 <tbody>

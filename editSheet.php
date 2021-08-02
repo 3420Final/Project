@@ -3,31 +3,36 @@
   include 'includes/library.php';
   $pdo = connectDB();
   
+  $errors = array();
+  $_SESSION["sheetID"] = $_GET["id"] ?? $_SESSION["sheetID"];
+  $sheetID = $_SESSION["sheetID"];
+  //get sheet
   $query = "select * from timeslot_sheets WHERE ID = ?";
   $stmt = $pdo->prepare($query);
-  $stmt->execute([$_GET["id"]]);
+  $stmt->execute([$sheetID]);
   $sheet = $stmt->fetch();
 
+  //get slots
   $query = "select * from timeslot_slots WHERE sheetID = ?";
   $stmt = $pdo->prepare($query);
-  $stmt->execute([$_GET["id"]]);
+  $stmt->execute([$sheetID]);
   $slots = $stmt->fetchAll();
-
-  $query = "select location, notes from timeslot_slots WHERE sheetID = ?";
-  $stmt = $pdo->prepare($query);
-  $stmt->execute([$_GET["id"]]);
-  $slotInfo = $stmt->fetch();
-
+  
   $creator = $_SESSION['username'];
   $title = $_POST['title'] ?? $sheet["name"];
   $description = $_POST['description'] ?? $sheet["description"];
-  $location = $_POST['location'] ?? $slotInfo["location"];
+  $location = $_POST['location'] ?? $slots[0]["location"];
   $privacy = $_POST['status'] ?? $sheet["privacy"];
   $numSlots = $_POST['numSlots'] ?? $sheet["numslots"];
-  $notes = $_POST['notes'] ?? $slotInfo["notes"];
+  $notes = $_POST['notes'] ?? $slots[0]["notes"];
 
   if (isset($_POST['submit'])){
-
+    $description = $_POST['description'];
+    $privacy = $_POST['status'];
+    $notes = $_POST['notes'];
+    $title = $_POST['title'];
+    $location = $_POST['location'];
+    
     //sanitize all the textbox inputs
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $notes = filter_var($notes, FILTER_SANITIZE_STRING);
@@ -36,58 +41,45 @@
       $errors['title'] = true;
     }
 
-    //validate user has entered a title
-    if (!isset($creator) || strlen($creator) === 0) {
-      $errors['creator'] = true;
-    }
 
-    //validate user has entered a title
+    //validate user has entered a desc
     if (!isset($description)) {
       $errors['description'] = true;
     }
 
-    //validate user has entered a title
+    //validate user has entered a location
     if (!isset($location) || strlen($location) === 0) {
       $errors['location'] = true;
     }
 
-    //make sure the chose a character
-    if (empty($privacy)) {
-      $errors['privacy'] = true;
-    }
-
-    //make sure they agreed to the terms
-    if ($numSlots == "") {
-      $errors['numSlots'] = true;
-    }
-      //validate user has entered a title
-      if (!isset($date)) {
-        $errors['date'] = true;
-      }
-
-      //validate user has entered a title
-      if (!isset($time)) {
-        $errors['time'] = true;
+      if (empty($privacy)) {
+        $errors['privacy'] = true;
       }
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
-        $query = "UPDATE timeslot_sheets SET numslots = ?, name = ?, description = ?, privacy = ?, host = ?";
+        //update sheet
+        $query = "UPDATE `timeslot_sheets` SET name = ?, description = ?, privacy = ? WHERE ID=?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$numSlots, $title, $description, $privacy, $host["ID"]]);
+        $stmt->execute([$title, $description, $privacy, $sheetID]);
 
-        $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
+        //update slots
+        $query = "UPDATE `timeslot_slots` SET location=?, notes=? WHERE sheetID=?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$numSlots, $title, $description, $privacy]);
-        $sheetID = $stmt->fetch();
-        for ($i = 0; $i < $numSlots; $i ++){
-          $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =?";
-          $stmt = $pdo->prepare($query);
-          $stmt->execute([$date, $time, $location, $notes]);
-        }
+        $stmt->execute([$location, $notes, $sheetID]);
+
+        // $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
+        // $stmt = $pdo->prepare($query);
+        // $stmt->execute([$numSlots, $title, $description, $privacy]);
+        // $sheetID = $stmt->fetch();
+        // for ($i = 0; $i < $numSlots; $i ++){
+        //   $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =?";
+        //   $stmt = $pdo->prepare($query);
+        //   $stmt->execute([$date, $time, $location, $notes]);
+        // }
         //send the user to the thankyou page.
-        header("Location:sheetThanks.php");
-        exit();
+        //header("Location:sheetThanks.php");
+        //exit();
       }
   }
 
@@ -124,7 +116,7 @@
             </div>
             <div>
               <label for="creator">Creator</label>
-              <input id="creator" name="creator" type="text" value="<?=$creator?>"/>
+              <input id="creator" name="creator" type="text" value="<?=$creator?>" disabled/>
               <span class="error <?=!isset($errors['creator']) ? 'hidden' : "";?>">Please enter your username</span>
             </div>
             <div>
@@ -174,26 +166,26 @@
                       <td>
                         <div>
                           <label for="date">Date: </label>
-                          <input id="date" name="date" type="date" value="<?=$slot["date"]?>"/>
+                          <input id="date" name="date" type="date" value="<?=$slot["date"]?>" disabled/>
                           <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                         <div>
                           <label for="time">Time</label>
-                          <input id="time" name="time" type="time" value="<?=$slot["time"]?>"/>
+                          <input id="time" name="time" type="time" value="<?=$slot["time"]?>" disabled/>
                           <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
                         </div>
                       </td>
                       <?php if ($slot["userID"] == null): ?>
-                        <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
+                        <td><button id="submit" disabled>Book Time Slot</button></td>
                       <?php else: ?>
                         <td>
                           <?php
-                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $query = "select * from `timeslot_users` WHERE ID= ?";
                           $stmt = $pdo->prepare($query);
                           $stmt->execute([$slot["userID"]]);
                           $slotParticipant = $stmt->fetch();
 
-                          echo "$slotParticipant[username]";
+                          echo "$slotParticipant[name]";
                           ?>
                         </td>
                       <?php endif ?>

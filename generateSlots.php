@@ -7,6 +7,7 @@
   $privacy = $_POST['status'] ?? $privacy = $_SESSION['privacy'] ?? null;
   $numSlots = $_POST['numSlots'] ?? $numSlots = $_SESSION['numSlots'] ?? null;
   $notes = $_POST['notes'] ?? $notes = $_SESSION['notes'] ?? null;
+  $dateTime = null; 
   $date = null; //bill july 4th
   $time = null; //bill july 4th
 
@@ -24,8 +25,11 @@
 
     //bill july 4th
     for($i = 0; $i<$numSlots;$i++){
-      $date[$i] = $_POST["date" .  $i ];
-      $time[$i] = $_POST["time" .  $i ];
+      $dateTime[$i] = $_POST["dateTime" .  $i ];
+      //validate user has entered a date, by checking date[0]
+      if ($dateTime[$i] == "") {
+        $errors['dateTime'] = true;
+      }
     }
 
     //sanitize all the textbox inputs
@@ -60,20 +64,12 @@
     if ($numSlots == "") {
       $errors['numSlots'] = true;
     }
-      //validate user has entered a date, by checking date[0]
-      if ($date[0] == "") {
-        $errors['date'] = true;
-      }
-
-      //validate user has entered a time,by checking time[0]
-      if ($time[0] == "") {
-        $errors['time'] = true;
-      }
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
 
-        
+        $date = substr($dateTime[$i], 0, 10);
+        $time = substr($dateTime[$i], 10);
 
         $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);
@@ -86,7 +82,7 @@
         for ($i = 0; $i < $numSlots; $i ++){
           $query = "insert into timeslot_slots values (NULL,?,?,?,?,?,NULL)";
           $stmt = $pdo->prepare($query);
-          $stmt->execute([$sheetID["ID"], $date[$i], $time[$i], $location, $notes]);
+          $stmt->execute([$sheetID["ID"], $date, $time, $location, $notes]);
         }
         //send the user to the thankyou page.
         header("Location:sheetThanks.php");
@@ -99,25 +95,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Sign-Up Sheet</title>
+    <title>Create Sign-Up Sheet: Part 2</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <script defer src="scripts/createSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <section id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
-        <h1>New Sign-Up Sheet</h1>
+        <h1>Part 2: Time Slot Details</h1>
       </header>
       <main>
         <nav id='sidebar'>
           <ul>
-            <li><a href="mySignups.php">Back</a></li>
+            <li><a href="signUpSheet.php">Back</a></li>
           </ul>
         </nav>
         <section>
           <h2>Sign-Up Sheet Details</h2>
-          <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+          <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
               <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
@@ -173,20 +174,19 @@
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date: </label>
-                          <input id="date" name="date<?=$i-1?>" type="date" value="<?= ($date == null) ? null : $date[$i-1] //bill july 4th ?>"/>
-                          <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
-                        </div>
-                        <div>
-                          <label for="time">Time</label>
-                          <input id="time" name="time<?=$i-1?>" type="time" value="<?= ($time == null) ? null : $time[$i-1] //bill july 4th ?>"/>
-                          <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
+                          <label for="date">Date and Time: </label>
+                          <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" data-input value="<?= ($dateTime == null) ? null : $dateTime[$i-1]?>">
+                          <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
+                      <td><button id="submit" disabled>Book Time Slot</button></td>
                     </tr>
                   <?php endfor ?>
                 </tbody>
               </table>
+            </div>
+            <div>
+              <button type="button" name="addSlot" id="addSlot">Add Another Time Slot</button>
             </div>
             <div>
               <button type="submit" name="submit">Create Sheet</button>

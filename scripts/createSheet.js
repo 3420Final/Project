@@ -21,6 +21,20 @@ function addRow(id){
     x.appendChild(node);   //add the node or row to the table
 } 
 
+//plug-in
+const datePicker = document.querySelectorAll("tbody tr td div");
+for (let i = 0; i < numSlots; i ++){
+    $(document).on('focus', '#basicDate',function(){
+        $(this).flatpickr({
+            appendTo: datePicker[i],
+            enableTime: true,
+            altInput: true,
+            altFormat: "F, d Y H:i",
+            dateFormat: "Y-m-d H:i"
+        });
+    });
+}
+
 //Form validation
 const requestForm = document.querySelector("#sheet");
 
@@ -101,28 +115,16 @@ requestForm.addEventListener("submit", (ev) => {
         console.log("slot number error");
     }
 
-    const dateInput = document.querySelector("#date");
-    const dateError = dateInput.nextElementSibling;
+    const dateTimeInput = document.querySelector("#basicDate");
+    const dateTimeError = dateTimeInput.nextElementSibling;
 
-    //validate user has entered a date
-    dateError.classList.remove("hidden");
-    if (dateInput.value != "") {
-        dateError.classList.add("hidden");
+    //validate user has entered a date and time
+    dateTimeError.classList.remove("hidden");
+    if (dateTimeInput.value != "") {
+        dateTimeError.classList.add("hidden");
     } else {
         error = true;
         console.log("date error");
-    }
-
-    const timeInput = document.querySelector("#time");
-    const timeError = timeInput.nextElementSibling;
-
-    //validate user has entered a time
-    timeError.classList.remove("hidden");
-    if (timeInput.value != "") {
-        timeError.classList.add("hidden");
-    } else {
-        error = true;
-        console.log("time error");
     }
 
     // Make this conditional on if there are errors.

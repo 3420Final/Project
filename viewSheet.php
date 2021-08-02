@@ -85,6 +85,7 @@
                           echo "$slotParticipant[username]";
                         ?>
                       </td>
+                      <td><button id="submit" disabled>Book Time Slot</button></td>
                     <?php endif ?>
                   </tr>
                 <?php endforeach ?>

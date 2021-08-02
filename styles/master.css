@@ -112,6 +112,14 @@ header h1 {
     justify-content: space-evenly;
     margin-top: 0.5em;
   }
+
+  .flatpickr-input form-control input active {
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
+    padding: 12px 10px;
+    text-align: center;
+    width: 250px;
+  }
   
   fieldset{
     
@@ -159,7 +167,7 @@ header h1 {
       }
     
       section table{
-        width: 80%;
+        width: 90%;
     }
     
       td, th {
@@ -336,117 +344,6 @@ nav#navbar{
       justify-content: space-between;
       border: none;
   }
-
-  /******************signupsheet section****************/
-  
-    
-    
-/*swap colours on hover*/
-#signUpSheet button:hover {
-    background-color: var(--green);
-    border: 0.3em solid var(--borders);
-    color: var(--white);
-    border-radius: 0.5em; /*rounded corners*/
-  }
-#FindSheet section{
-    display: flex;
-    border: 0.2em solid var(--black);
-    margin: 0.5rem;
-    background-color: var(--white);
-    color:var(--black);
-    flex-direction: column;
-    justify-content: space-evenly;
-    justify-content: stretch;
-    flex: 2 1 auto;
-  }
-
-#signUpSheet button{
-    font-size: 1.2em;
-    border-radius: 0.5em; /*rounded corners*/
-    background-color: white;
-    border: 0.3em solid var(--borders);
-    color: var(--blue);
-    text-align: center;
-    text-decoration: none; /*remove underline*/
-    display: flex;
-    padding: 0.5em;
-    margin-bottom: 1em;
-    align-items: flex-start;
-    text-align: center;
-    justify-content: space-around;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
-  }
-
-#FindSheet form{
-  display:flex;
-  flex: 2 1 auto;
-  padding: 1em;
-  margin: 1em;
-}
-
-#FindSheet form input{
-  height: 1.3em;
-  margin-right: 0.1em;
-}
-
-#FindSheet form i{
-  font-size: 2em;
-  margin-top: 0.5em;
-  margin-right: 0.3em;
-}
-
-#FindSheet form button{
-  padding: 0.5em;
-  margin: 0.5em;
-  width: 3em;
-}
-
-section .SlotSignUp{
-  margin: 1em;
-}
-#signUpSheet header{
-  /*Citation for the image below: https://www.pinterest.ca/pin/674203006692235309/*/
-  background-image: url('../images/SignUpSheet.jpg');
-  height: 20em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
-#signUpSheet section {
-  display: flex;
-  border: 0.2em solid var(--black);
-  margin: 0.5rem;
-  padding: 1em;
-  background-color: var(--white);
-  color:var(--black);
-  flex-direction: column;
-  justify-content: space-evenly;
-  justify-content: stretch;
-  flex: 2 1 auto;
-}
-
-#signUpSheet main{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin: 0.1em;
-
-}
-
-  /*profile *************************************************************/
-form#newuser, form#uploadform {
-  display: flex;
-  border: 0.2em solid var(--black);
-  margin: 0.5rem;
-  background-color: var(--white);
-  color:var(--black);
-  flex-direction: column;
-  justify-content: space-evenly;
-  justify-content: stretch;
-  flex: 2 1 auto;
-}
 
       /*login page*******************************************************/
       /*this is the box, border, shape*/

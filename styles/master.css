@@ -99,6 +99,15 @@ header h1 {
       color: var(--black);
   }
 
+  p{
+    margin: 0.5em;
+  }
+
+  i{
+    margin-right:0.3em;
+  }
+  
+
   form > div{
     display: flex;
     flex-direction: column;
@@ -191,6 +200,13 @@ header h1 {
         background-color: var(--green);
         color: white;
     }
+
+    section table tr td div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
     .error {
         color: red;
         display: block;

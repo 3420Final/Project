@@ -30,6 +30,11 @@ strong {
 abbr {
     display: inline;
 }
+
+p{
+  margin: 0.5em;
+}
+
 /*links in nav*/
 nav a {
     font-family: 'Fredericka the Great', cursive;
@@ -170,7 +175,7 @@ header h1 {
     
     section table thead tr th{
         background-color: var(--green);
-        color: white;
+        color: black;
     }
     .error {
         color: var(--borders);
@@ -306,7 +311,7 @@ nav#navbar{
     bottom: 40%;
     left: 25%;
     background: rgb(0, 0, 0); /* Fallback color */
-    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    background: rgba(0, 0, 0, 0.7); /* Black background with 0.5 opacity */
     color: #f1f1f1; /* Grey text */
     width: 50%; /* Full width */
     padding: 20px; /* Some padding */
@@ -413,6 +418,12 @@ nav#navbar{
           align-items: center;
           margin-bottom: 1em;
         }
+
+        #FindSheet section div div{
+          display: flex;
+          justify-content: space-between;
+          margin: 0.5em;
+        }
   
        #signUpSheet section {
           display: flex;
@@ -434,6 +445,12 @@ nav#navbar{
           margin: 0.1em;
         
         }
+
+        #signUpSheet header h1{
+          background: rgb(255, 255, 255); /* Fallback color */
+          background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+        }
+    
 
         /*profile *************************************************************/
       form#newuser, form#uploadform {
@@ -571,4 +588,12 @@ section#emailbox h3{
 /*time slots**********************************************/
 #timeSlot p, #timeSlot ul, #timeSlot li{
     margin: .5em;
+}
+
+#timeSlot button:disabled{
+  background-color: lightgrey;
+}
+
+#timeSlot button:disabled:hover{
+  color: var(--back);
 }

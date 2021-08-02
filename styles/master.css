@@ -159,6 +159,7 @@ header h1 {
       text-align: center;
       justify-content: space-around;
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+      border-radius: 0.5em; /*Jamie August 2*/
     }
 
     section div.table{
@@ -405,7 +406,7 @@ nav#navbar{
 #FindSheet form button{
   padding: 0.5em;
   margin: 0.5em;
-  width: 3em;
+  border-radius: 0.5em; /*Jamie August 2*/
 }
 
 section .SlotSignUp{

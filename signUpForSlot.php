@@ -1,16 +1,18 @@
 <?php 
   session_start();
-  $user = $_SESSION['username'];
+  if (isset($_SESSION['username'])){
+    $user = $_SESSION['username'];
+    $query = "select * from timeslot_users WHERE username = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$user]);
+    $userDetails = $stmt->fetch();
+  }
+
   $book = "book";
   
   include 'includes/library.php';
   $pdo = connectDB();
 
-  $query = "select * from timeslot_users WHERE username = ?";
-  $stmt = $pdo->prepare($query);
-  $stmt->execute([$user]);
-  $userDetails = $stmt->fetch();
-  
   $query = "select * from timeslot_sheets WHERE ID = ?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$_GET["id"]]);
@@ -107,10 +109,10 @@
                     <?php if ($slot["userID"] == null): ?>
                       <?php if (isset($_SESSION['username'])): ?>
                         <td>
-                          <button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button>
+                          <div><button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button></div>
                         </td>
                       <?php else: ?>
-                        <td><input type="button" name="submit"><?="<a href='bookSlotNonUsers.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></td>
+                        <td><div><button type="submit" name="submit"><?="<a href='bookSlotNonUsers.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></div></td>
                       <?php endif ?>
                     <?php else: ?>
                       <td>

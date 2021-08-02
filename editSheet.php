@@ -181,7 +181,7 @@ $dateTime = null;
                       <td>
                         <div>
                           <label for="date">Date and Time: </label>
-                          <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" data-input value="<?= ($dateTime == null) ? null : $dateTime?>">
+                          <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" <?php if($slot["userID"] != null) echo'disabled'?> data-input value="<?= ($dateTime == null) ? null : $dateTime?>"  >
                           <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>

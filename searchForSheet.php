@@ -1,6 +1,6 @@
 <?php
+  $search = $_GET['search'] ?? null;
   if (isset($_GET['search'])){
-    $search = $_GET['search'];
     include 'includes/library.php';
     $pdo = connectDB();
     $query = "SELECT * FROM `timeslot_users` WHERE username like ?";
@@ -51,8 +51,8 @@
         
         <section id = "FindSheet">
         <form id="searchbar" name="search"  action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="GET">
-            <i aria-hidden="true" class="fas fa-search"></i>
-            <input type='text' name="search" id="search" placeholder="Search for the Public Sign-Up Sheets By Creator username, Title, Description">
+            <label><i aria-hidden="true" class="fas fa-search"></i></label>
+            <input type='text' name="search" id="search" placeholder="Search for the Public Sign-Up Sheets By Creator username, Title, Description" value="<?=$search?>">
             <button id="submit" type="submit">Search</button>
           </form>
           <?php if(isset($_GET['search'])): ?>
@@ -61,7 +61,7 @@
             <section>
               <div>
                 <div>
-                  <h3><?=$sheet["name"]?></h3>
+                  <h2><?=$sheet["name"]?></h2>
                   <ul>
                   <li><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."'><abbr title = 'Book Time Slot'><i class='fab fa-readme'></i></abbr></a>"?></li>
                   </ul>
@@ -78,7 +78,7 @@
             <section>
               <div>
                 <div>
-                  <h3><?=$sheet["name"]?></h3>
+                  <h2><?=$sheet["name"]?></h2>
                   <ul>
                     <li><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."'><abbr title = 'Book Time Slot'><i class='fab fa-readme'></i></abbr></a>"?></li>
                   </ul>
@@ -95,7 +95,7 @@
             <section>
               <div>
                 <div>
-                  <h3><?=$sheet["name"]?></h3>
+                  <h2><?=$sheet["name"]?></h2>
                   <ul>
                     <li><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."'><abbr title = 'Book Time Slot'><i class='fab fa-readme'></i></abbr></a>"?></li>
                   </ul>

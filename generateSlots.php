@@ -12,7 +12,7 @@
   $time = null; //bill july 4th
 
   $numSlots = intval($numSlots);  //bill july 4th
-
+  
   $errors = array();
   
   include 'includes/library.php';
@@ -24,16 +24,15 @@
   if (isset($_POST['submit'])){
 
     var_dump($_POST);
+
     //bill july 4th
     for($i = 0; $i<$numSlots;$i++){
       $dateTime[$i] = $_POST["dateTime" .  $i ];
-      var_dump($dateTime[$i]);
       //validate user has entered a date, by checking date[0]
       if ($dateTime[$i] == "") {
         $errors['dateTime'] = true;
       }
     }
-var_dump($dateTime);
     //sanitize all the textbox inputs
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $notes = filter_var($notes, FILTER_SANITIZE_STRING);
@@ -71,11 +70,12 @@ var_dump($dateTime);
       if (count($errors) === 0) {
         for($i = 0; $i<$numSlots;$i++){
 
-          $date = substr($dateTime[$i], 0, 10);
-          $time = substr($dateTime[$i], 10);
+          $date[$i] = substr($dateTime[$i], 0, 10);
+          $time[$i] = substr($dateTime[$i], 10);
+          var_dump($date);
         }
 
-        $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
+        $query = "INSERT INTO timeslot_sheets (numslots, name, numslotsfilled,description,privacy,host,dateCreated) VALUES (?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$numSlots, $title, '0', $description, $privacy, $host["ID"]]);
 
@@ -84,9 +84,9 @@ var_dump($dateTime);
         $stmt->execute([$numSlots, $title, $description, $privacy]);
         $sheetID = $stmt->fetch();
         for ($i = 0; $i < $numSlots; $i ++){
-          $query = "insert into timeslot_slots values (NULL,?,?,?,?,?,NULL)";
+          $query = "insert into `timeslot_slots` (sheetID, date,time,location,notes) values (?,?,?,?,?)";
           $stmt = $pdo->prepare($query);
-          $stmt->execute([$sheetID["ID"], $date, $time, $location, $notes]);
+          $stmt->execute([$sheetID["ID"], $date[$i], $time[$i], $location, $notes]);
         }
         //send the user to the thankyou page.
         header("Location:sheetThanks.php");

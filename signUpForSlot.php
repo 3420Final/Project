@@ -113,10 +113,10 @@
                     <?php if ($slot["userID"] == null): ?>
                       <?php if (isset($_SESSION['username'])): ?>
                         <td>
-                          <button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button>
+                          <div><button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button></div>
                         </td>
                       <?php else: ?>
-                        <td><input type="button" name="submit"><?="<a href='bookslotNonUser.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></td>
+                        <td><div><input type="button" name="submit"><?="<a href='bookslotNonUser.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></div></td>
                       <?php endif ?>
                     <?php else: ?>
                       <td>

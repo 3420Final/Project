@@ -1,3 +1,9 @@
+<?php
+$name = $_POST['name'] ?? null;
+$email = $_POST['email'] ?? null;
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

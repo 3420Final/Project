@@ -38,6 +38,16 @@ nav a {
 .sr-only {
     visibility: hidden;
 }
+
+/*colour scheme variables*/
+:root {
+  --white: #DCE1DE;
+  --black: #1F2421;
+  --blue: #216869;
+  --green: #49A078;
+  --light-green: #9CC5A1;
+}
+
 header h1 {
     color: black;
   }
@@ -124,7 +134,7 @@ header h1 {
     border-radius: 0.5em; /*rounded corners*/
     background-color: white;
     border: 0.3em solid var(--borders);
-    color: var(--blue);
+    color: black;
     text-align: center;
   
     text-decoration: none; /*remove underline*/
@@ -181,7 +191,7 @@ header h1 {
         color: white;
     }
     .error {
-        color: var(--borders);
+        color: red;
         display: block;
         margin: 0.5em;
       }
@@ -189,17 +199,7 @@ header h1 {
       .hidden {
         display: none;
       }
-    
-
-/*see google doc for picture of colours*/
-/*colour scheme variables*/
-:root {
-    --white: #DCE1DE;
-    --black: #1F2421;
-    --blue: #216869;
-    --green: #49A078;
-    --light-green: #9CC5A1;
-}
+  
 
 /*background gradient******************************************************************************/
 body{
@@ -345,132 +345,6 @@ nav#navbar{
       border: none;
   }
 
-  /******************signupsheet section****************/
-  
-    
-    
-    /*swap colours on hover*/
-    #signUpSheet button:hover {
-        background-color: var(--green);
-        border: 0.3em solid var(--borders);
-        color: var(--white);
-        border-radius: 0.5em; /*rounded corners*/
-      }
-      #FindSheet section{
-          display: flex;
-          border: 0.2em solid var(--black);
-          margin: 0.5rem;
-          background-color: var(--white);
-          color:var(--black);
-          flex-direction: column;
-          justify-content: space-evenly;
-          justify-content: stretch;
-          flex: 2 1 auto;
-        }
-  
-     #signUpSheet button{
-          font-size: 1.2em;
-          border-radius: 0.5em; /*rounded corners*/
-          background-color: white;
-          border: 0.3em solid var(--borders);
-          color: var(--blue);
-          text-align: center;
-          text-decoration: none; /*remove underline*/
-          display: flex;
-          padding: 0.5em;
-          margin-bottom: 1em;
-          align-items: flex-start;
-          text-align: center;
-          justify-content: space-around;
-          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
-        }
-      
-      #FindSheet form{
-        display:flex;
-        flex: 2 1 auto;
-        padding: 1em;
-        margin: 1em;
-      }
-      
-      #FindSheet form input{
-        height: 1.3em;
-        margin-right: 0.1em;
-      }
-      
-      #FindSheet form i{
-        font-size: 2em;
-        margin-top: 0.5em;
-        margin-right: 0.3em;
-      }
-      
-      #FindSheet form button{
-        padding: 0.5em;
-        margin: 0.5em;
-        width: 3em;
-      }
-
-      #FindSheet button:disabled{
-        background-color: lightgrey;
-      }
-
-      #FindSheet button:disabled:hover{
-        color: var(--back);
-      }
-      section .SlotSignUp{
-        margin: 1em;
-      }
-      #signUpSheet header{
-          /*Citation for the image below: https://www.pinterest.ca/pin/674203006692235309/*/
-          background-image: url('../images/SignUpSheet.jpg');
-          height: 20em;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 1em;
-        }
-  
-       #signUpSheet section {
-          display: flex;
-          border: 0.2em solid var(--black);
-          margin: 0.5rem;
-          padding: 1em;
-          background-color: var(--white);
-          color:var(--black);
-          flex-direction: column;
-          justify-content: space-evenly;
-          justify-content: stretch;
-          flex: 2 1 auto;
-        }
-        
-       #signUpSheet main{
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          margin: 0.1em;
-        
-        }
-
-        #signUpSheet button:disabled{
-          background-color: lightgrey;
-        }
-  
-        #signUpSheet button:disabled:hover{
-          color: var(--back);
-        }
-
-        /*profile *************************************************************/
-      form#newuser, form#uploadform {
-        display: flex;
-        border: 0.2em solid var(--black);
-        margin: 0.5rem;
-        background-color: var(--white);
-        color:var(--black);
-        flex-direction: column;
-        justify-content: space-evenly;
-        justify-content: stretch;
-        flex: 2 1 auto;
-      }
-
       /*login page*******************************************************/
       /*this is the box, border, shape*/
 section#loginbox > div{
@@ -478,6 +352,7 @@ section#loginbox > div{
     border-radius: 10px;
     background-color: var(--white);
     padding: 2em 3em 2em 3em;
+    margin-bottom: 4em;
 }
 /*this is just for the form element, and the icon div*/
 section#loginbox > div > div{
@@ -527,6 +402,10 @@ section#loginbox > div > div > form div button{
 
 section#loginbox > div > div > form div button:hover{
     background-color: #85b98a;
+}
+/*the remember me box*/
+#login > div:nth-child(6){
+  flex-direction: row;
 }
 
 

@@ -2,6 +2,42 @@
 $name = $_POST['name'] ?? null;
 $email = $_POST['email'] ?? null;
 
+$sheetID = $_GET["sheetID"];
+$slotID = $_GET["slotID"];
+
+
+if (isset($_POST['submit'])) {
+  include 'includes/library.php';
+  $pdo = connectDB();
+
+  //create a random string as guest username
+  $username = bin2hex(random_bytes(5));
+  $username = 'guest' . $username;
+
+  //insert a guest account into the usernames
+  $query = "INSERT INTO `timeslot_users` (username,name,email) VALUES (?,?,?)"; 
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$username,$name,$email]);
+  
+  //get the user ID
+  $query = "SELECT `ID` FROM `timeslot_users` WHERE username=?";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$username]);
+  $userID = $stmt->fetch();
+  $userID = $userID['ID'];
+
+  try{
+    $query = "UPDATE `timeslot_slots` SET userID=? WHERE ID=?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$userID,$slotID]); 
+  }
+  //if this exception triggers, it is likely that the guest didnt get inserted correctly
+  catch (exceptions $e){
+    echo 'Something went wrong with booking';
+  }
+
+
+}
 
 ?>
 <!DOCTYPE html>

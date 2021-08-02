@@ -74,7 +74,6 @@
           <section class = "Slots">
             <section>
               <h2>My Time Slots</h2>
-              <a href="SignUpSheet.php"><abbr title = "Create Sign-up Sheet"><i class="fas fa-plus-square"></i></abbr></a>
             </section>
             <?php foreach ($mySlots as $slot): ?>
               <div>

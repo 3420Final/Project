@@ -56,6 +56,7 @@ else{
       <ul>
         <li><a href="mySignups.php">Back</a></li>
         <li><a href="editAccount.php">Edit Profile</a></li>
+        <li><a href="deleteAccount.php">DeleteAccount</a></li>
       </ul>
     </nav>
       <div>

@@ -50,8 +50,8 @@ if (isset($_POST['submit'])) {
   }
 
   
-  //header("Location:slotThanks.php");
-  //exit();
+  header("Location:slotThanks.php");
+  exit();
 }
 
 ?>

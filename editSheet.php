@@ -108,10 +108,11 @@ $dateTime = null;
         //   $stmt->execute([$date, $time, $location, $notes]);
         // }
         //send the user to the thankyou page.
-        
+
+        header("Location:sheetThanks.php");
+        exit();
       }
-      //header("Location:sheetThanks.php");
-      //exit();
+      
   }
 
 ?>

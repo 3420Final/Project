@@ -5,7 +5,12 @@ $email = $_POST['email'] ?? null;
 $sheetID = $_GET["sheetID"];
 $slotID = $_GET["slotID"];
 
-
+//update the sheet table to reflect how many people are booked
+$query = "SELECT COUNT() FROM `timeslot_slots` WHERE sheetID=?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$sheetID]); 
+$slotsBooked = $stmt->fetch();
+var_dump($slotsBooked);
 if (isset($_POST['submit'])) {
   include 'includes/library.php';
   $pdo = connectDB();
@@ -36,7 +41,9 @@ if (isset($_POST['submit'])) {
     echo 'Something went wrong with booking';
   }
 
-
+  
+  //header("Location:slotThanks.php");
+  //exit();
 }
 
 ?>
@@ -55,7 +62,7 @@ if (isset($_POST['submit'])) {
     </header>
     <main>
     <?php include 'includes/sidebar.php';?>
-      <form id="newuser" name="newuser"  method="post"><!--action="results.php" this was removed for testing by Bill-->
+      <form id="newuser" name="newuser"  method="post">
         <div>
           <label for="name">Name </label>
           <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>

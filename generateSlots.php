@@ -23,15 +23,17 @@
   $host = $stmt->fetch();
   if (isset($_POST['submit'])){
 
+    var_dump($_POST);
     //bill july 4th
     for($i = 0; $i<$numSlots;$i++){
       $dateTime[$i] = $_POST["dateTime" .  $i ];
+      var_dump($dateTime[$i]);
       //validate user has entered a date, by checking date[0]
       if ($dateTime[$i] == "") {
         $errors['dateTime'] = true;
       }
     }
-
+var_dump($dateTime);
     //sanitize all the textbox inputs
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $notes = filter_var($notes, FILTER_SANITIZE_STRING);
@@ -67,9 +69,11 @@
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
+        for($i = 0; $i<$numSlots;$i++){
 
-        $date = substr($dateTime[$i], 0, 10);
-        $time = substr($dateTime[$i], 10);
+          $date = substr($dateTime[$i], 0, 10);
+          $time = substr($dateTime[$i], 10);
+        }
 
         $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);

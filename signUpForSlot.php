@@ -126,7 +126,7 @@
                           $stmt->execute([$slot["userID"]]);
                           $slotParticipant = $stmt->fetch();
 
-                          echo "$slotParticipant[username]";
+                          echo "$slotParticipant[name]";
                         ?>
                       </td>
                     <?php endif ?>

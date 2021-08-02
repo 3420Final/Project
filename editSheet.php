@@ -32,6 +32,17 @@ $dateTime = null;
   $notes = $_POST['notes'] ?? $slots[0]["notes"];
 
   if (isset($_POST['submit'])){
+
+    //get the num slots posted
+    for($i = 0; $i<$numSlots;$i++){
+      if(isset($_POST["dateTime" .  $i ])){
+        $dateTime[$i] = $_POST["dateTime" .  $i ];
+        if ($dateTime[$i] == "") {
+          $errors['dateTime'] = true;
+        }
+      }
+    }
+    var_dump($dateTime);
     $description = $_POST['description'];
     $privacy = $_POST['status'];
     $notes = $_POST['notes'];
@@ -73,6 +84,20 @@ $dateTime = null;
         $stmt = $pdo->prepare($query);
         $stmt->execute([$location, $notes, $sheetID]);
 
+
+        for ($i = 0; $i < $numSlots; $i ++){
+          if(isset($date[$i])){
+
+          $date[$i] = substr($dateTime[$i], 0, 10);
+          $time[$i] = substr($dateTime[$i], 10);
+
+
+          $query = "insert into `timeslot_slots` (sheetID, date,time,location,notes) values (?,?,?,?,?)";
+          $stmt = $pdo->prepare($query);
+          $stmt->execute([$sheetID["ID"], $date[$i], $time[$i], $location, $notes]);
+        }
+      }
+
         // $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
         // $stmt = $pdo->prepare($query);
         // $stmt->execute([$numSlots, $title, $description, $privacy]);
@@ -83,9 +108,10 @@ $dateTime = null;
         //   $stmt->execute([$date, $time, $location, $notes]);
         // }
         //send the user to the thankyou page.
-        //header("Location:sheetThanks.php");
-        //exit();
+        
       }
+      //header("Location:sheetThanks.php");
+      //exit();
   }
 
 ?>

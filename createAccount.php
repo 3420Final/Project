@@ -82,6 +82,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create New User</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <script defer src="plug-ins/checkforce.js-master/dist/checkforce.min.js"></script>
     <script defer src="scripts/createAccount.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
@@ -94,11 +95,11 @@
   <?php include 'includes/sidebar.php';?>
     <form id="uploadform"  method="post" enctype="multipart/form-data">
       <div>
-        <img src="images/profileImage.png" alt="Profile Image Icon" width="350" height="350" />
+        <img id='previewimage' src="images/profileImage.png" alt="Profile Image Icon" width="350" height="350" />
         <!--2MB restriction-->
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
         <label for="imgupload">Upload Profile Image:</label>
-        <input type="file" name="imgupload" id="imgupload" />
+        <input type="file" name="imgupload" id="imgupload" onchange="previewFile()" />
       </div>
       <div>
         <label for="name">Name </label>
@@ -133,12 +134,13 @@
       </div>
 
       <div>
-        <label for="passwd">Password </label>
-        <input type="password" name="password1" id="passwd" required/>
+        <label for="password1">Password </label>
+        <input type="password" name="password1" id="password1" required/>
+        <span class='strength'></span>
       </div>
       <div>
-        <label for="passwd">Re-enter Password </label>
-        <input type="password" name="password2" id="passwd" required/>
+        <label for="password2">Re-enter Password </label>
+        <input type="password" name="password2" id="password2" required/>
       </div>
       <span class="<?=!isset($errors['passwordsmatch']) ? 'hidden' : "error";?>">Password Fields Dont Match</span>
       <span class="<?=!isset($errors['usernameexists']) ? 'hidden' : "error";?>">That Username is already taken, or the email is already in use</span>

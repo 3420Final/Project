@@ -11,7 +11,6 @@ button.addEventListener("click", () => {
     addRow("generateSlots");
     numSlots ++;
     document.querySelector("#numSlots").value = numSlots;
-    document.getElementById("chicken").setAttribute('name', 'date');
 });
 
 function addRow(id){ 

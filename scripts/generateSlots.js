@@ -11,7 +11,6 @@ button.addEventListener("click", () => {
     addRow("generateSlots");
     numSlots ++;
     document.querySelector("#numSlots").value = numSlots;
-    document.getElementById("chicken").setAttribute('name', 'date');
 });
 
 function addRow(id){ 
@@ -94,7 +93,7 @@ requestForm.addEventListener("submit", (ev) => {
     const privacy = document.querySelector("input[type='radio']:checked");
     const privacyError = document.querySelector("fieldset span");
 
-    //validate that a radio button was selected. Remember that a radio button's checked attribute determines if it was selected
+    //validate that a radio button was selected.
     privacyError.classList.remove("hidden");
     if (privacy) {
         privacyError.classList.add("hidden");
@@ -115,18 +114,17 @@ requestForm.addEventListener("submit", (ev) => {
         console.log("slot number error");
     }
 
-    //had to remove this because it wasnt letting me past on the first create sheet page
-    // const dateTimeInput = document.querySelector("#basicDate");
-    // const dateTimeError = dateTimeInput.nextElementSibling;
-
-    // //validate user has entered a date and time
-    // dateTimeError.classList.remove("hidden");
-    // if (dateTimeInput.value != "") {
-    //     dateTimeError.classList.add("hidden");
-    // } else {
-    //     error = true;
-    //     console.log("date error");
-    // }
+    const dateTimeInput = document.querySelector("#basicDate");
+    const dateTimeError = dateTimeInput.nextElementSibling;
+    console.log(dateTimeInput.value);
+    //validate user has entered a date and time
+    dateTimeError.classList.remove("hidden");
+    if (dateTimeInput.value != "") {
+        dateTimeError.classList.add("hidden");
+    } else {
+        error = true;
+        console.log("date error");
+    }
 
     // Make this conditional on if there are errors.
     if (error) ev.preventDefault(); //STOP FORM SUBMISSION IF THERE ARE ERRORS

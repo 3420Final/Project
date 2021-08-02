@@ -1,16 +1,22 @@
 <?php 
-  session_start();
-  $user = $_SESSION['username'];
-  $book = "book";
-  
+
   include 'includes/library.php';
   $pdo = connectDB();
 
-  $query = "select * from timeslot_users WHERE username = ?";
-  $stmt = $pdo->prepare($query);
-  $stmt->execute([$user]);
-  $userDetails = $stmt->fetch();
+  session_start();
+
+  //if the user is logged in
+  if (isset($_SESSION['username'])){
+    $user = $_SESSION['username'];
+
+    $query = "select * from timeslot_users WHERE username = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$user]);
+    $userDetails = $stmt->fetch();
+  }
   
+  $book = "book";
+ 
   $query = "select * from timeslot_sheets WHERE ID = ?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$_GET["id"]]);
@@ -110,17 +116,17 @@
                           <button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button>
                         </td>
                       <?php else: ?>
-                        <td><input type="button" name="submit"><?="<a href='bookSlotNonUsers.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></td>
+                        <td><input type="button" name="submit"><?="<a href='bookslotNonUser.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></td>
                       <?php endif ?>
                     <?php else: ?>
                       <td>
                         <?php
-                          $query = "select * from 'timeslot_users' WHERE ID= ?";
+                          $query = "select * from `timeslot_users` WHERE ID= ?";
                           $stmt = $pdo->prepare($query);
                           $stmt->execute([$slot["userID"]]);
                           $slotParticipant = $stmt->fetch();
 
-                          echo "$slotParticipant[username]";
+                          echo "$slotParticipant[name]";
                         ?>
                       </td>
                     <?php endif ?>

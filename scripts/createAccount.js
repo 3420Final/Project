@@ -1,4 +1,26 @@
 "use strict";
+
+//preview image
+//citation https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+function previewFile() {
+  const preview = document.querySelector('#previewimage');
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+  if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+    reader.addEventListener("load", function () {
+      // convert image file to base64 string
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+  else{
+    preview.src =  "images/profileImage.png";
+  }
+}
+
 //Form validation
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -8,13 +30,27 @@ window.addEventListener("DOMContentLoaded", () => {
   //select the form
   const uploadform = document.querySelector("#uploadform");
 
+
+  //chcck that image is valid
+  let fileInput   = document.querySelector('input[type=file]');
+  let file   = document.querySelector('input[type=file]').files;
+  fileInput.addEventListener("change", (ev) => {
+    
+    if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+      error=false;
+    }
+    else{
+      error=true;
+    }
+  });
+  
+
+
   //Password strength plug-in
   //code referenced from:
   //https://github.com/jaimeneeves/checkforce.js
   let render = document.querySelector('.strength');
   
-
-
   CheckForce('#password1').checkPassword(function(response){
     render.innerHTML = response.content;
   });
@@ -36,7 +72,10 @@ window.addEventListener("DOMContentLoaded", () => {
       password2.insertAdjacentHTML("afterend", "<span class='error'>Passwords dont match</span>");
     }
     else{
-      error = false;
+      //make sure error isnt set by something else
+      if(!error){
+        error = false;
+      }
     }
   });
 
@@ -66,7 +105,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if(response == 'true'){
           //username.insertAdjacentHTML("afterend", "<span>Username available</span>");
+          //make sure error isnt set by something else
+        if(!error){
           error = false;
+        }
+
         }
         else if(response == 'false') {
           username.insertAdjacentHTML("afterend", "<span class='error'>Username already taken</span>");
@@ -112,7 +155,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if(response == 'true'){
           //email.insertAdjacentHTML("afterend", "<span>email available</span>");
+          //make sure error isnt set by something else
+        if(!error){
           error = false;
+        }
         }
         else if(response == 'false') {
           email.insertAdjacentHTML("afterend", "<span class='error'>email already taken</span>");

@@ -12,7 +12,7 @@
   $time = null; //bill july 4th
 
   $numSlots = intval($numSlots);  //bill july 4th
-
+  
   $errors = array();
   
   include 'includes/library.php';
@@ -23,6 +23,7 @@
   $host = $stmt->fetch();
   if (isset($_POST['submit'])){
 
+
     //bill july 4th
     for($i = 0; $i<$numSlots;$i++){
       $dateTime[$i] = $_POST["dateTime" .  $i ];
@@ -31,7 +32,6 @@
         $errors['dateTime'] = true;
       }
     }
-
     //sanitize all the textbox inputs
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $notes = filter_var($notes, FILTER_SANITIZE_STRING);
@@ -67,11 +67,13 @@
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
+        for($i = 0; $i<$numSlots;$i++){
 
-        $date = substr($dateTime[$i], 0, 10);
-        $time = substr($dateTime[$i], 10);
+          $date[$i] = substr($dateTime[$i], 0, 10);
+          $time[$i] = substr($dateTime[$i], 10);
+        }
 
-        $query = "INSERT INTO timeslot_sheets VALUES (NULL, ?,?,?,?,?,?, NOW())";
+        $query = "INSERT INTO timeslot_sheets (numslots, name, numslotsfilled,description,privacy,host,dateCreated) VALUES (?,?,?,?,?,?, NOW())";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$numSlots, $title, '0', $description, $privacy, $host["ID"]]);
 
@@ -80,9 +82,9 @@
         $stmt->execute([$numSlots, $title, $description, $privacy]);
         $sheetID = $stmt->fetch();
         for ($i = 0; $i < $numSlots; $i ++){
-          $query = "insert into timeslot_slots values (NULL,?,?,?,?,?,NULL)";
+          $query = "insert into `timeslot_slots` (sheetID, date,time,location,notes) values (?,?,?,?,?)";
           $stmt = $pdo->prepare($query);
-          $stmt->execute([$sheetID["ID"], $date, $time, $location, $notes]);
+          $stmt->execute([$sheetID["ID"], $date[$i], $time[$i], $location, $notes]);
         }
         //send the user to the thankyou page.
         header("Location:sheetThanks.php");
@@ -101,7 +103,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
-    <script defer src="scripts/createSheet.js"></script>
+    <script defer src="scripts/generateSlots.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -166,6 +168,7 @@
                   <tr>
                     <th>What</th>
                     <th>When</th>
+                    <th>Book</th>
                   </tr>
                 </thead>
                 <tbody>

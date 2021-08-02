@@ -16,11 +16,12 @@
   $stmt = $pdo->prepare($query);
   $stmt->execute([$host["ID"]]);
   $sheets = $stmt->fetchAll();
-
+  //var_dump($sheets);
   $query = "select * from timeslot_slots WHERE userID = ?";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$host["ID"]]);
   $mySlots = $stmt->fetchAll();
+  //var_dump($mySlots);
 
 ?>
 <!DOCTYPE html>
@@ -48,11 +49,10 @@
             </section>
             <?php foreach ($sheets as $sheet): ?>
               <?php 
-              $query = "select * from timeslot_slots WHERE sheetID = ? AND DATE(date) >= CURDATE()";
+              $query = "select * from timeslot_slots WHERE sheetID = ?";
               $stmt = $pdo->prepare($query);
               $stmt->execute([$sheet["ID"]]);
               $slots = $stmt->fetchAll();
-              if ($slots):
               ?>
               <div>
                   <div>
@@ -68,7 +68,6 @@
                   <p><strong>Number of Slots: </strong><?=$sheet["numslots"]?></p>
                   <p><strong>Number of People Signed-Up: </strong><?=$sheet["numslotsfilled"]?></p>
               </div>
-              <?php endif ?>
             <?php endforeach ?> 
           </section>
           <section class = "Slots">

@@ -23,7 +23,6 @@
   $host = $stmt->fetch();
   if (isset($_POST['submit'])){
 
-    var_dump($_POST);
 
     //bill july 4th
     for($i = 0; $i<$numSlots;$i++){
@@ -72,7 +71,6 @@
 
           $date[$i] = substr($dateTime[$i], 0, 10);
           $time[$i] = substr($dateTime[$i], 10);
-          var_dump($date);
         }
 
         $query = "INSERT INTO timeslot_sheets (numslots, name, numslotsfilled,description,privacy,host,dateCreated) VALUES (?,?,?,?,?,?, NOW())";
@@ -105,7 +103,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
-    <script defer src="scripts/createSheet.js"></script>
+    <script defer src="scripts/generateSlots.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>

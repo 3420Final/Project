@@ -5,16 +5,11 @@ $email = $_POST['email'] ?? null;
 $sheetID = $_GET["sheetID"];
 $slotID = $_GET["slotID"];
 
-//update the sheet table to reflect how many people are booked
-$query = "SELECT COUNT() FROM `timeslot_slots` WHERE sheetID=?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$sheetID]); 
-$slotsBooked = $stmt->fetch();
-var_dump($slotsBooked);
 if (isset($_POST['submit'])) {
+  
   include 'includes/library.php';
   $pdo = connectDB();
-
+  
   //create a random string as guest username
   $username = bin2hex(random_bytes(5));
   $username = 'guest' . $username;
@@ -32,9 +27,22 @@ if (isset($_POST['submit'])) {
   $userID = $userID['ID'];
 
   try{
+    //update the slot
     $query = "UPDATE `timeslot_slots` SET userID=? WHERE ID=?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$userID,$slotID]); 
+
+    //update the sheet table to reflect how many people are booked
+    $query = "SELECT COUNT(*) FROM `timeslot_slots` WHERE sheetID=? AND userID IS NOT NULL ";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$sheetID]); 
+    $slotsBooked = $stmt->fetch();
+    $slotsBooked = $slotsBooked['COUNT(*)'];
+    $slotsBooked++;
+
+    $query = "UPDATE `timeslot_sheets` SET numslotsfilled=? WHERE ID=?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$slotsBooked,$sheetID]); 
   }
   //if this exception triggers, it is likely that the guest didnt get inserted correctly
   catch (exceptions $e){

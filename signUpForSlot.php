@@ -112,7 +112,7 @@
                           <div><button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button></div>
                         </td>
                       <?php else: ?>
-                        <td><div><button type="submit" name="submit"><?="<a href='bookSlotNonUsers.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></div></td>
+                        <td><div><button type="submit" name="submit"><?="<a href='bookSlotNonUser.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></div></td>
                       <?php endif ?>
                     <?php else: ?>
                       <td>

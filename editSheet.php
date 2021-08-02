@@ -1,4 +1,9 @@
 <?php 
+
+
+$dateTime = null; 
+
+
   session_start();
   include 'includes/library.php';
   $pdo = connectDB();
@@ -91,7 +96,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Sign-Up Sheet</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
-    <script defer src="scripts/createSheet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <script defer src="scripts/editSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -150,29 +159,30 @@
                 <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>"/>
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
-            <div class = "table"> 
-              <table id="generateSlots">
+              <div class = "table"> 
+              <table>
                 <thead>
                   <tr>
                     <th>What</th>
                     <th>When</th>
-                    <th>Who</th>
+                    <th>Book</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($slots as $slot): ?>
+                  <?php for ($i = 1; $i <= $numSlots; $i++): ?>
+                    <?php
+
+                    $slot = $slots[$i-1];
+
+                    $dateTime = $slot['date'] . ' ' . $slot['time'];
+                    ?>
                     <tr>
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date: </label>
-                          <input id="date" name="date" type="date" value="<?=$slot["date"]?>" disabled/>
-                          <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
-                        </div>
-                        <div>
-                          <label for="time">Time</label>
-                          <input id="time" name="time" type="time" value="<?=$slot["time"]?>" disabled/>
-                          <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
+                          <label for="date">Date and Time: </label>
+                          <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" data-input value="<?= ($dateTime == null) ? null : $dateTime?>">
+                          <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
                       <?php if ($slot["userID"] == null): ?>
@@ -190,7 +200,7 @@
                         </td>
                       <?php endif ?>
                     </tr>
-                  <?php endforeach ?>
+                  <?php endfor ?>
                 </tbody>
               </table>
             </div>

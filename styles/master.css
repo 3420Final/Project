@@ -46,6 +46,8 @@ nav a {
   --blue: #216869;
   --green: #49A078;
   --light-green: #9CC5A1;
+  --back: #216869; /*This got deleted*/
+  --borders: #1F2421; /*This got deleted*/
 }
 
 header h1 {
@@ -314,7 +316,7 @@ nav#navbar{
     bottom: 40%;
     left: 25%;
     background: rgb(0, 0, 0); /* Fallback color */
-    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    background: rgba(0, 0, 0, 0.7); /* Black background with 0.5 opacity */
     color: #f1f1f1; /* Grey text */
     width: 50%; /* Full width */
     padding: 20px; /* Some padding */

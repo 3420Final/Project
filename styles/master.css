@@ -209,7 +209,7 @@ section tr:nth-child(even) {
 
 section table thead tr th {
   background-color: var(--green);
-  color: white;
+  color: black;
 }
 
 section table tr td div {
@@ -368,6 +368,11 @@ nav#navbar h2.title {
   justify-content: space-between;
   border: none;
 }
+
+#mySignUps section section{
+  max-height: 1.5em;
+}
+
 /******************signupsheet section****************/
 
 /*swap colours on hover*/

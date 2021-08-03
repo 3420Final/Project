@@ -57,7 +57,7 @@
               <div>
                   <div>
                       <h3><?=$sheet["name"]?></h3>
-                      <ul>
+                      <ul tabindex="0">
                         <li><?="<a href='viewSheet.php?id=".$sheet["ID"]."'><abbr title = 'View Sign-up Sheet'><i class='fab fa-readme'></i></abbr></a>"?></li>
                         <li><?="<a href='editSheet.php?id=".$sheet["ID"]."'><abbr title = 'Edit Sign-up Sheet'><i class='far fa-edit'></i></abbr></a>"?></li>
                         <li><?="<a href='copySheet.php?id=".$sheet["ID"]."'><abbr title = 'Copy Sign-up Sheet'><i class='far fa-copy'></i></abbr></a>"?></li>
@@ -87,7 +87,7 @@
                         echo $slotName[0]['name'];
                       ?>
                     </h3>
-                    <ul>
+                    <ul tabindex="0">
                       <li><?="<a href='viewTimeSlot.php?id=".$slot["ID"]."'><abbr title = 'View Time Slot'><i class='fab fa-readme'></i></abbr></a>"?></li>
                       <li><?="<a href='deleteTimeSlot.php?id=".$slot["ID"]."'><abbr title = 'Delete Time Slot'><i class='fas fa-trash-alt'></i></abbr></a>"?></li>
                     </ul>

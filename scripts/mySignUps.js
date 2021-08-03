@@ -9,6 +9,7 @@ if (sheetListItems[3] != undefined){
         }
     });
 }
+
 const slotListItems = document.querySelectorAll(".Slots div ul li");
 if (slotListItems[1] != undefined){
     slotListItems[1].addEventListener("click", (ev) =>{
@@ -18,6 +19,25 @@ if (slotListItems[1] != undefined){
         }
     });
 }
-//at least 2 plug-ins ( One could be password strength on create account)
-//we could use flatpickr which is some kind of calender plug-in
-//we can think about what plug-ins to use
+
+if (sheetListItems[3] != undefined){
+    sheetListItems[3].addEventListener("keypress", (ev) =>{
+        if (ev.keyCode === 13){
+            let confirmDelete = confirm ("Are you sure you want to delete this sheet?");
+            if (confirmDelete == false){
+                ev.preventDefault();
+            }
+        }
+    });
+}
+
+if (slotListItems[1] != undefined){
+    slotListItems[1].addEventListener("keypress", (ev) =>{
+        if (ev.keyCode === 13){
+            let confirmDelete = confirm ("Are you sure you want to delete this time slot?");
+            if (confirmDelete == false){
+                ev.preventDefault();
+            }
+        }
+    });
+}

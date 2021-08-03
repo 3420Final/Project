@@ -52,4 +52,5 @@ for(let i = 0; i < slotListItems.length; i ++){
             }
         });
     }
+
 }

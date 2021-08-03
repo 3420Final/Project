@@ -3,6 +3,8 @@
   include 'includes/library.php';
   $pdo = connectDB();
 
+  $dateTime = null;
+
   $creator = $_SESSION['username'];
 
   $query = "select * from timeslot_users WHERE username = ?";
@@ -43,14 +45,28 @@
   $privacy = $_POST['status'] ?? $sheet["privacy"];
   $numSlots = $_POST['numSlots'] ?? $sheet["numslots"];
   $notes = $_POST['notes'] ?? $slotInfo["notes"];
-  $date = $_POST['date'] ?? $slot["date"];
-  $time = $_POST['time'] ?? $slot["time"];
 
   $errors = array();
 
 
   if (isset($_POST['submit'])){
 
+    //get the num slots posted
+    for($i = 0; $i<$numSlots;$i++){
+      if(isset($_POST["dateTime" .  $i ])){
+        $dateTime[$i] = $_POST["dateTime" .  $i ];
+        if ($dateTime[$i] == "") {
+          $errors['dateTime'] = true;
+        }
+      }
+    }
+    var_dump($dateTime);
+    $description = $_POST['description'];
+    $privacy = $_POST['status'];
+    $notes = $_POST['notes'];
+    $title = $_POST['title'];
+    $location = $_POST['location'];
+    
     //sanitize all the textbox inputs
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $notes = filter_var($notes, FILTER_SANITIZE_STRING);
@@ -59,59 +75,62 @@
       $errors['title'] = true;
     }
 
-    //validate user has entered a title
-    if (!isset($creator) || strlen($creator) === 0) {
-      $errors['creator'] = true;
-    }
 
-    //validate user has entered a title
+    //validate user has entered a desc
     if (!isset($description)) {
       $errors['description'] = true;
     }
 
-    //validate user has entered a title
+    //validate user has entered a location
     if (!isset($location) || strlen($location) === 0) {
       $errors['location'] = true;
     }
 
-    //make sure the chose a character
-    if (empty($privacy)) {
-      $errors['privacy'] = true;
-    }
-
-    //make sure they agreed to the terms
-    if ($numSlots == "") {
-      $errors['numSlots'] = true;
-    }
-      //validate user has entered a title
-      if (!isset($date)) {
-        $errors['date'] = true;
-      }
-
-      //validate user has entered a title
-      if (!isset($time)) {
-        $errors['time'] = true;
+      if (empty($privacy)) {
+        $errors['privacy'] = true;
       }
 
       //only do this if there weren't any errors
       if (count($errors) === 0) {
-        $query = "UPDATE timeslot_sheets SET numslots = ?, name = ?, description = ?, privacy = ?, host = ?";
+        //update sheet
+        $query = "UPDATE `timeslot_sheets` SET name = ?, description = ?, privacy = ? WHERE ID=?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$numSlots, $title, $description, $privacy, $host["ID"]]);
+        $stmt->execute([$title, $description, $privacy, $sheetID]);
 
-        $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
+        //update slots
+        $query = "UPDATE `timeslot_slots` SET location=?, notes=? WHERE sheetID=?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$numSlots, $title, $description, $privacy]);
-        $sheetID = $stmt->fetch();
+        $stmt->execute([$location, $notes, $sheetID]);
+
+
         for ($i = 0; $i < $numSlots; $i ++){
-          $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =? WHERE sheetID = ?";
+          if(isset($date[$i])){
+
+          $date[$i] = substr($dateTime[$i], 0, 10);
+          $time[$i] = substr($dateTime[$i], 10);
+
+
+          $query = "insert into `timeslot_slots` (sheetID, date,time,location,notes) values (?,?,?,?,?)";
           $stmt = $pdo->prepare($query);
-          $stmt->execute([$date, $time, $location, $notes, $sheetId["ID"]]);
+          $stmt->execute([$sheetID, $date[$i], $time[$i], $location, $notes]);
         }
+      }
+
+        // $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
+        // $stmt = $pdo->prepare($query);
+        // $stmt->execute([$numSlots, $title, $description, $privacy]);
+        // $sheetID = $stmt->fetch();
+        // for ($i = 0; $i < $numSlots; $i ++){
+        //   $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =?";
+        //   $stmt = $pdo->prepare($query);
+        //   $stmt->execute([$date, $time, $location, $notes]);
+        // }
         //send the user to the thankyou page.
+
         header("Location:sheetThanks.php");
         exit();
       }
+      
   }
 
 ?>
@@ -122,6 +141,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Copy Sign-Up Sheet</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <script defer src="scripts/editSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -138,7 +162,7 @@
         </nav>
         <section>
           <h2>Sign-Up Sheet Details</h2>
-          <form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+          <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
               <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
@@ -146,7 +170,7 @@
             </div>
             <div>
               <label for="creator">Creator</label>
-              <input id="creator" name="creator" type="text" value="<?=$creator?>"/>
+              <input id="creator" name="creator" type="text" value="<?=$creator?>" disabled/>
               <span class="error <?=!isset($errors['creator']) ? 'hidden' : "";?>">Please enter your username</span>
             </div>
             <div>
@@ -180,60 +204,56 @@
                 <input id="numSlots" name="numSlots" type="number" value="<?=$numSlots?>"/>
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
-            <div class = "table"> 
+              <div class = "table"> 
               <table>
                 <thead>
                   <tr>
                     <th>What</th>
                     <th>When</th>
-                    <th>Who</th>
+                    <th>Book</th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php if (!isset($_POST["submit"])): ?>
-                  <?php foreach ($slots as $slot): ?>
+                  <?php for ($i = 1; $i <= $numSlots; $i++): ?>
+                    <?php
+
+                    $slot = $slots[$i-1];
+
+                    $dateTime = $slot['date'] . ' ' . $slot['time'];
+                    ?>
                     <tr>
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date: </label>
-                          <input id="date" name="date" type="date" value="<?=$slot["date"]?>"/>
-                          <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
-                        </div>
-                        <div>
-                          <label for="time">Time</label>
-                          <input id="time" name="time" type="time" value="<?=$slot["time"]?>"/>
-                          <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
+                          <label for="date">Date and Time: </label>
+                          <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" <?php if($slot["userID"] != null) echo'disabled'?> data-input value="<?= ($dateTime == null) ? null : $dateTime?>"  >
+                          <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
-                      <td><button id="submit">Book Time Slot</button></td>
-                    </tr>
-                  <?php endforeach ?>
-                  <?php else: ?>
-                    <?php for ($i = 1; $i <= $numSlots; $i++): ?>
-                        <tr>
-                        <td><?=$title?></td>
+                      <?php if ($slot["userID"] == null): ?>
+                        <td><button id="submit" disabled>Book Time Slot</button></td>
+                      <?php else: ?>
                         <td>
-                            <div>
-                            <label for="date">Date: </label>
-                            <input id="date" name="date" type="date" value="<?=$date?>"/>
-                            <span class="error <?=!isset($errors['date']) ? 'hidden' : "";?>">Please enter a date</span>
-                            </div>
-                            <div>
-                            <label for="time">Time</label>
-                            <input id="time" name="time" type="time" value="<?=$time?>"/>
-                            <span class="error <?=!isset($errors['time']) ? 'hidden' : "";?>">Please enter a time</span>
-                            </div>
+                          <?php
+                          $query = "select * from `timeslot_users` WHERE ID= ?";
+                          $stmt = $pdo->prepare($query);
+                          $stmt->execute([$slot["userID"]]);
+                          $slotParticipant = $stmt->fetch();
+
+                          echo "$slotParticipant[name]";
+                          ?>
                         </td>
-                        <td><button id="submit"><a href="SheetThanks.php">Book Time Slot</a></button></td>
-                        </tr>
-                    <?php endfor ?>
-                  <?php endif ?>
+                      <?php endif ?>
+                    </tr>
+                  <?php endfor ?>
                 </tbody>
               </table>
             </div>
             <div>
-              <button type="submit" name="submit">Finalize Sheet</button>
+              <button type="button" name="addSlot" id="addSlot">Add Another Time Slot</button>
+            </div>
+            <div>
+              <button type="submit" name="submit">Change Sheet</button>
             </div>
           </form>
         </section>

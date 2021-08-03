@@ -75,7 +75,7 @@
                         <td><button type='submit' name='bookslot'>Book Time Slot</button></td>
                       </form>
                     <?php else: ?>
-                      <td>
+                      <td><div>
                         <?php
                           $query = "select * from `timeslot_users` WHERE ID= ?";
                           $stmt = $pdo->prepare($query);
@@ -84,8 +84,8 @@
 
                           echo "$slotParticipant[username]";
                         ?>
-                      </td>
-                      <td><button id="submit" disabled>Book Time Slot</button></td>
+                      </div></td>
+                      <td><div><button id="submit" disabled>Book Time Slot</button></div></td>
                     <?php endif ?>
                   </tr>
                 <?php endforeach ?>

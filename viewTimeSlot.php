@@ -49,7 +49,7 @@
         <section>
         <div>
             <h2><?=$sheet["name"]?></h2>
-            <ul>
+            <ul tabindex="0">
               <li><?="<a href='deleteTimeSlot.php?id=".$slot["ID"]."'><abbr title = 'Delete Time Slot'><i class='fas fa-trash-alt'></i></abbr></a>"?></li>
             </ul>
           </div>

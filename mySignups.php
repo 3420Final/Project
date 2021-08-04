@@ -34,8 +34,7 @@
     <script defer src="scripts/mySignUps.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "mySignUps">
+  <body id = "mySignUps">
       <?php include 'includes/navbar.php';?>
       <header>
           <img src="images/checklist.png" alt="pencil on a clipboard" />
@@ -99,6 +98,5 @@
             <?php endforeach ?>
           </section>
       </main>
-    </section>
   </body>
 </html>

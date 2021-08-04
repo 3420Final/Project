@@ -14,8 +14,7 @@
       <title>Done!</title>
       <link rel="stylesheet" href="styles/master.css" />
   </head>
-  <body>
-    <section class = "mySignUps">
+  <body id="mySignUps">
       <?php include 'includes/navbar.php';?>
         <header>
           <h1><i class="fas fa-clipboard-check"></i> Time Slot Cancelled!</h1>
@@ -30,6 +29,5 @@
             <h3>This time slot has now been cancelled!</h3>
           </section>
       </main>
-    </section>
   </body>
 </html>

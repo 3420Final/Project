@@ -334,6 +334,10 @@ nav#navbar h2.title {
   margin: 0 auto; /* Center it */
 }
 
+.container img{
+  width: 100%;
+}
+
 .container .content {
   position: absolute;
   bottom: 40%;

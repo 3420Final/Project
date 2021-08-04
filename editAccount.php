@@ -165,7 +165,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div>
         <label for="name">Name </label>
-        <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>
+        <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" value="<?=$name?>" required/>
       </div>
       <div>
         <label for="email">Email </label>
@@ -192,7 +192,7 @@ if (isset($_POST['submit'])) {
         </fieldset>
       <div>
         <label for="username">Username </label>
-        <input type="text" name="username" id="username" value="<?=$username?>"required/>
+        <input type="text" name="username" id="username" value="<?=$username?>" required/>
       </div>
       <span class="<?=!isset($errors['usernameexists']) ? 'hidden' : "error";?>">That Username is already taken, or the email is already in use</span>
       <span class="<?=!isset($errors['usernametoolong']) ? 'hidden' : "error";?>">That Username is too long. Less than 20 charachters please.</span>

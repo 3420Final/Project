@@ -121,6 +121,7 @@ if (isset($_POST['submit'])) {
         $stmt->execute([$userID]);
         $path = $stmt->fetch();
 
+
         //if profile picture doesnt exist, use blank
         if(!$path){
           $path = "images/profileImage.png";
@@ -146,7 +147,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Profile</title>
     <link rel ="stylesheet" href = "styles/master.css"/>
-    <script defer src="scripts/createAccount.js"></script>
+    <script defer src="scripts/editAccount.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -157,11 +158,11 @@ if (isset($_POST['submit'])) {
   <?php include 'includes/editAccountSideBar.php';?>
     <form id="uploadform"  method="post" enctype="multipart/form-data">
       <div>
-        <img src=<?=$path?> alt="Profile Image Icon" width="350" height="350" />
+        <img src=<?=$path?> alt="Profile Image Icon" width="350" height="350" id='previewimage'/>
         <!--2MB restriction-->
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
         <label for="imgupload">Upload Profile Image:</label>
-        <input type="file" name="imgupload" id="imgupload" />
+        <input type="file" name="imgupload" id="imgupload" onchange="previewFile()" />
       </div>
       <div>
         <label for="name">Name </label>

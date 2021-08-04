@@ -33,10 +33,8 @@
     <script defer src="scripts/deleteSlot.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "timeSlot">
+  <body id = "timeSlot">
       <?php include 'includes/navbar.php';?>
-      </nav>
       <header>
         <h1><i class="fab fa-readme"></i> View Time Slot</h1>
       </header>
@@ -61,7 +59,5 @@
           <p><i class="fas fa-sticky-note"></i><strong>Notes: </strong><?=$slot["notes"]?></p>
         </section>
       </main>
-    </section>
   </body>
 </html>
-

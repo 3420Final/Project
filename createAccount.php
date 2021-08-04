@@ -74,7 +74,6 @@
     }
   }
 ?>
-<!--There is an error coming up in the console relating to the plugin and the plugin dosen't appear to be working on my end-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,7 +102,7 @@
       </div>
       <div>
         <label for="name">Name </label>
-        <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" autocorrect="off" value="<?=$name?>" required/>
+        <input type="text" id="name" name="name" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" value="<?=$name?>" required/>
       </div>
       <div>
         <label for="email">Email </label>
@@ -130,7 +129,7 @@
         </fieldset>
       <div>
         <label for="username">Username </label>
-        <input type="text" name="username" id="username" value="<?=$username?>"required/>
+        <input type="text" name="username" id="username" value="<?=$username?>" required/>
       </div>
 
       <div>

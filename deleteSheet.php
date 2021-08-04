@@ -18,8 +18,7 @@
       <title>Done!</title>
       <link rel="stylesheet" href="styles/master.css" />
   </head>
-  <body>
-    <section class = "mySignUps">
+  <body id="mySignUps">
       <?php include 'includes/navbar.php';?>
         <header>
           <h1><i class="fas fa-clipboard-check"></i> Sheet Deleted!</h1>
@@ -34,6 +33,5 @@
             <h3>This sheet has now been deleted!</h3>
           </section>
       </main>
-    </section>
   </body>
 </html>

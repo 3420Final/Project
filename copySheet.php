@@ -115,16 +115,6 @@
           $stmt->execute([$sheetID, $date[$i], $time[$i], $location, $notes]);
         }
       }
-
-        // $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
-        // $stmt = $pdo->prepare($query);
-        // $stmt->execute([$numSlots, $title, $description, $privacy]);
-        // $sheetID = $stmt->fetch();
-        // for ($i = 0; $i < $numSlots; $i ++){
-        //   $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =?";
-        //   $stmt = $pdo->prepare($query);
-        //   $stmt->execute([$date, $time, $location, $notes]);
-        // }
         //send the user to the thankyou page.
 
         header("Location:sheetThanks.php");
@@ -148,8 +138,7 @@
     <script defer src="scripts/editSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpSheet">
+  <body id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1><i class="far fa-edit"></i> Finalize Sign-Up Sheet</h1>
@@ -165,7 +154,7 @@
           <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
-              <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
+              <input id="title" name="title" type="text" placeholder="Project Check-In #1" value="<?=$title?>"/>
               <span class="error <?=!isset($errors['title']) ? 'hidden' : "";?>">Please enter a title</span>
             </div>
             <div>
@@ -225,13 +214,13 @@
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date and Time: </label>
+                          <label for="basicDate">Date and Time: </label>
                           <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" <?php if($slot["userID"] != null) echo'disabled'?> data-input value="<?= ($dateTime == null) ? null : $dateTime?>"  >
                           <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
                       <?php if ($slot["userID"] == null): ?>
-                        <td><button id="submit" disabled>Book Time Slot</button></td>
+                        <td><button name="submit" disabled>Book Time Slot</button></td>
                       <?php else: ?>
                         <td>
                           <?php
@@ -258,6 +247,5 @@
           </form>
         </section>
       </main>
-    </section>
   </body>
 </html>

@@ -80,8 +80,7 @@
     <script defer src="scripts/createSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpSheet">
+  <body id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1>Part 1: Sign-up Sheet Outline</h1>
@@ -97,7 +96,7 @@
           <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
-              <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
+              <input id="title" name="title" type="text" placeholder="Project Check-In #1" value="<?=$title?>"/>
               <span class="error <?=!isset($errors['title']) ? 'hidden' : "";?>">Please enter a title</span>
             </div>
             <div>
@@ -149,12 +148,12 @@
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date and Time: </label>
+                          <label for="basicDate">Date and Time: </label>
                           <input type="text" name="dateTime" id="basicDate" placeholder="Please select Date Time" data-input value="<?=$dateTime?>" disabled>
                           <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
-                      <td><button id="submit" disabled>Book Time Slot</button></td>
+                      <td><div><button id="submit" disabled>Book Time Slot</button></div></td>
                     </tr>
                 </tbody>
               </table>
@@ -167,6 +166,6 @@
           </form>
         </section>
       </main>
-    </section>
   </body>
 </html>
+

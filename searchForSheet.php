@@ -36,8 +36,7 @@
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpForSlot">
+  <body id = "signUpForSlot">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1><i class="fas fa-search"></i> Find Sign-Up Sheet</h1>
@@ -48,7 +47,6 @@
             <li><a href="mySignups.php">Back</a></li>
           </ul>
         </nav>
-        
         <section id = "FindSheet">
         <form id="searchbar" name="search"  action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="GET">
             <label><i aria-hidden="true" class="fas fa-search"></i></label>
@@ -110,6 +108,5 @@
         <?php endif ?>
         </section>
       </main>
-    </section>
   </body>
 </html>

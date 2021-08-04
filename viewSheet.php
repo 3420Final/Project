@@ -36,8 +36,7 @@
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpSheet">
+  <body id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1><i class="fab fa-readme"></i> View Sign-Up Sheet</h1>
@@ -56,7 +55,6 @@
           <p><i class="fas fa-unlock-alt"></i><strong>Privacy: </strong><?=$privacy?></p>
           <p><i class="fas fa-sticky-note"></i><strong>Notes: </strong><?=$notes?></p>
           <div class = "table"> 
-          <div class = "table"> 
             <table>
               <thead>
                 <tr>
@@ -71,9 +69,7 @@
                     <td><?=$title?></td>
                     <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
                     <?php if ($slot["userID"] == null): ?>
-                      <form id="book" name="book"  method="post">
-                        <td><button type='submit' name='bookslot' disabled>Book Time Slot</button></td>
-                      </form>
+                    <td><div><button type='submit' name='bookslot' disabled>Book Time Slot</button></div></td>
                     <?php else: ?>
                       <td><div>
                         <?php
@@ -93,6 +89,6 @@
           </div>
         </section>
       </main>
-    </section>
   </body>
 </html>
+

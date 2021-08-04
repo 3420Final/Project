@@ -6,8 +6,7 @@
       <title>Done!</title>
       <link rel="stylesheet" href="styles/master.css" />
   </head>
-  <body>
-    <section class = "mySignUps">
+  <body id="mySignUps">
       <?php include 'includes/navbar.php';?>
         <header>
           <h1><i class="fas fa-clipboard-check"></i> Time Slot Booked!</h1>
@@ -22,6 +21,5 @@
             <h3>You are now registered for this time slot!</h3>
           </section>
       </main>
-    </section>
   </body>
 </html>

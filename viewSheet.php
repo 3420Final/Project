@@ -72,7 +72,7 @@
                     <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
                     <?php if ($slot["userID"] == null): ?>
                       <form id="book" name="book"  method="post">
-                        <td><button type='submit' name='bookslot'>Book Time Slot</button></td>
+                        <td><button type='submit' name='bookslot' disabled>Book Time Slot</button></td>
                       </form>
                     <?php else: ?>
                       <td><div>
@@ -85,7 +85,6 @@
                           echo "$slotParticipant[name]";
                         ?>
                       </div></td>
-                      <td><div><button id="submit" disabled>Book Time Slot</button></div></td>
                     <?php endif ?>
                   </tr>
                 <?php endforeach ?>

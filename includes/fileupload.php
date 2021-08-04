@@ -56,8 +56,6 @@ function fileUpload(int $userID){
         throw $e;
     }
 }
-    
-
 
 ?>
 

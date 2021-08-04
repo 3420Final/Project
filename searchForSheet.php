@@ -36,8 +36,7 @@
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpForSlot">
+  <body id = "signUpForSlot">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1><i class="fas fa-search"></i> Find Sign-Up Sheet</h1>
@@ -110,6 +109,5 @@
         <?php endif ?>
         </section>
       </main>
-    </section>
   </body>
 </html>

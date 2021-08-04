@@ -47,7 +47,6 @@
             <li><a href="mySignups.php">Back</a></li>
           </ul>
         </nav>
-        
         <section id = "FindSheet">
         <form id="searchbar" name="search"  action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="GET">
             <label><i aria-hidden="true" class="fas fa-search"></i></label>

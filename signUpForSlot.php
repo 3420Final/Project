@@ -76,8 +76,7 @@
     <link rel ="stylesheet" href = "styles/master.css"/>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpSheet">
+  <body id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1><i class="fab fa-readme"></i> Book a Time Slot</h1>
@@ -96,7 +95,6 @@
           <p><i class="fas fa-unlock-alt"></i><strong>Privacy: </strong><?=$privacy?></p>
           <p><i class="fas fa-sticky-note"></i><strong>Notes: </strong><?=$notes?></p>
           <div class = "table"> 
-          <div class = "table"> 
             <table>
               <thead>
                 <tr>
@@ -112,11 +110,9 @@
                     <td><?=$slot["date"]?> @ <?=$slot["time"]?></td>
                     <?php if ($slot["userID"] == null): ?>
                       <?php if (isset($_SESSION['username'])): ?>
-                        <td>
-                          <div><button type="submit" name="submitUser"><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></button></div>
-                        </td>
+                        <td><div><?="<a href='signUpForSlot.php?id=".$sheet["ID"]."&slotID=".$slot["ID"]."&action=".$book."'>Book Time Slot</a>"?></div></td>
                       <?php else: ?>
-                        <td><div><button type="submit" name="submit"><?="<a href='bookslotNonUser.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></button></div></td>
+                        <td><div><?="<a href='bookslotNonUser.php?slotID=".$slot["ID"]."&sheetID=".$sheet["ID"]."'>Book Time Slot</a>"?></div></td>
                       <?php endif ?>
                     <?php else: ?>
                       <td>
@@ -137,6 +133,5 @@
           </div>
         </section>
       </main>
-    </section>
   </body>
 </html>

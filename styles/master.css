@@ -398,7 +398,7 @@ nav#navbar h2.title {
   flex: 2 1 auto;
 }
 
-#signUpSheet button {
+#signUpSheet button, #signUpSheet td a {
   font-size: 1.2em;
   border-radius: 0.5em; /*rounded corners*/
   background-color: white;

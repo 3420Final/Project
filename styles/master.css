@@ -74,7 +74,7 @@ main {
   justify-content: space-evenly;
 }
 
-section section {
+main section {
   display: flex;
   border: 0.2em solid var(--black);
   margin: 0.5rem;

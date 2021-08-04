@@ -1,8 +1,6 @@
 <?php 
 
-
-$dateTime = null; 
-
+  $dateTime = null; 
 
   session_start();
   include 'includes/library.php';
@@ -154,8 +152,7 @@ $dateTime = null;
     <script defer src="scripts/editSheet.js"></script>
     <script src="https://kit.fontawesome.com/accfddd944.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <section id = "signUpSheet">
+  <body id = "signUpSheet">
       <?php include 'includes/navbar.php';?>
       <header>
         <h1><i class="far fa-edit"></i> Edit Sign-Up Sheet</h1>
@@ -171,7 +168,7 @@ $dateTime = null;
           <form id="sheet" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
             <div>
               <label for="title">Title</label>
-              <input id="title" name="title" type="text" placeholder="Project Check-In #1"value="<?=$title?>"/>
+              <input id="title" name="title" type="text" placeholder="Project Check-In #1" value="<?=$title?>"/>
               <span class="error <?=!isset($errors['title']) ? 'hidden' : "";?>">Please enter a title</span>
             </div>
             <div>
@@ -231,7 +228,7 @@ $dateTime = null;
                       <td><?=$title?></td>
                       <td>
                         <div>
-                          <label for="date">Date and Time: </label>
+                          <label for="basicDate">Date and Time: </label>
                           <input type="text" name="dateTime<?=$i-1?>" id="basicDate" placeholder="Please select Date Time" <?php if($slot["userID"] != null) echo'disabled'?> data-input value="<?= ($dateTime == null) ? null : $dateTime?>"  >
                           <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
@@ -264,6 +261,5 @@ $dateTime = null;
           </form>
         </section>
       </main>
-    </section>
   </body>
 </html>

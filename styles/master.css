@@ -505,21 +505,26 @@ form#newuser, form#uploadform {
 }
 /*login page*******************************************************/
 /*this is the box, border, shape*/
-section#loginbox > div {
+
+#loginbox section{
+  max-width: 20%;
   border: solid black 2px;
   border-radius: 10px;
   background-color: var(--white);
+}
+
+#loginbox section > div {
   padding: 2em 3em 2em 3em;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
 }
 /*this is just for the form element, and the icon div*/
-section#loginbox > div > div {
+#loginbox section > div > div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 /*the icon for the person*/
-section#loginbox i {
+#loginbox section i {
   font-size: 6em;
   padding: 0.25em;
   margin-left: auto;
@@ -527,30 +532,30 @@ section#loginbox i {
   background-color: white;
   border-radius: 10em;
 }
-section#loginbox > div > div > form {
+#loginbox section > div > div > form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 /*put the labels ontop of the boxes*/
-section#loginbox > div > div > form label.usernamepass {
+#loginbox section > div > div > form label.usernamepass {
   display: block;
 }
-section#loginbox > div > div > form > div {
+#loginbox > div > div > form > div {
   padding-top: 1em;
 }
 
 /*font and sizing for email password stuff*/
-section#loginbox > div > div > form div#usernamepassword > input {
+#loginbox section > div > div > form div#usernameField > input, #loginbox section > div > div > form div#passwordField > input {
   font-size: 1em;
   padding: 0.25em 1em 0.25em 1em;
 }
-section#loginbox > div > div > form div#usernamepassword > label {
+#loginbox section > div > div > form div#usernameField > label, #loginbox section > div > div > form div#passwordField > label {
   padding: 0.25em 0 0.25em 0;
   font-size: 1.75em;
 }
 
-section#loginbox > div > div > form div button {
+#loginbox section > div > div > form div button {
   font-size: 1.25em;
   padding: 0.5em 1em 0.5em 1em;
   border: transparent;
@@ -558,7 +563,7 @@ section#loginbox > div > div > form div button {
   background-color: var(--light-green);
 }
 
-section#loginbox > div > div > form div button:hover {
+#loginbox section > div > div > form div button:hover {
   background-color: #85b98a;
 }
 /*the remember me box*/

@@ -11,13 +11,12 @@ button.addEventListener("click", () => {
     addRow("generateSlots");
     numSlots ++;
     document.querySelector("#numSlots").value = numSlots;
-    document.getElementById("chicken").setAttribute('name', 'date');
 });
 
 function addRow(id){ 
     console.log("addRow");
     var x=document.getElementById(id).tBodies[0];  //get the table
-    var node=x.rows[0].cloneNode(true);    //clone the previous node or row
+    var node=x.rows[0].cloneNode(true);    //clone the first node or row
     x.appendChild(node);   //add the node or row to the table
 } 
 
@@ -46,7 +45,7 @@ requestForm.addEventListener("submit", (ev) => {
     const titleInput = document.querySelector("#title");
     const titleError = titleInput.nextElementSibling;
 
-    //validate user has entered a date
+    //validate user has entered a title
     titleError.classList.remove("hidden");
     if (titleInput.value != "") {
         titleError.classList.add("hidden");
@@ -58,7 +57,7 @@ requestForm.addEventListener("submit", (ev) => {
     const creatorInput = document.querySelector("#creator");
     const creatorError = creatorInput.nextElementSibling;
 
-    //validate user has entered a date
+    //validate user has entered a creator
     creatorError.classList.remove("hidden");
     if (creatorInput.value != "") {
         creatorError.classList.add("hidden");
@@ -70,7 +69,7 @@ requestForm.addEventListener("submit", (ev) => {
     const descriptionInput = document.querySelector("#description");
     const descriptionError = descriptionInput.nextElementSibling;
 
-    //validate user has entered a date
+    //validate user has entered a desc
     descriptionError.classList.remove("hidden");
     if (descriptionInput.value != "") {
         descriptionError.classList.add("hidden");
@@ -82,7 +81,7 @@ requestForm.addEventListener("submit", (ev) => {
     const locationInput = document.querySelector("#location");
     const locationError = locationInput.nextElementSibling;
 
-    //validate user has entered a date
+    //validate user has entered a location
     locationError.classList.remove("hidden");
     if (locationInput.value != "") {
         locationError.classList.add("hidden");
@@ -94,7 +93,7 @@ requestForm.addEventListener("submit", (ev) => {
     const privacy = document.querySelector("input[type='radio']:checked");
     const privacyError = document.querySelector("fieldset span");
 
-    //validate that a radio button was selected. Remember that a radio button's checked attribute determines if it was selected
+    //validate that a radio button was selected
     privacyError.classList.remove("hidden");
     if (privacy) {
         privacyError.classList.add("hidden");
@@ -106,7 +105,7 @@ requestForm.addEventListener("submit", (ev) => {
     const numSlotsInput = document.querySelector("#numSlots");
     const numSlotsError = numSlotsInput.nextElementSibling;
 
-    //validate user has entered a title
+    //validate user has entered a number of slots
     numSlotsError.classList.remove("hidden");
     if (numSlotsInput.value >= 1) {
         numSlotsError.classList.add("hidden");

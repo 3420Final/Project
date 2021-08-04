@@ -82,7 +82,7 @@
                           $stmt->execute([$slot["userID"]]);
                           $slotParticipant = $stmt->fetch();
 
-                          echo "$slotParticipant[username]";
+                          echo "$slotParticipant[name]";
                         ?>
                       </div></td>
                       <td><div><button id="submit" disabled>Book Time Slot</button></div></td>

@@ -114,19 +114,6 @@ requestForm.addEventListener("submit", (ev) => {
         console.log("slot number error");
     }
 
-    //had to remove this because it wasnt letting me past on the first create sheet page
-    // const dateTimeInput = document.querySelector("#basicDate");
-    // const dateTimeError = dateTimeInput.nextElementSibling;
-
-    // //validate user has entered a date and time
-    // dateTimeError.classList.remove("hidden");
-    // if (dateTimeInput.value != "") {
-    //     dateTimeError.classList.add("hidden");
-    // } else {
-    //     error = true;
-    //     console.log("date error");
-    // }
-
     // Make this conditional on if there are errors.
     if (error) ev.preventDefault(); //STOP FORM SUBMISSION IF THERE ARE ERRORS
 });

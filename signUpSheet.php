@@ -153,7 +153,7 @@
                           <span class="error <?=!isset($errors['dateTime']) ? 'hidden' : "";?>">Please enter a date</span>
                         </div>
                       </td>
-                      <td><button id="submit" disabled>Book Time Slot</button></td>
+                      <td><div><button id="submit" disabled>Book Time Slot</button></div></td>
                     </tr>
                 </tbody>
               </table>

@@ -33,16 +33,25 @@ $dateTime = null;
 
   if (isset($_POST['submit'])){
 
-    //get the num slots posted
+    
+    //get the details from all the slots
     for($i = 0; $i<$numSlots;$i++){
-      if(isset($_POST["dateTime" .  $i ])){
+      if(isset($slots[$i])){
+        $slotIDs[$i] = $slots[$i]['ID'];
+      }
+        if(isset($_POST["dateTime" .  $i ])){
         $dateTime[$i] = $_POST["dateTime" .  $i ];
         if ($dateTime[$i] == "") {
           $errors['dateTime'] = true;
         }
       }
+      if(isset($_POST["delete" .  $i ])){
+        $delete[$i] = $_POST["delete" .  $i ];
+      }
     }
-    var_dump($dateTime);
+
+    
+
     $description = $_POST['description'];
     $privacy = $_POST['status'];
     $notes = $_POST['notes'];
@@ -75,39 +84,54 @@ $dateTime = null;
       //only do this if there weren't any errors
       if (count($errors) === 0) {
         //update sheet
-        $query = "UPDATE `timeslot_sheets` SET name = ?, description = ?, privacy = ? WHERE ID=?";
+        $query = "UPDATE `timeslot_sheets` SET name = ?, numslots=?, description = ?, privacy = ? WHERE ID=?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$title, $description, $privacy, $sheetID]);
+        $stmt->execute([$title, $numSlots, $description, $privacy, $sheetID]);
 
-        //update slots
+        //update slots information
         $query = "UPDATE `timeslot_slots` SET location=?, notes=? WHERE sheetID=?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$location, $notes, $sheetID]);
 
 
+        //what if update? what if delete?
         for ($i = 0; $i < $numSlots; $i ++){
-          if(isset($date[$i])){
-
+          if(isset($dateTime[$i])){
           $date[$i] = substr($dateTime[$i], 0, 10);
           $time[$i] = substr($dateTime[$i], 10);
 
+          //if the slot just needs to get updated
+          if(isset($slotIDs[$i])){
+            //if the slot is being deleted
+            if(isset($delete[$i])){
+              $query = "DELETE FROM `timeslot_slots` WHERE ID=?";
+              $stmt = $pdo->prepare($query);
+              $stmt->execute([$slotIDs[$i]]);
 
-          $query = "insert into `timeslot_slots` (sheetID, date,time,location,notes) values (?,?,?,?,?)";
-          $stmt = $pdo->prepare($query);
-          $stmt->execute([$sheetID["ID"], $date[$i], $time[$i], $location, $notes]);
+              $numSlots--;
+              
+              $query = "UPDATE `timeslot_sheets` SET numslots=? WHERE ID=?";
+              $stmt = $pdo->prepare($query);
+              $stmt->execute([$numSlots, $sheetID]);
+            }
+            else{
+              $query = "UPDATE `timeslot_slots` SET date=?, time=? WHERE ID=?";
+              $stmt = $pdo->prepare($query);
+              $stmt->execute([$date[$i], $time[$i],$slotIDs[$i]]);
+            }
+          }
+          //if it is a new slot
+          else{
+            $query = "insert into `timeslot_slots` (sheetID, date,time,location,notes) values (?,?,?,?,?)";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$sheetID, $date[$i], $time[$i], $location, $notes]);
+          }
+
+        
         }
-      }
 
-        // $query = "SELECT * FROM `timeslot_sheets` WHERE numslots = ? AND name = ? AND description = ? AND privacy = ?";
-        // $stmt = $pdo->prepare($query);
-        // $stmt->execute([$numSlots, $title, $description, $privacy]);
-        // $sheetID = $stmt->fetch();
-        // for ($i = 0; $i < $numSlots; $i ++){
-        //   $query = "UPDATE timeslot_slots SET date = ?, time = ?, location = ?, notes =?";
-        //   $stmt = $pdo->prepare($query);
-        //   $stmt->execute([$date, $time, $location, $notes]);
-        // }
-        //send the user to the thankyou page.
+        unset($_SESSION["sheetID"]);
+      }
 
         header("Location:sheetThanks.php");
         exit();
@@ -187,7 +211,7 @@ $dateTime = null;
                 <span class="error <?=!isset($errors['numSlots']) ? 'hidden' : "";?>">Please enter the number of time slots in this sheet</span>
               </div>
               <div class = "table"> 
-              <table>
+              <table id="generateSlots">
                 <thead>
                   <tr>
                     <th>What</th>
@@ -203,7 +227,7 @@ $dateTime = null;
 
                     $dateTime = $slot['date'] . ' ' . $slot['time'];
                     ?>
-                    <tr>
+                    <tr class = 'row'>
                       <td><?=$title?></td>
                       <td>
                         <div>
@@ -213,7 +237,7 @@ $dateTime = null;
                         </div>
                       </td>
                       <?php if ($slot["userID"] == null): ?>
-                        <td><button id="submit" disabled>Book Time Slot</button></td>
+                        <td>Delete Slot: <input type="checkbox" name="delete<?=$i-1?>" value="Delete"></td>
                       <?php else: ?>
                         <td>
                           <?php

@@ -59,19 +59,19 @@
     <header>
         <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
     </header>
-    <main>
-        <section id='loginbox'>
+    <main id='loginbox'>
+        <section>
             <div>
                 <div>
                     <i class="fas fa-user"></i>
                 </div>
                 <div>
                     <form id="login" name="login"  method="post">
-                        <div id='usernamepassword'>
+                        <div id='usernameField'>
                             <label for="username" class='usernamepass'>Username:</label>
                             <input id="username" name="username" type="text" placeholder="" required/>
                         </div>
-                        <div id='usernamepassword'>
+                        <div id='passwordField'>
                             <label for="password" class='usernamepass'>Password:</label>
                             <input id="password" name="password" type="password" placeholder="" required/>
                         </div>

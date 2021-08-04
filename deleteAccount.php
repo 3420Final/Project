@@ -73,8 +73,7 @@ if (isset($_POST['delete'])){
     <form id="newuser" name="newuser" action="results.php" method="post">
         <div>
             <label for="name">Name </label>
-            <input type="text" id="name" name="name" 
-              title="firstname lastname"  value = <?=$name?> readonly required/>
+            <input type="text" id="name" name="name" title="firstname lastname"  value = <?=$name?> readonly required/>
           </div>
           <div>
             <label for="email">Email </label>

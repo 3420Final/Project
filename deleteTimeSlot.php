@@ -18,7 +18,7 @@
     <section class = "mySignUps">
       <?php include 'includes/navbar.php';?>
         <header>
-          <h1><i class="fas fa-clipboard-check"></i> Sheet Deleted!</h1>
+          <h1><i class="fas fa-clipboard-check"></i> Time Slot Cancelled!</h1>
         </header>
         <main>
           <nav>
@@ -27,7 +27,7 @@
             </ul>
           </nav>
           <section>
-            <h3>This sheet has now been deleted!</h3>
+            <h3>This time slot has now been cancelled!</h3>
           </section>
       </main>
     </section>

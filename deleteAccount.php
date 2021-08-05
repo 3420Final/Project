@@ -35,8 +35,7 @@ if(!$path){
 else{
   $path = $path['filepath'];
 }
-
-if (isset($_POST['delete'])){
+if (isset($_POST['deleteAccount'])){
     $query = "DELETE FROM `timeslot_users` WHERE ID = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$userID]);
@@ -70,10 +69,10 @@ if (isset($_POST['delete'])){
       <div>
         <img src=<?=$path?> alt="Profile Image Icon" width="350" height="350" /> 
       </div>
-    <form id="newuser" name="newuser" action="results.php" method="post">
+    <form id="newuser" name="newuser" method="post">
         <div>
             <label for="name">Name </label>
-            <input type="text" id="name" name="name" title="firstname lastname"  value = <?=$name?> readonly required/>
+            <input type="text" id="name" name="name" title="firstname lastname"  value = <?=$name?> readonly/>
           </div>
           <div>
             <label for="email">Email </label>

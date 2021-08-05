@@ -91,7 +91,7 @@
         $stmt = $pdo->prepare($query);
         $stmt->execute([$location, $notes, $sheetID]);
 
-
+        $tempNumSlots =$numSlots;
         //what if update? what if delete?
         for ($i = 0; $i < $numSlots; $i ++){
           if(isset($dateTime[$i])){
@@ -106,11 +106,8 @@
               $stmt = $pdo->prepare($query);
               $stmt->execute([$slotIDs[$i]]);
 
-              $numSlots--;
+              $tempNumSlots--;
               
-              $query = "UPDATE `timeslot_sheets` SET numslots=? WHERE ID=?";
-              $stmt = $pdo->prepare($query);
-              $stmt->execute([$numSlots, $sheetID]);
             }
             else{
               $query = "UPDATE `timeslot_slots` SET date=?, time=? WHERE ID=?";
@@ -128,9 +125,15 @@
         
         }
 
-        unset($_SESSION["sheetID"]);
+        
       }
 
+        $query = "UPDATE `timeslot_sheets` SET numslots=? WHERE ID=?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$tempNumSlots, $sheetID]);
+
+        unset($_SESSION["sheetID"]);
+        
         header("Location:sheetThanks.php");
         exit();
       }

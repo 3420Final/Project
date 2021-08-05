@@ -33,10 +33,16 @@ window.addEventListener("DOMContentLoaded", () => {
   
     //chcck that image is valid
     let fileInput   = document.querySelector('input[type=file]');
-    let file   = document.querySelector('input[type=file]').files;
     fileInput.addEventListener("change", (ev) => {
       
-      if (! /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+        let file1 = document.querySelector('input[type=file]').files[0];
+
+      //remove previous errors
+      if(fileInput.nextSibling){
+        fileInput.nextSibling.remove();
+      }
+
+      if (/\.(jpe?g|png|gif)$/i.test(file1.name) ) {
         error=false;
       }
       else{
@@ -104,7 +110,7 @@ window.addEventListener("DOMContentLoaded", () => {
     email.addEventListener("change", (ev) => {
   
       //remove previous errors
-      if(email){
+      if(email.nextSibling){
         email.nextSibling.remove();
       }
       

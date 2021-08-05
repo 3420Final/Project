@@ -33,14 +33,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //chcck that image is valid
   let fileInput   = document.querySelector('input[type=file]');
-  let file   = document.querySelector('input[type=file]').files;
   fileInput.addEventListener("change", (ev) => {
     
-    if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+      let file1 = document.querySelector('input[type=file]').files[0];
+
+    //remove previous errors
+    if(fileInput.nextSibling){
+      fileInput.nextSibling.remove();
+    }
+
+    if (/\.(jpe?g|png|gif)$/i.test(file1.name) ) {
       error=false;
     }
     else{
       error=true;
+      fileInput.insertAdjacentHTML("afterend", "<span class='error'>Incorrect File Type</span>");
     }
   });
   
@@ -63,7 +70,7 @@ window.addEventListener("DOMContentLoaded", () => {
   password2.addEventListener("change", (ev) => {
     
     //remove previous errors
-    if(password2){
+    if(password2.nextSibling){
       password2.nextSibling.remove();
     }
 
@@ -85,7 +92,7 @@ window.addEventListener("DOMContentLoaded", () => {
   username.addEventListener("change", (ev) => {
 
     //remove previous errors
-    if(username){
+    if(username.nextSibling){
       username.nextSibling.remove();
     }
     
@@ -135,7 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
   email.addEventListener("change", (ev) => {
 
     //remove previous errors
-    if(email){
+    if(email.nextSibling){
       email.nextSibling.remove();
     }
     
